@@ -1,0 +1,26 @@
+language: android
+env:
+  global:
+    - ANDROID_TARGET=android-17
+    - ANDROID_ABI=armeabi-v7a
+android:
+  components:
+    - tools
+    - platform-tools
+    
+    # Build tool version for the project
+    - build-tools-25.0.2
+
+    - extra-android-m2repository
+
+    # SDK Version to compile project
+    - android-25
+    - android-17
+script:
+  - ./gradlew build jacocoTestReport
+
+jdk: oraclejdk8
+
+# Send code report to codecov.io
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
