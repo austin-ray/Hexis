@@ -3,7 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
+    <TextView
+        android:text="@string/placeholder"
+=======
     <android.support.v7.widget.RecyclerView
+>>>>>>> origin/master
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/quadrant_list" />
