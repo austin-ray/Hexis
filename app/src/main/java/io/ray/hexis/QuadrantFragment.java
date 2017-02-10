@@ -4,11 +4,15 @@ package io.ray.hexis;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +41,19 @@ public class QuadrantFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_quadrant, container, false);
 
         // Inject the views
-        ButterKnife.bind(root);
+        ButterKnife.bind(this, root);
+
+        // Set the layout manager
+        quadRecView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+
+        // Create mock data set
+        List<QuadrantItem> mockData = new ArrayList<>();
+        mockData.add(new QuadrantItem("Test #1"));
+        mockData.add(new QuadrantItem("Test #2"));
+
+        // Set view Adapter
+        QuadrantViewAdapter quadrantViewAdapter = new QuadrantViewAdapter(mockData);
+        quadRecView.setAdapter(quadrantViewAdapter);
 
         return root;
     }
