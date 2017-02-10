@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         // Initialize navigation view object
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
