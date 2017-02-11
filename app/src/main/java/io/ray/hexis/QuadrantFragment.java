@@ -9,10 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +20,8 @@ public class QuadrantFragment extends Fragment {
 
     @BindView(R.id.quadrant_list)
     RecyclerView quadRecView;
+
+    private QuadrantViewAdapter quadrantViewAdapter;
 
     /**
      * Create a new instance of a QuadrantFragment
@@ -44,17 +42,20 @@ public class QuadrantFragment extends Fragment {
         ButterKnife.bind(this, root);
 
         // Set the layout manager
-        quadRecView.setLayoutManager(new LinearLayoutManager(container.getContext()));
-
-        // Create mock data set
-        List<QuadrantItem> mockData = new ArrayList<>();
-        mockData.add(new QuadrantItem("Test #1"));
-        mockData.add(new QuadrantItem("Test #2"));
+        quadRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Set view Adapter
-        QuadrantViewAdapter quadrantViewAdapter = new QuadrantViewAdapter(mockData);
+        quadrantViewAdapter = new QuadrantViewAdapter();
         quadRecView.setAdapter(quadrantViewAdapter);
 
         return root;
+    }
+
+    /**
+     * Add an item to the Quadrant
+     * @param item  New Item
+     */
+    public void addItem(QuadrantItem item) {
+        quadrantViewAdapter.addItem(item);
     }
 }
