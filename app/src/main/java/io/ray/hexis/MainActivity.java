@@ -1,6 +1,5 @@
 package io.ray.hexis;
 
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -9,22 +8,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get current view to pass to navigation adapter object
+        View v = findViewById(android.R.id.content);
+
         // Initialize toolbar object
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Initialize navigation view object
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //Initialize navigation Adapter to handle item selection
+        NavigationAdapter nAdapter = new NavigationAdapter(v);
 
         // Initialize drawer layout object
         // This adds the three horizontal navigation drawer bars in the toolbar
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.quadrant_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
 
+
+
     }
 
     // Close navigation drawer when back button is pressed
@@ -53,22 +56,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody") @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_add_goal) {
-            // Handle add goal action here
-        } else if (id == R.id.nav_goal1) {
-            // Handle open goal action here
-        } else if (id == R.id.nav_goal2) {
-            // Handle open goal action here
-        }
-
-        // Close the navigation drawer after item is selected
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
