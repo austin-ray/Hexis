@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_add_goal"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="New Goal"/>
+
+
+  <item android:title="Goals">
+
+      <item
+          android:id="@+id/nav_goal1"
+          android:icon="@android:drawable/ic_dialog_dialer"
+          android:title="Goal 1"/>
+      <item
+          android:id="@+id/nav_goal2"
+          android:icon="@android:drawable/ic_dialog_dialer"
+          android:title="Goal 2"/>
+
+  </item>
+  </group>
+
+</menu>
