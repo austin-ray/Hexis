@@ -22,6 +22,11 @@ android {
     productFlavors {
     }
     testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
         unitTests.returnDefaultValues = true
     }
 }

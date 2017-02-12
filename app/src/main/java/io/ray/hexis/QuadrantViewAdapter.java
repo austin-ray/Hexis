@@ -15,7 +15,24 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
     private List<QuadrantItem> data;
 
-    public QuadrantViewAdapter() {
+    /**
+     * Factory method for constructing a QuadrantViewAdapter without a data set
+     * @return  QuadrantViewAdapter without a data set
+     */
+    public static QuadrantViewAdapter newInstance() {
+        return new QuadrantViewAdapter();
+    }
+
+    /**
+     * Factory method for constructing a QuadrantViewAdapter with a data set
+     * @param data  Data set for the QuadrantViewAdapter
+     * @return      QuadrantViewAdapter set up with a data set
+     */
+    public static QuadrantViewAdapter newInstance(List<QuadrantItem> data) {
+        return new QuadrantViewAdapter(data);
+    }
+
+    private QuadrantViewAdapter() {
         data = new ArrayList<>();
     }
 
@@ -23,7 +40,7 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
      * Constructor passing a data set
      * @param data  Data set
      */
-    public QuadrantViewAdapter(List<QuadrantItem> data) {
+    private QuadrantViewAdapter(List<QuadrantItem> data) {
         this.data = new ArrayList<>(data);
     }
 
@@ -54,5 +71,13 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     public void addItem(QuadrantItem item) {
         data.add(item);
         this.notifyDataSetChanged();
+    }
+
+    /**
+     * Return the data set that the ViewAdapter has
+     * @return  ViewAdapter data set
+     */
+    public List<QuadrantItem> getData() {
+        return data;
     }
 }
