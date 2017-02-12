@@ -1,5 +1,6 @@
 package io.ray.hexis;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -42,8 +43,9 @@ public class MainActivity extends AppCompatActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.quadrant_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
 
-
-
+        // Set the FloatingActionButton
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floating_action_button);
+        fab.setOnClickListener(new AddItemOnClickListener(mViewPager));
     }
 
     // Close navigation drawer when back button is pressed

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Hexis</string>
+
+    <!-- PLACEHOLDER REMOVE IN PRODUCTION -->
+    <string name="placeholder">Placeholder, Remove me!</string>
 </resources>

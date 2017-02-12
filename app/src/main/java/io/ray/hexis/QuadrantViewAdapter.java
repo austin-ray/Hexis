@@ -15,6 +15,10 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
     private List<QuadrantItem> data;
 
+    public QuadrantViewAdapter() {
+        data = new ArrayList<>();
+    }
+
     /**
      * Constructor passing a data set
      * @param data  Data set
@@ -41,5 +45,14 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    /**
+     * Add an item to the data set
+     * @param item  Add an item to the data set
+     */
+    public void addItem(QuadrantItem item) {
+        data.add(item);
+        this.notifyDataSetChanged();
     }
 }
