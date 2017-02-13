@@ -11,8 +11,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowDialog;
 
 import static org.junit.Assert.*;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by Andrew on 2/12/2017.
@@ -41,6 +43,11 @@ public class AddItemDialogFragmentTest {
 
         // Test dialog cancel
         dialogFragment.getDialog().cancel();
+
+        dialogFragment.show(activity.getSupportFragmentManager(), "Add Item");
+
+        Dialog dialog = ShadowDialog.getLatestDialog();
+        assertNotNull(dialog);
     }
 
     @Test public void onCreateDialog() throws Exception {
