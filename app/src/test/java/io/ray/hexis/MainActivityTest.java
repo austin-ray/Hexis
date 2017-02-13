@@ -23,9 +23,6 @@ public class MainActivityTest {
         // Open the drawer
         drawer.openDrawer(GravityCompat.START);
 
-        // Close the drawer
-        drawer.closeDrawer(GravityCompat.START);
-
         // Click the button
         activity.onBackPressed();
     }
