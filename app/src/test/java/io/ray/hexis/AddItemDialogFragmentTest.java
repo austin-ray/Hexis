@@ -48,6 +48,8 @@ public class AddItemDialogFragmentTest {
 
         Dialog dialog = ShadowDialog.getLatestDialog();
         assertNotNull(dialog);
+        assertSame(dialog, dialogFragment.getDialog());
+        assertNotNull(dialogFragment.getDialog().findViewById(R.id.add_item));
     }
 
     @Test public void onCreateDialog() throws Exception {
