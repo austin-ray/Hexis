@@ -2,6 +2,7 @@ package io.ray.hexis;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,13 +10,39 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 
 /**
- * Created by Andrew on 2/12/2017.
+ * DialogFragment that appears when a user adds an item to a QuadrantFragment
  */
-
 public class AddItemDialogFragment extends DialogFragment{
     private EditText newItem;
-    private AddItemOnClickListener addItemOnClickListener;
+    private Listener listener;
 
+    /**
+     * Listener for the AddItemDialogFragment
+     */
+    public interface Listener {
+        /**
+         * Add a QuadrantItem to the current fragment
+         * @param message   Message that will be used to construct a QuadrantItem
+         */
+        void addItem(String message);
+    }
+
+    /**
+     * Factory method for creating the DialogFragment with a listener
+     * @param listener  Listener for passing back the information to create a QuadrantItem
+     * @return          New AddItemDialogFragment instance
+     */
+    public static DialogFragment newInstance(Listener listener) {
+        DialogFragment dialog = new AddItemDialogFragment();
+
+        // Set the listener
+        ((AddItemDialogFragment) dialog).setListener(listener);
+
+        // Return the dialog
+        return dialog;
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -30,7 +57,7 @@ public class AddItemDialogFragment extends DialogFragment{
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
                     newItem = (EditText) getDialog().findViewById(R.id.add_item);
-
+                    listener.addItem(newItem.getText().toString());
                 }
             })
             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -39,6 +66,14 @@ public class AddItemDialogFragment extends DialogFragment{
                 }
             });
         return builder.create();
+    }
+
+    /**
+     * Set the listener for the Dialog
+     * @param listener  Listener reference for the DialogFragment
+     */
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 
 }
