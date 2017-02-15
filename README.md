@@ -6,3 +6,7 @@
 ###### Master Status
 [![Build Status](https://travis-ci.org/Austin-Ray/Hexis.svg?branch=master)](https://travis-ci.org/Austin-Ray/Hexis)
 [![codecov](https://codecov.io/gh/Austin-Ray/Hexis/branch/master/graph/badge.svg)](https://codecov.io/gh/Austin-Ray/Hexis)
+
+###### Develop Status
+[![Build Status](https://travis-ci.org/Austin-Ray/Hexis.svg?branch=develop)](https://travis-ci.org/Austin-Ray/Hexis)
+[![codecov](https://codecov.io/gh/Austin-Ray/Hexis/branch/develop/graph/badge.svg)](https://codecov.io/gh/Austin-Ray/Hexis)
