@@ -2,9 +2,13 @@ package io.ray.hexis;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.widget.EditText;
+
 import org.apache.tools.ant.Main;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +20,6 @@ import org.robolectric.shadows.ShadowDialog;
 import static org.junit.Assert.*;
 import static org.robolectric.Shadows.shadowOf;
 
-/**
- * Created by Andrew on 2/12/2017.
- */
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 public class AddItemDialogFragmentTest {
@@ -96,5 +97,30 @@ public class AddItemDialogFragmentTest {
         DialogFragment dialogFragment = (DialogFragment) activity.getSupportFragmentManager()
             .findFragmentByTag("Add Item");
                 assertNotNull(dialogFragment);
+    }
+
+    @Test
+    public void positiveButtonClick() throws Exception {
+        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
+
+        activity.findViewById(R.id.floating_action_button).performClick();
+        DialogFragment fragment = (DialogFragment) activity.getSupportFragmentManager()
+                .findFragmentByTag("Add Item");
+
+        ((AlertDialog)fragment.getDialog()).getButton(DialogInterface.BUTTON_POSITIVE)
+                .performClick();
+    }
+
+    @Test
+    public void negativeButtonClick() throws Exception {
+        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
+
+        activity.findViewById(R.id.floating_action_button).performClick();
+
+        DialogFragment fragment = (DialogFragment) activity.getSupportFragmentManager()
+                .findFragmentByTag("Add Item");
+
+        ((AlertDialog) fragment.getDialog()).getButton(DialogInterface.BUTTON_NEGATIVE)
+                .performClick();
     }
 }
