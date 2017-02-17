@@ -3,4 +3,10 @@
 
     <!-- PLACEHOLDER REMOVE IN PRODUCTION -->
     <string name="placeholder">Placeholder, Remove me!</string>
+    <string-array name="quadrant_array">
+        <item>QI</item>
+        <item>QII</item>
+        <item>QIII</item>
+        <item>QIV</item>
+    </string-array>
 </resources>

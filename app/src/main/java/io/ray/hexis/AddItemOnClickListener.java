@@ -49,6 +49,13 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         currentFragment.addItem(new QuadrantItem(message));
     }
 
+    @Override
+    public void addItemSpecific(String message, int quadrantId){
+        QuadrantFragment specificFragment = getSpecificFragment(quadrantId);
+
+        specificFragment.addItem(new QuadrantItem(message));
+    }
+
     /**
      * Get the currently display fragment in the ViewPager
      * @return  Fragment being displayed
@@ -62,5 +69,17 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
 
         // Return the item.
         return (QuadrantFragment)adapter.getItem(currentItem);
+    }
+
+    private QuadrantFragment getSpecificFragment(int quadrantId){
+
+        // Get the adapter used by the ViewPager
+        QuadrantFragmentPagerAdapter adapter = (QuadrantFragmentPagerAdapter) pager.getAdapter();
+
+        // Need to set off screen page limit before attempting to access
+        pager.setOffscreenPageLimit(4);
+
+        // Return the item.
+        return (QuadrantFragment)adapter.getItem(quadrantId);
     }
 }
