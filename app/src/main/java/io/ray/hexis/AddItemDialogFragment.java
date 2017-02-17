@@ -24,6 +24,11 @@ import android.widget.ToggleButton;
  */
 public class AddItemDialogFragment extends DialogFragment{
     private EditText newItem;
+    private ToggleButton qI;
+    private ToggleButton qII;
+    private ToggleButton qIII;
+    private ToggleButton qIV;
+    private int selectedQuadrant = 0;
     private Listener listener;
 
 
@@ -62,12 +67,41 @@ public class AddItemDialogFragment extends DialogFragment{
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v =  inflater.inflate(R.layout.fragment_add_item_dialog, null);
-        Button clickMe = (Button) v.findViewById(R.id.button);
 
-        clickMe.setOnClickListener(new View.OnClickListener() {
+        qI = (ToggleButton) v.findViewById(R.id.btn_QI);
+        qII = (ToggleButton) v.findViewById(R.id.btn_QII);
+        qIII = (ToggleButton) v.findViewById(R.id.btn_QIII);
+        qIV = (ToggleButton) v.findViewById(R.id.btn_QIV);
+        qI.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
-                Log.d("Button pressed", "Clicked");
+                selectedQuadrant = 0;
+                qII.setChecked(false);
+                qIII.setChecked(false);
+                qIV.setChecked(false);
+            }
+        });
+        qII.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedQuadrant = 1;
+                qI.setChecked(false);
+                qIII.setChecked(false);
+                qIV.setChecked(false);
+            }
+        });
+        qIII.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedQuadrant = 2;
+                qI.setChecked(false);
+                qII.setChecked(false);
+                qIV.setChecked(false);
+            }
+        });
+        qIV.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedQuadrant = 3;
+                qII.setChecked(false);
+                qIII.setChecked(false);
+                qI.setChecked(false);
             }
         });
 
@@ -79,8 +113,7 @@ public class AddItemDialogFragment extends DialogFragment{
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
                     newItem = (EditText) getDialog().findViewById(R.id.add_item);
-                    listener.addItem(newItem.getText().toString());
-                    listener.addItemSpecific(newItem.getText().toString(), 2);
+                    listener.addItemSpecific(newItem.getText().toString(), selectedQuadrant);
                 }
             })
             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -90,8 +123,6 @@ public class AddItemDialogFragment extends DialogFragment{
             });
         return builder.create();
     }
-
-
 
     /**
      * Set the listener for the Dialog
