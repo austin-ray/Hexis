@@ -18,6 +18,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
      */
     public AddItemOnClickListener(ViewPager pager) {
         this.pager = pager;
+        pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
     }
 
     /**
@@ -77,7 +78,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         QuadrantFragmentPagerAdapter adapter = (QuadrantFragmentPagerAdapter) pager.getAdapter();
 
         // Need to set off screen page limit before attempting to access
-        pager.setOffscreenPageLimit(4);
+        //pager.setOffscreenPageLimit(adapter.getCount());
 
         // Return the item.
         return (QuadrantFragment)adapter.getItem(quadrantId);
