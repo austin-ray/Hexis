@@ -76,4 +76,7 @@ public class AddItemDialogFragment extends DialogFragment{
         this.listener = listener;
     }
 
+    public Listener getListener() {
+        return listener;
+    }
 }
