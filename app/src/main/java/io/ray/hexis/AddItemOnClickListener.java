@@ -50,11 +50,23 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         currentFragment.addItem(new QuadrantItem(message));
     }
 
+    /**
+     * @param message   Message that will be used to construct a QuadrantItem
+     * @param quadrantId the quadrant id
+     */
     @Override
     public void addItemSpecific(String message, int quadrantId){
         QuadrantFragment specificFragment = getSpecificFragment(quadrantId);
 
         specificFragment.addItem(new QuadrantItem(message));
+    }
+
+    /**
+     * @return quadrant id of current quadrant
+     */
+    @Override
+    public int getQuadrant(){
+        return pager.getCurrentItem();
     }
 
     /**
@@ -72,6 +84,10 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         return (QuadrantFragment)adapter.getItem(currentItem);
     }
 
+    /**
+     * @param quadrantId The requested quadrant fragment
+     * @return Fragment that holds the requested quadrant
+     */
     private QuadrantFragment getSpecificFragment(int quadrantId){
 
         // Get the adapter used by the ViewPager

@@ -31,7 +31,6 @@
             android:textSize="14sp"
             android:textOn="QI"
             android:textOff="QI"
-            android:checked="true"
             />
         <ToggleButton android:id="@+id/btn_QII"
             android:layout_height="wrap_content"

@@ -42,7 +42,17 @@ public class AddItemDialogFragment extends DialogFragment{
          */
         void addItem(String message);
 
+        /**
+         * Add a QuadrantItem to the current fragment
+         * @param message   Message that will be used to construct a QuadrantItem
+         * @param quadrantId the quadrant id
+         */
         void addItemSpecific(String message, int quadrantId);
+
+        /**
+         * @return id of current quadrant
+         */
+        int getQuadrant();
     }
 
     /**
@@ -72,6 +82,24 @@ public class AddItemDialogFragment extends DialogFragment{
         qII = (ToggleButton) v.findViewById(R.id.btn_QII);
         qIII = (ToggleButton) v.findViewById(R.id.btn_QIII);
         qIV = (ToggleButton) v.findViewById(R.id.btn_QIV);
+
+        // Get the current quadrant
+        selectedQuadrant = listener.getQuadrant();
+
+        // Set the toggle button to be checked with current quadrant
+        switch (selectedQuadrant){
+            case 0: qI.setChecked(true);
+                break;
+            case 1: qII.setChecked(true);
+                break;
+            case 2: qIII.setChecked(true);
+                break;
+            case 3: qIV.setChecked(true);
+                break;
+            default:
+                break;
+        }
+
         qI.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 selectedQuadrant = 0;
@@ -130,6 +158,10 @@ public class AddItemDialogFragment extends DialogFragment{
      */
     public void setListener(Listener listener) {
         this.listener = listener;
+    }
+
+    public Listener getListener() {
+        return listener;
     }
 
 }
