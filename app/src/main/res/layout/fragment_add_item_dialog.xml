@@ -18,6 +18,44 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:hint="Add Item" />
-
+    <RadioGroup android:id="@+id/toggleGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        >
+        <ToggleButton android:id="@+id/btn_QI"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QI"
+            android:textOff="QI"
+            />
+        <ToggleButton android:id="@+id/btn_QII"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QII"
+            android:textOff="QII"
+            />
+        <ToggleButton android:id="@+id/btn_QIII"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QIII"
+            android:textOff="QIII"
+            />
+        <ToggleButton android:id="@+id/btn_QIV"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QIV"
+            android:textOff="QIV"
+            />
+    </RadioGroup>
 </LinearLayout>
 

@@ -2,7 +2,6 @@ package io.ray.hexis;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -11,11 +10,9 @@ import android.support.v4.view.ViewPager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.exceptions.ExceptionIncludingMockitoWarnings;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowDialog;
 
 import static org.junit.Assert.*;
 
@@ -99,6 +96,17 @@ public class AddItemDialogFragmentTest {
         dialog = getDialog();
 
         ((AlertDialog) dialog.getDialog()).getButton(button).performClick();
+    }
+
+    @Test
+    public void clickButtons() throws Exception {
+        fab.performClick();
+        dialog = getDialog();
+
+        dialog.getDialog().findViewById(R.id.btn_QI).performClick();
+        dialog.getDialog().findViewById(R.id.btn_QII).performClick();
+        dialog.getDialog().findViewById(R.id.btn_QIII).performClick();
+        dialog.getDialog().findViewById(R.id.btn_QIV).performClick();
     }
 
     /**

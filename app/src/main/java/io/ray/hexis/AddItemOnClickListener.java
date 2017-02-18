@@ -18,6 +18,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
      */
     public AddItemOnClickListener(ViewPager pager) {
         this.pager = pager;
+        pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
     }
 
     /**
@@ -50,6 +51,25 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     }
 
     /**
+     * @param message   Message that will be used to construct a QuadrantItem
+     * @param quadrantId the quadrant id
+     */
+    @Override
+    public void addItemSpecific(String message, int quadrantId){
+        QuadrantFragment specificFragment = getSpecificFragment(quadrantId);
+
+        specificFragment.addItem(new QuadrantItem(message));
+    }
+
+    /**
+     * @return quadrant id of current quadrant
+     */
+    @Override
+    public int getQuadrant(){
+        return pager.getCurrentItem();
+    }
+
+    /**
      * Get the currently display fragment in the ViewPager
      * @return  Fragment being displayed
      */
@@ -62,5 +82,21 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
 
         // Return the item.
         return (QuadrantFragment)adapter.getItem(currentItem);
+    }
+
+    /**
+     * @param quadrantId The requested quadrant fragment
+     * @return Fragment that holds the requested quadrant
+     */
+    private QuadrantFragment getSpecificFragment(int quadrantId){
+
+        // Get the adapter used by the ViewPager
+        QuadrantFragmentPagerAdapter adapter = (QuadrantFragmentPagerAdapter) pager.getAdapter();
+
+        // Need to set off screen page limit before attempting to access
+        //pager.setOffscreenPageLimit(adapter.getCount());
+
+        // Return the item.
+        return (QuadrantFragment)adapter.getItem(quadrantId);
     }
 }
