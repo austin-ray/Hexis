@@ -1,4 +1,4 @@
-package io.ray.hexis;
+package io.ray.hexis.view;
 
 
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.ray.hexis.presenter.QuadrantViewAdapter;
+import io.ray.hexis.R;
+import io.ray.hexis.model.QuadrantItem;
 
 /**
  * Viewer class that displays one quadrant of a time matrix

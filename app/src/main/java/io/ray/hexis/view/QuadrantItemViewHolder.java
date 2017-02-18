@@ -1,4 +1,4 @@
-package io.ray.hexis;
+package io.ray.hexis.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.ray.hexis.R;
 
 /**
  * Placeholder ViewHolder for Quadrant items

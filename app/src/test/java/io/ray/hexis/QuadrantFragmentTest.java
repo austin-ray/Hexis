@@ -11,6 +11,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
+import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.view.QuadrantFragment;
+
 import static org.junit.Assert.*;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 

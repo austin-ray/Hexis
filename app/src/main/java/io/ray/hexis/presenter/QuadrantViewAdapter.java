@@ -1,4 +1,4 @@
-package io.ray.hexis;
+package io.ray.hexis.presenter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.ray.hexis.R;
+import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.view.QuadrantItemViewHolder;
 
 /**
  * RecyclerView.Adapter for a QuadrantFragment

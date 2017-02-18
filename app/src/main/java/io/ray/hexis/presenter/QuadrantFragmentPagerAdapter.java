@@ -1,8 +1,10 @@
-package io.ray.hexis;
+package io.ray.hexis.presenter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import io.ray.hexis.view.QuadrantFragment;
 
 /**
  * View pager object that handles four quadrant fragments to form a

@@ -14,6 +14,9 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import io.ray.hexis.presenter.AddItemOnClickListener;
+import io.ray.hexis.view.AddItemDialogFragment;
+
 import static org.junit.Assert.*;
 
 @RunWith(RobolectricTestRunner.class)

@@ -1,13 +1,13 @@
-package io.ray.hexis;
+package io.ray.hexis.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Placeholder QuadrantItem class
+ *  QuadrantItem object. Represents an entry on a Quadrant.
  */
 public class QuadrantItem implements Parcelable {
-    private String msg;
+    private final String msg;
 
     /**
      * Parcelable Creator for a QuadrantItem
@@ -28,7 +28,7 @@ public class QuadrantItem implements Parcelable {
      * Required constructor to load a Parcelable item
      * @param in    Parcel to unpack and create QuadrantItem from
      */
-    public QuadrantItem(Parcel in) {
+    private QuadrantItem(Parcel in) {
         msg = in.readString();
     }
 
@@ -48,11 +48,20 @@ public class QuadrantItem implements Parcelable {
         return msg;
     }
 
+    /**
+     * Describe the contents of the Parcel
+     * @return  Integer representing a Parcel's status
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Write a QuadrantItem object to a Parcel
+     * @param dest      Parcel being written to
+     * @param flags     Flags to determine how to write it
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(msg);

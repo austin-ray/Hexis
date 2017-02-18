@@ -8,6 +8,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import io.ray.hexis.presenter.NavigationAdapter;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants =  BuildConfig.class, sdk = 22)
@@ -22,7 +23,7 @@ public class NavigationAdapterTest {
                 activity.findViewById(android.R.id.content));
 
         // Get the menu from the navigation view
-        Menu menu = adapter.nView.getMenu();
+        Menu menu = adapter.getNavigationView().getMenu();
 
         // Iterate through the possible menu items
         for (int i = 0; i < menu.size(); i++) {

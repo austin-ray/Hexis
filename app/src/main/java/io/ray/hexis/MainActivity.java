@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import io.ray.hexis.presenter.AddItemOnClickListener;
+import io.ray.hexis.presenter.NavigationAdapter;
+import io.ray.hexis.presenter.QuadrantFragmentPagerAdapter;
+
 public class MainActivity extends AppCompatActivity{
 
     @Override
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         //Initialize navigation Adapter to handle item selection
-        NavigationAdapter nAdapter = new NavigationAdapter(v);
+        NavigationAdapter navAdapter = new NavigationAdapter(v);
 
         // Initialize drawer layout object
         // This adds the three horizontal navigation drawer bars in the toolbar

@@ -1,37 +1,40 @@
-package io.ray.hexis;
+package io.ray.hexis.presenter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.ray.hexis.R;
 
 /**
  * Class to set navigation listeners
  */
+public class NavigationAdapter implements NavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.nav_view)
+    NavigationView navView;
 
-public class NavigationAdapter  implements NavigationView.OnNavigationItemSelectedListener {
-    Context c;
-    @BindView(R.id.nav_view) NavigationView nView;
-    @BindView(R.id.drawer_layout) DrawerLayout dLayout;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout dLayout;
 
-    public NavigationAdapter(View v){
+    public NavigationAdapter(View v) {
         // Bind butterknife before attempting to set Navigation Listeners
         ButterKnife.bind(this, v);
 
         // Set navigationView object to passed view
-        NavigationView navigationView = nView;
+        NavigationView navigationView = navView;
 
         // Set navigation view
         navigationView.setNavigationItemSelectedListener(this);
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody") @Override
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -48,5 +51,13 @@ public class NavigationAdapter  implements NavigationView.OnNavigationItemSelect
         DrawerLayout drawer = dLayout;
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Get and return NavigationView
+     * @return  Return NavigationView
+     */
+    public NavigationView getNavigationView() {
+        return navView;
     }
 }

@@ -1,16 +1,20 @@
-package io.ray.hexis;
+package io.ray.hexis.presenter;
 
 import android.support.v4.app.DialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import io.ray.hexis.view.AddItemDialogFragment;
+import io.ray.hexis.view.QuadrantFragment;
+import io.ray.hexis.model.QuadrantItem;
+
 /**
  * Listener for the FloatingActionButton, and the DialogFragment is spawns.
  */
 public class AddItemOnClickListener implements FloatingActionButton.OnClickListener,
         AddItemDialogFragment.Listener {
-    private ViewPager pager;
+    private final ViewPager pager;
 
     /**
      * Parameterized constructor that passed a ViewPager object in order to operate
