@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -12,7 +13,10 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 
 import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.model.QuadrantModel;
+import io.ray.hexis.presenter.QuadrantPresenter;
 import io.ray.hexis.view.QuadrantFragment;
+import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import static org.junit.Assert.*;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
@@ -24,7 +28,7 @@ public class QuadrantFragmentTest {
     @Test
     public void newInstance() throws Exception {
         // Get an instance of the fragment
-        Fragment fragment = QuadrantFragment.newInstance();
+        IQuadrantFragment fragment = QuadrantFragment.newInstance();
 
         // Make sure it's not null
         assertNotNull(fragment);
@@ -39,12 +43,13 @@ public class QuadrantFragmentTest {
     public void onCreateView() throws Exception {
         // Get an instance of the fragment
         QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
+        fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
 
         // Start its lifecycle
         startFragment(fragment);
 
         // Add an item
-        fragment.addItem(new QuadrantItem("TEST"));
+        fragment.addItem("TEST");
 
         // Create a bundle get a saved state of the fragment
         Bundle out = new Bundle();
@@ -61,12 +66,13 @@ public class QuadrantFragmentTest {
     public void onSaveInstanceState() throws Exception {
         // Get a new instance of the fragment
         QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
+        fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
 
         // Start the fragment
         startFragment(fragment);
 
         // Add an item
-        fragment.addItem(new QuadrantItem("TEST"));
+        fragment.addItem("TEST");
 
         // Create a bundle and get a saved instance of the fragment
         Bundle out = new Bundle();
@@ -80,12 +86,13 @@ public class QuadrantFragmentTest {
     public void addItem() throws Exception {
         // Get an instance of the fragment.
         QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
+        fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
 
         // Start its lifecycle
         startFragment(fragment);
 
         // Add an item to the list
-        fragment.addItem(new QuadrantItem("TEST"));
+        fragment.addItem("TEST");
 
         // Create a bundle and get its saved state
         Bundle out = new Bundle();

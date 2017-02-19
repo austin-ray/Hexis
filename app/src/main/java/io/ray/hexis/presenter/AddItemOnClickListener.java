@@ -51,7 +51,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         QuadrantFragment currentFragment = getCurrentFragment();
 
         // Add a new QuadrantItem to the fragment
-        currentFragment.addItem(new QuadrantItem(message));
+        currentFragment.addItem(message);
     }
 
     /**
@@ -62,7 +62,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     public void addItem(String message, int quadrantId){
         QuadrantFragment specificFragment = getFragment(quadrantId);
 
-        specificFragment.addItem(new QuadrantItem(message));
+        specificFragment.addItem(message);
     }
 
     /**

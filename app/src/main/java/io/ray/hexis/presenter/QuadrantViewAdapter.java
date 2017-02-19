@@ -69,12 +69,12 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     }
 
     /**
-     * Add an item to the data set
-     * @param item  Add an item to the data set
+     * Set the data for the RecyclerView
+     * @param data  New data set
      */
-    public void addItem(QuadrantItem item) {
-        data.add(item);
-        this.notifyDataSetChanged();
+    public void setData(List<QuadrantItem> data) {
+        this.data = new ArrayList<>(data);
+        notifyDataSetChanged();
     }
 
     /**

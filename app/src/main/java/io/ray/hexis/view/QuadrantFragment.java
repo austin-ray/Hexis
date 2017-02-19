@@ -19,22 +19,25 @@ import butterknife.ButterKnife;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.presenter.abs.IQuadrantPresenter;
+import io.ray.hexis.view.abs.IQuadrantFragment;
 
 /**
  * Viewer class that displays one quadrant of a time matrix
  */
-public class QuadrantFragment extends Fragment {
+public class QuadrantFragment extends Fragment implements IQuadrantFragment {
 
     @BindView(R.id.quadrant_list)
     RecyclerView quadRecView;
 
     private QuadrantViewAdapter quadrantViewAdapter;
+    private IQuadrantPresenter presenter;
 
     /**
      * Create a new instance of a QuadrantFragment
      * @return New instance of a Quadrant Fragment
      */
-    public static Fragment newInstance() {
+    public static IQuadrantFragment newInstance() {
         return new QuadrantFragment();
     }
 
@@ -75,9 +78,36 @@ public class QuadrantFragment extends Fragment {
 
     /**
      * Add an item to the Quadrant
-     * @param item  New Item
+     * @param message  Message for the new QuadrantItem
      */
-    public void addItem(QuadrantItem item) {
-        quadrantViewAdapter.addItem(item);
+    public void addItem(String message) {
+        presenter.addItem(message);
+    }
+
+    /**
+     * Set the data for the ViewAdapter
+     * @param data  Data
+     */
+    @Override
+    public void setData(List<QuadrantItem> data) {
+        quadrantViewAdapter.setData(data);
+    }
+
+    /**
+     * Set the Presenter object for this class
+     * @param presenter     Presenter reference
+     */
+    @Override
+    public void setPresenter(IQuadrantPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    /**
+     * Return a fragment reference of this object
+     * @return  This, but every time its called, it's a fragment
+     */
+    @Override
+    public Fragment toFragment() {
+        return this;
     }
 }

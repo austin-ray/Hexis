@@ -51,7 +51,7 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
         ButterKnife.bind(this, root);
 
         // Initialize view pager object that hand one time matrix
-        pager.setAdapter(new QuadrantFragmentPagerAdapter(getFragmentManager()));
+        pager.setAdapter(new QuadrantFragmentPagerAdapter(getFragmentManager(), presenter));
 
         // Set the view pager up with a row of tabs
         tabs.setupWithViewPager(pager);
@@ -62,6 +62,10 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
         return root;
     }
 
+    /**
+     * Return this as a fragment. Saves some typing elsewhere.
+     * @return  This, but as a fragment
+     */
     @Override
     public Fragment toFragment() {
         return this;

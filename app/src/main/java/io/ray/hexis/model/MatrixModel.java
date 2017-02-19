@@ -3,9 +3,17 @@ package io.ray.hexis.model;
 import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
 
+/**
+ * Implementation of an IMatrixModel
+ */
 public class MatrixModel implements IMatrixModel {
+
+    // Data for all the Quadrants
     private IQuadrantModel[] quadrantModels;
 
+    /**
+     * Constructor which sets up four empty IQuadrantModel objects in an array
+     */
     public MatrixModel() {
         quadrantModels = new QuadrantModel[4];
 
@@ -14,6 +22,11 @@ public class MatrixModel implements IMatrixModel {
         }
     }
 
+    /**
+     * Get the IQuadrantModel from a specified Quadrant
+     * @param quadrant  Quadrant of requested IQuadrantModel
+     * @return IQuadrantModel for specified quadrant
+     */
     @Override
     public IQuadrantModel getQuadrant(int quadrant) {
         return quadrantModels[quadrant];
