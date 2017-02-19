@@ -53,7 +53,7 @@ public class AddItemDialogFragment extends DialogFragment {
          * @param message   Message that will be used to construct a QuadrantItem
          * @param quadrantId the quadrant id
          */
-        void addItemSpecific(String message, int quadrantId);
+        void addItem(String message, int quadrantId);
 
         /**
          * @return id of current quadrant
@@ -104,7 +104,7 @@ public class AddItemDialogFragment extends DialogFragment {
             // Add action buttons
             .setPositiveButton("Add Item", (dialog, id) -> {
                 newItem = (EditText) getDialog().findViewById(R.id.add_item);
-                listener.addItemSpecific(newItem.getText().toString(), selectedQuadrant);
+                listener.addItem(newItem.getText().toString(), selectedQuadrant);
             })
             .setNegativeButton("Cancel", (dialog, id) -> AddItemDialogFragment.this.getDialog()
                     .cancel());
