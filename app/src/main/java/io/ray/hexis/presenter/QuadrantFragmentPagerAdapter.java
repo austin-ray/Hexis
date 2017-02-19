@@ -4,14 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import io.ray.hexis.presenter.abs.IMatrixPresenter;
 import io.ray.hexis.view.QuadrantFragment;
+import io.ray.hexis.view.abs.IQuadrantFragment;
 
 /**
  * View pager object that handles four quadrant fragments to form a
  * time management matrix.
  */
 public class QuadrantFragmentPagerAdapter extends FragmentStatePagerAdapter {
-    private Fragment[] fragments = new Fragment[4];
+    private IQuadrantFragment[] fragments = new QuadrantFragment[4];
     private String[] titles = new String[4];
 
     /**
@@ -19,14 +21,14 @@ public class QuadrantFragmentPagerAdapter extends FragmentStatePagerAdapter {
      * sets their titles to QI, QII, QIII, QIV, respectively
      * @param fm FragmentManager object that handles the transitions.
      */
-    public QuadrantFragmentPagerAdapter(FragmentManager fm) {
+    public QuadrantFragmentPagerAdapter(FragmentManager fm, IMatrixPresenter presenter) {
         super(fm);
 
-        // Create four blank fragments
-        fragments[0] = QuadrantFragment.newInstance();
-        fragments[1] = QuadrantFragment.newInstance();
-        fragments[2] = QuadrantFragment.newInstance();
-        fragments[3] = QuadrantFragment.newInstance();
+        // Create the four QuadrantFragments
+        for (int i = 0; i < fragments.length; i++) {
+            fragments[i] = QuadrantFragment.newInstance();
+            fragments[i].setPresenter(new QuadrantPresenter(fragments[i], presenter.getQuadrantData(i)));
+        }
 
         // Set default titles.
         titles[0] = "QI";
@@ -42,7 +44,7 @@ public class QuadrantFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return fragments[position];
+        return fragments[position].toFragment();
     }
 
     @Override

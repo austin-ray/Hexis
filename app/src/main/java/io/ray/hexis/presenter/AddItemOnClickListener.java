@@ -51,7 +51,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         QuadrantFragment currentFragment = getCurrentFragment();
 
         // Add a new QuadrantItem to the fragment
-        currentFragment.addItem(new QuadrantItem(message));
+        currentFragment.addItem(message);
     }
 
     /**
@@ -59,10 +59,10 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
      * @param quadrantId the quadrant id
      */
     @Override
-    public void addItemSpecific(String message, int quadrantId){
-        QuadrantFragment specificFragment = getSpecificFragment(quadrantId);
+    public void addItem(String message, int quadrantId){
+        QuadrantFragment specificFragment = getFragment(quadrantId);
 
-        specificFragment.addItem(new QuadrantItem(message));
+        specificFragment.addItem(message);
     }
 
     /**
@@ -78,27 +78,16 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
      * @return  Fragment being displayed
      */
     private QuadrantFragment getCurrentFragment() {
-        // Get the number reference of the current item
-        int currentItem = pager.getCurrentItem();
-
-        // Get the adapter used by the ViewPager
-        QuadrantFragmentPagerAdapter adapter = (QuadrantFragmentPagerAdapter) pager.getAdapter();
-
-        // Return the item.
-        return (QuadrantFragment)adapter.getItem(currentItem);
+        return getFragment(pager.getCurrentItem());
     }
 
     /**
      * @param quadrantId The requested quadrant fragment
      * @return Fragment that holds the requested quadrant
      */
-    private QuadrantFragment getSpecificFragment(int quadrantId){
-
+    private QuadrantFragment getFragment(int quadrantId){
         // Get the adapter used by the ViewPager
         QuadrantFragmentPagerAdapter adapter = (QuadrantFragmentPagerAdapter) pager.getAdapter();
-
-        // Need to set off screen page limit before attempting to access
-        //pager.setOffscreenPageLimit(adapter.getCount());
 
         // Return the item.
         return (QuadrantFragment)adapter.getItem(quadrantId);

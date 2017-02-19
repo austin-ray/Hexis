@@ -2,6 +2,8 @@ package io.ray.hexis;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +16,8 @@ import android.view.View;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.NavigationAdapter;
 import io.ray.hexis.presenter.QuadrantFragmentPagerAdapter;
+import io.ray.hexis.view.MatrixFragment;
+import io.ray.hexis.view.abs.IMatrixFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -39,17 +43,12 @@ public class MainActivity extends AppCompatActivity{
             new ActionBarDrawerToggle(this, drawer, toolbar, 0, 0);
         toggle.syncState();
 
-        // Initialize view pager object that hand one time matrix
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.quadrant_view_pager);
-        mViewPager.setAdapter(new QuadrantFragmentPagerAdapter(getSupportFragmentManager()));
+        IMatrixFragment matrix = MatrixFragment.newInstance();
 
-        // Set the view pager up with a row of tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.quadrant_tab_layout);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        // Set the FloatingActionButton
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floating_action_button);
-        fab.setOnClickListener(new AddItemOnClickListener(mViewPager));
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.container_fragment, matrix.toFragment());
+        ft.commit();
     }
 
     // Close navigation drawer when back button is pressed
