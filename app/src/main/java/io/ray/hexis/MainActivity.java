@@ -1,5 +1,6 @@
 package io.ray.hexis;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import io.ray.hexis.model.SQLiteHelper;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.NavigationAdapter;
 import io.ray.hexis.presenter.QuadrantFragmentPagerAdapter;
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity{
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.container_fragment, matrix.toFragment());
         ft.commit();
+
+
+        // Temporary way of testing SQLite database
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+        //  Call onCreate method in SQLiteHelper
+        sqLiteHelper.getReadableDatabase();
     }
 
     // Close navigation drawer when back button is pressed
