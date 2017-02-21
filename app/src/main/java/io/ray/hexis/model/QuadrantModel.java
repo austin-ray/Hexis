@@ -37,4 +37,9 @@ public class QuadrantModel implements IQuadrantModel {
     public List<QuadrantItem> getData() {
         return data;
     }
+
+    @Override
+    public void setData(List<QuadrantItem> list) {
+        data = new ArrayList<>(list);
+    }
 }

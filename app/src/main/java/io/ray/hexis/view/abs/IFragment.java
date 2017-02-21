@@ -10,4 +10,5 @@ public interface IFragment<T> {
     Fragment toFragment();
 
     T getPresenter();
+    void setPresenter(T presenter);
 }

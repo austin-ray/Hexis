@@ -1,5 +1,8 @@
 package io.ray.hexis.presenter.abs;
 
+import java.util.List;
+
+import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
 import io.ray.hexis.view.abs.IMatrixFragment;
@@ -15,11 +18,15 @@ public interface IMatrixPresenter extends IPresenter<IMatrixFragment, IMatrixMod
      */
     void addItem(int quadrant, String message);
 
+    void addItem(int quadrant, QuadrantItem item);
+
     /**
      * Return the IQuadrantModel for a specified quadrant
      * @param quadrant  Quadrant that data is requested from
      * @return          IQuadrantModel for a quadrant
      */
     IQuadrantModel getQuadrantData(int quadrant);
+
+    void setQuadrantData(int quadrant, List<QuadrantItem> data);
 }
 

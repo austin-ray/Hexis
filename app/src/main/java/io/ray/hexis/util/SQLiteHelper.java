@@ -39,7 +39,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             QuadrantItemsEntry.TABLE_NAME;
 
     // Purge database variable, set to true if database needs to be reset
-    private static final boolean PURGE_DATABASE = true;
+    private static final boolean PURGE_DATABASE = false;
 
     /**
      * Constructor used to create database if database does not already exist
