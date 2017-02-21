@@ -9,6 +9,9 @@ import android.os.Parcelable;
 public class QuadrantItem implements Parcelable {
     private final String msg;
 
+    private long UID = -1;
+    private int completion;
+
     /**
      * Parcelable Creator for a QuadrantItem
      * Allows a QuadrantItem to be created from a Parcelable
@@ -38,6 +41,14 @@ public class QuadrantItem implements Parcelable {
      */
     public QuadrantItem(String msg) {
         this.msg = msg;
+        this.UID = -1;
+        this.completion = 0;
+    }
+
+    public QuadrantItem(String msg, long UID, int completion) {
+        this.msg = msg;
+        this.UID = UID;
+        this.completion = completion;
     }
 
     /**
@@ -65,5 +76,17 @@ public class QuadrantItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(msg);
+    }
+
+    public void setUID(long UID) {
+        this.UID = UID;
+    }
+
+    public long getUID() {
+        return UID;
+    }
+
+    public int getCompletion() {
+        return completion;
     }
 }

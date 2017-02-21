@@ -70,4 +70,9 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
     public Fragment toFragment() {
         return this;
     }
+
+    @Override
+    public IMatrixPresenter getPresenter() {
+        return presenter;
+    }
 }

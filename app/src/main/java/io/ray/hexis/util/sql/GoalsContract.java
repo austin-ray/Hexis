@@ -1,4 +1,4 @@
-package io.ray.hexis.model;
+package io.ray.hexis.util.sql;
 
 
 import android.provider.BaseColumns;

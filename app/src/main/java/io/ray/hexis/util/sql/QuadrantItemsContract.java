@@ -1,4 +1,4 @@
-package io.ray.hexis.model;
+package io.ray.hexis.util.sql;
 
 import android.provider.BaseColumns;
 
@@ -11,6 +11,6 @@ public final class QuadrantItemsContract {
         public static final String COLUMN_NAME_GOAL_ID = "goal_id";
         public static final String COLUMN_NAME_ITEM_TEXT = "item_text";
         public static final String COLUMN_NAME_QUADRANT = "quadrant";
-        public static final String COLUMN_NAME_COMPLETION_STATUS = "completition_status";
+        public static final String COLUMN_NAME_COMPLETION_STATUS = "completion_status";
     }
 }

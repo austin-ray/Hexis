@@ -8,7 +8,7 @@ import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 /**
  * Abstract implementation of a QuadrantFragment
  */
-public interface IQuadrantFragment extends IFragment {
+public interface IQuadrantFragment extends IFragment<IQuadrantPresenter> {
     /**
      * Set the presenter for a IQuadrantFragment
      * @param presenter     Presenter reference

@@ -1,11 +1,11 @@
-package io.ray.hexis.model;
+package io.ray.hexis.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import io.ray.hexis.model.GoalsContract.GoalsEntry;
-import io.ray.hexis.model.QuadrantItemsContract.QuadrantItemsEntry;
+import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
+import io.ray.hexis.util.sql.QuadrantItemsContract.QuadrantItemsEntry;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -39,7 +39,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             QuadrantItemsEntry.TABLE_NAME;
 
     // Purge database variable, set to true if database needs to be reset
-    private static final boolean PURGE_DATABASE = false;
+    private static final boolean PURGE_DATABASE = true;
 
     /**
      * Constructor used to create database if database does not already exist

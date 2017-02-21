@@ -46,4 +46,14 @@ public class MatrixPresenter implements IMatrixPresenter {
     public IQuadrantModel getQuadrantData(int quadrant) {
         return model.getQuadrant(quadrant);
     }
+
+    @Override
+    public IMatrixFragment getFragment() {
+        return fragment;
+    }
+
+    @Override
+    public IMatrixModel getModel() {
+        return model;
+    }
 }
