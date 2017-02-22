@@ -7,7 +7,6 @@ import android.view.View;
 
 import io.ray.hexis.view.AddItemDialogFragment;
 import io.ray.hexis.view.QuadrantFragment;
-import io.ray.hexis.model.QuadrantItem;
 
 /**
  * Listener for the FloatingActionButton, and the DialogFragment is spawns.

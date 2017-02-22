@@ -1,5 +1,8 @@
 package io.ray.hexis.presenter;
 
+import java.util.List;
+
+import io.ray.hexis.model.MatrixModel;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
@@ -37,6 +40,10 @@ public class MatrixPresenter implements IMatrixPresenter {
         model.getQuadrant(quadrant).addItem(new QuadrantItem(message));
     }
 
+    public void addItem(int quadrant, QuadrantItem item) {
+        model.getQuadrant(quadrant).addItem(item);
+    }
+
     /**
      * Return the IQuadrantModel for a specified quadrant
      * @param quadrant  Quadrant that data is requested from
@@ -45,5 +52,25 @@ public class MatrixPresenter implements IMatrixPresenter {
     @Override
     public IQuadrantModel getQuadrantData(int quadrant) {
         return model.getQuadrant(quadrant);
+    }
+
+    @Override
+    public IMatrixFragment getFragment() {
+        return fragment;
+    }
+
+    @Override
+    public IMatrixModel getModel() {
+        return model;
+    }
+
+    @Override
+    public void setQuadrantData(int quadrant, List<QuadrantItem> data) {
+        if (model != null) {
+            getModel().setQuadrantModel(quadrant, data);
+        } else {
+            model = new MatrixModel();
+            model.setQuadrantModel(quadrant, data);
+        }
     }
 }
