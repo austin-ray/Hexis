@@ -16,4 +16,6 @@ public interface IQuadrantModel {
      * @return      Actual data from IQuadrantModel
      */
     List<QuadrantItem> getData();
+
+    void setData(List<QuadrantItem> list);
 }

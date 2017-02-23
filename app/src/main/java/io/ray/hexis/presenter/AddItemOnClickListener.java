@@ -5,9 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import io.ray.hexis.util.SQLiteHelper;
+import io.ray.hexis.util.WriteQuadrantItems;
 import io.ray.hexis.view.AddItemDialogFragment;
 import io.ray.hexis.view.QuadrantFragment;
-import io.ray.hexis.model.QuadrantItem;
 
 /**
  * Listener for the FloatingActionButton, and the DialogFragment is spawns.
@@ -15,6 +16,7 @@ import io.ray.hexis.model.QuadrantItem;
 public class AddItemOnClickListener implements FloatingActionButton.OnClickListener,
         AddItemDialogFragment.Listener {
     private final ViewPager pager;
+    private final SQLiteHelper sqLiteHelper;
 
     /**
      * Parameterized constructor that passed a ViewPager object in order to operate
@@ -22,6 +24,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
      */
     public AddItemOnClickListener(ViewPager pager) {
         this.pager = pager;
+        this.sqLiteHelper = new SQLiteHelper(pager.getContext());
         pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
     }
 
@@ -63,6 +66,8 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         QuadrantFragment specificFragment = getFragment(quadrantId);
 
         specificFragment.addItem(message);
+        WriteQuadrantItems writeQuadrantItems = new WriteQuadrantItems(sqLiteHelper);
+        writeQuadrantItems.insertNewItem(1,quadrantId,message);
     }
 
     /**

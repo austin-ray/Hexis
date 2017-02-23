@@ -110,4 +110,9 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment {
     public Fragment toFragment() {
         return this;
     }
+
+    @Override
+    public IQuadrantPresenter getPresenter() {
+        return presenter;
+    }
 }

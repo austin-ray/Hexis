@@ -33,6 +33,8 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
     private IMatrixPresenter presenter;
 
     public static IMatrixFragment newInstance() {
+        IMatrixFragment fragment = new MatrixFragment();
+        fragment.setPresenter(new MatrixPresenter(fragment, new MatrixModel()));
         return new MatrixFragment();
     }
 
@@ -69,5 +71,14 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
     @Override
     public Fragment toFragment() {
         return this;
+    }
+
+    @Override
+    public IMatrixPresenter getPresenter() {
+        return presenter;
+    }
+
+    public void setPresenter(IMatrixPresenter presenter) {
+        this.presenter = presenter;
     }
 }

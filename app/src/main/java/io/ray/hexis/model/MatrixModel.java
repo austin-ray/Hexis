@@ -1,5 +1,7 @@
 package io.ray.hexis.model;
 
+import java.util.List;
+
 import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
 
@@ -30,5 +32,10 @@ public class MatrixModel implements IMatrixModel {
     @Override
     public IQuadrantModel getQuadrant(int quadrant) {
         return quadrantModels[quadrant];
+    }
+
+    @Override
+    public void setQuadrantModel(int quadrant, List<QuadrantItem> data) {
+        getQuadrant(quadrant).setData(data);
     }
 }
