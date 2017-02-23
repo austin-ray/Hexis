@@ -21,6 +21,12 @@ public class WriteGoalItems {
         this.db = sqLiteHelper.getReadableDatabase();
     }
 
+    /**
+     * @param goalID the goalID to be set
+     * @param quadrant the quadrant the item should be assoicated with
+     * @param itemText the content of the item
+     * @return the unique id of the newly inserted item
+     */
     public long insertNewItem(int goalID, int quadrant, String itemText){
         values = new ContentValues();
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS, 0);

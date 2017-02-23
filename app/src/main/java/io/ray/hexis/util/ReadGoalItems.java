@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Andrew on 2/21/2017.
+ * A class to read data from QuadrantItems table from hexis Database
  */
-
 public class ReadGoalItems {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
@@ -24,6 +23,11 @@ public class ReadGoalItems {
         this.db = sqLiteHelper.getReadableDatabase();
     }
 
+    /**
+     * @param goalID the id of goal
+     * @param quadrantID the quadrant id
+     * @return a list of every item matching the passed parameters
+     */
     public List getItemsTextByQuadrant(int goalID, int quadrantID){
         String[] projection = {
             QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID,
