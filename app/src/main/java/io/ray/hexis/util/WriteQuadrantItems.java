@@ -5,10 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import io.ray.hexis.util.sql.QuadrantItemsContract;
 
 /**
- * Created by Andrew on 2/22/2017.
+ * WriteGoalItems class to insert data into QuadrantItems table
  */
 
-public class WriteGoalItems {
+public class WriteQuadrantItems {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
     private ContentValues values;
@@ -16,7 +16,7 @@ public class WriteGoalItems {
     /**
      * @param sqLiteHelper
      */
-    public WriteGoalItems(SQLiteHelper sqLiteHelper) {
+    public WriteQuadrantItems(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }

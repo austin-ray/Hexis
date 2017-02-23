@@ -1,7 +1,6 @@
 package io.ray.hexis.util;
 
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.util.sql.QuadrantItemsContract;
@@ -11,14 +10,14 @@ import java.util.List;
 /**
  * A class to read data from QuadrantItems table from hexis Database
  */
-public class ReadGoalItems {
+public class ReadQuadrantItems {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
 
     /**
      * @param sqLiteHelper
      */
-    public ReadGoalItems(SQLiteHelper sqLiteHelper) {
+    public ReadQuadrantItems(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }

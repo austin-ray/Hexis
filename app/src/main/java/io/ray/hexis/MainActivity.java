@@ -9,14 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.NavigationAdapter;
-import io.ray.hexis.presenter.abs.IMatrixPresenter;
-import io.ray.hexis.util.ReadGoalItems;
-import io.ray.hexis.util.SQLiteHelper;
 import io.ray.hexis.view.MatrixFragment;
 import io.ray.hexis.view.abs.IMatrixFragment;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 

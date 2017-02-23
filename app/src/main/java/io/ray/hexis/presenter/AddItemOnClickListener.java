@@ -1,13 +1,12 @@
 package io.ray.hexis.presenter;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.DialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import io.ray.hexis.util.SQLiteHelper;
-import io.ray.hexis.util.WriteGoalItems;
+import io.ray.hexis.util.WriteQuadrantItems;
 import io.ray.hexis.view.AddItemDialogFragment;
 import io.ray.hexis.view.QuadrantFragment;
 
@@ -67,8 +66,8 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
         QuadrantFragment specificFragment = getFragment(quadrantId);
 
         specificFragment.addItem(message);
-        WriteGoalItems writeGoalItems = new WriteGoalItems(sqLiteHelper);
-        writeGoalItems.insertNewItem(1,quadrantId,message);
+        WriteQuadrantItems writeQuadrantItems = new WriteQuadrantItems(sqLiteHelper);
+        writeQuadrantItems.insertNewItem(1,quadrantId,message);
     }
 
     /**

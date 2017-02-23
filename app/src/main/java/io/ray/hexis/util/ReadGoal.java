@@ -8,6 +8,7 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
 /**
  * Class to read data from Goal table in Hexis database
  */
+
 public class ReadGoal {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
@@ -49,6 +50,7 @@ public class ReadGoal {
     }
 
     /**
+     * Query database looking for goal with matching ID
      * @return true if goal with matching ID is found in table
      */
     public boolean doesGoalExist(int goalID) {
@@ -64,6 +66,8 @@ public class ReadGoal {
     }
 
     /**
+     * Query database looking for goal with matching ID
+     * Returns the title of the goal with the matching ID
      * @return title of Goal with matching ID
      */
     public String getGoalTitle(int goalID) {
