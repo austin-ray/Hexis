@@ -9,7 +9,7 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
 /**
  * InsertGoal class to insert a new row into Goal table
  */
-public class WriteGoal {
+public class GoalWriter {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
     private ContentValues values;
@@ -17,7 +17,7 @@ public class WriteGoal {
     /**
      * @param sqLiteHelper
      */
-    public WriteGoal(SQLiteHelper sqLiteHelper) {
+    public GoalWriter(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }
@@ -37,8 +37,8 @@ public class WriteGoal {
      * @return primary key of updated goal, returns -1 if goal does not exist
      */
     public long updateGoal(String goalTitle, String newGoalTitle) {
-        ReadGoal readGoal = new ReadGoal(sqLiteHelper);
-        if (readGoal.doesGoalExist(goalTitle)) {
+        GoalReader goalReader = new GoalReader(sqLiteHelper);
+        if (goalReader.doesGoalExist(goalTitle)) {
             // Use ContentValues to sanitize user defined goalTitle string
             values = new ContentValues();
             values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
@@ -54,12 +54,12 @@ public class WriteGoal {
      * @return primary key of updated goal, returns -1 if goal does not exist
      */
     public long updateGoal(int goalID, String newGoalTitle) {
-        ReadGoal readGoal = new ReadGoal(sqLiteHelper);
-        if (readGoal.doesGoalExist(goalID)) {
+        GoalReader goalReader = new GoalReader(sqLiteHelper);
+        if (goalReader.doesGoalExist(goalID)) {
             // Use ContentValues to sanitize user defined goalTitle string
             values = new ContentValues();
             values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
-            Log.d("WriteGoal write", "updating");
+            Log.d("GoalWriter write", "updating");
             return db.update(GoalsEntry.TABLE_NAME, values,
                 GoalsEntry.COLUMN_NAME_ID + "=" + goalID, null);
         }

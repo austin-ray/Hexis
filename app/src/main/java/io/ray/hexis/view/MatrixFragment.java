@@ -10,10 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
 import io.ray.hexis.model.MatrixModel;
+import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
 import io.ray.hexis.presenter.MatrixPresenter;
@@ -33,16 +38,40 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
     private IMatrixPresenter presenter;
 
     public static IMatrixFragment newInstance() {
-        IMatrixFragment fragment = new MatrixFragment();
-        fragment.setPresenter(new MatrixPresenter(fragment, new MatrixModel()));
         return new MatrixFragment();
+    }
+
+    public static IMatrixFragment newInstance(List<List<QuadrantItem>> list) {
+        IMatrixFragment fragment = new MatrixFragment();
+
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("0", (ArrayList<QuadrantItem>)list.get(0));
+        args.putParcelableArrayList("1", (ArrayList<QuadrantItem>)list.get(1));
+        args.putParcelableArrayList("2", (ArrayList<QuadrantItem>)list.get(2));
+        args.putParcelableArrayList("3", (ArrayList<QuadrantItem>)list.get(3));
+
+        ((Fragment) fragment).setArguments(args);
+
+        return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
 
-        presenter = new MatrixPresenter(this, new MatrixModel());
+        if (args != null) {
+            IMatrixModel model = new MatrixModel();
+
+            model.setQuadrantModel(0, args.getParcelableArrayList("0"));
+            model.setQuadrantModel(1, args.getParcelableArrayList("1"));
+            model.setQuadrantModel(2, args.getParcelableArrayList("2"));
+            model.setQuadrantModel(3, args.getParcelableArrayList("3"));
+
+            presenter = new MatrixPresenter(this, model);
+        } else {
+            presenter = new MatrixPresenter(this, new MatrixModel());
+        }
     }
 
     @Nullable

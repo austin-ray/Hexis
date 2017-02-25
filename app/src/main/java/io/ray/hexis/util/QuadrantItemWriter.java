@@ -8,7 +8,7 @@ import io.ray.hexis.util.sql.QuadrantItemsContract;
  * WriteGoalItems class to insert data into QuadrantItems table
  */
 
-public class WriteQuadrantItems {
+public class QuadrantItemWriter {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
     private ContentValues values;
@@ -16,7 +16,7 @@ public class WriteQuadrantItems {
     /**
      * @param sqLiteHelper
      */
-    public WriteQuadrantItems(SQLiteHelper sqLiteHelper) {
+    public QuadrantItemWriter(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }
@@ -27,7 +27,11 @@ public class WriteQuadrantItems {
      * @param itemText the content of the item
      * @return the unique id of the newly inserted item
      */
-    public long insertNewItem(int goalID, int quadrant, String itemText){
+    public long insertNewItem(int goalID, int quadrant, String itemText) {
+        // Shift to account for difference in counting by SQL Lite
+        goalID++;
+        quadrant++;
+
         values = new ContentValues();
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS, 0);
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_GOAL_ID, goalID);
