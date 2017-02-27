@@ -41,6 +41,13 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment {
         return new QuadrantFragment();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        presenter.updateFragment();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

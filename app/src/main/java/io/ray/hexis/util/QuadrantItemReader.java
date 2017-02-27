@@ -10,14 +10,14 @@ import java.util.List;
 /**
  * A class to read data from QuadrantItems table from hexis Database
  */
-public class ReadQuadrantItems {
+public class QuadrantItemReader {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
 
     /**
      * @param sqLiteHelper
      */
-    public ReadQuadrantItems(SQLiteHelper sqLiteHelper) {
+    public QuadrantItemReader(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }
@@ -27,7 +27,11 @@ public class ReadQuadrantItems {
      * @param quadrantID the quadrant id
      * @return a list of every item matching the passed parameters
      */
-    public List getItemsTextByQuadrant(int goalID, int quadrantID){
+    public List<QuadrantItem> getItemsTextByQuadrant(int goalID, int quadrantID){
+        // Offset to account for difference in counting by SQL Lite
+        goalID++;
+        quadrantID++;
+
         String[] projection = {
             QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID,
             QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT,

@@ -9,7 +9,7 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
  * Class to read data from Goal table in Hexis database
  */
 
-public class ReadGoal {
+public class GoalReader {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
 
@@ -27,7 +27,7 @@ public class ReadGoal {
     /**
      * @param sqLiteHelper
      */
-    public ReadGoal(SQLiteHelper sqLiteHelper) {
+    public GoalReader(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
         this.db = sqLiteHelper.getReadableDatabase();
     }
