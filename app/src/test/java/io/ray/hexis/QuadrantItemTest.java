@@ -65,7 +65,27 @@ public class QuadrantItemTest {
     @Test
     public void getMessage() throws Exception {
         QuadrantItem test = new QuadrantItem("TEST");
+        QuadrantItem test2 = new QuadrantItem("TEST",-1L,0);
         assertEquals("TEST", test.getMessage());
+        assertEquals("TEST", test2.getMessage());
     }
 
+    @Test
+    public void getUID() throws Exception{
+        QuadrantItem test = new QuadrantItem("TEST",-1L,0);
+        assertEquals(-1L, test.getUID());
+    }
+
+    @Test
+    public void setUID() throws Exception{
+        QuadrantItem test = new QuadrantItem("TEST", -1L, 0);
+        test.setUID(2L);
+        assertEquals(2L, test.getUID());
+    }
+
+    @Test
+    public void getCompletionStatus() throws Exception{
+        QuadrantItem test = new QuadrantItem("TEST", -1L, 0);
+        assertEquals(0, test.getCompletion());
+    }
 }

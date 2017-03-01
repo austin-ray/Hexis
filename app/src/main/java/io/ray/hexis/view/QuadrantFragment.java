@@ -92,6 +92,15 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment {
     }
 
     /**
+     * Add an item with itemUID to the Quadrant
+     * @param message
+     * @param itemUID
+     */
+    public void addItem(String message, long itemUID){
+        presenter.addItem(message, itemUID);
+    }
+
+    /**
      * Set the data for the ViewAdapter
      * @param data  Data
      */

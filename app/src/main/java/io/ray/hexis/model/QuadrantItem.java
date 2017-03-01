@@ -45,6 +45,23 @@ public class QuadrantItem implements Parcelable {
         this.completion = 0;
     }
 
+    /**
+     * Parameterized constructor that takes a message and UID
+     * @param msg
+     * @param UID
+     */
+    public QuadrantItem(String msg, long UID){
+        this.msg = msg;
+        this.UID = UID;
+        this.completion = 0;
+    }
+
+    /**
+     * Parameterized constructor that takes a message, UID, and completion status
+     * @param msg
+     * @param UID
+     * @param completion
+     */
     public QuadrantItem(String msg, long UID, int completion) {
         this.msg = msg;
         this.UID = UID;

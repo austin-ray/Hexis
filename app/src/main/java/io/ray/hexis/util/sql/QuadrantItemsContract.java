@@ -3,6 +3,7 @@ package io.ray.hexis.util.sql;
 import android.provider.BaseColumns;
 
 public final class QuadrantItemsContract {
+    // Prevent instantiation
     private QuadrantItemsContract() { }
 
     public static class QuadrantItemsEntry implements BaseColumns {

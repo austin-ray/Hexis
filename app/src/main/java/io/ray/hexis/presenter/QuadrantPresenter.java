@@ -38,6 +38,19 @@ public class QuadrantPresenter implements IQuadrantPresenter {
     updateFragment();
   }
 
+    /**
+     * Add a QuadrantItem with itemUID to the model
+     * @param message
+     * @param itemUID
+     */
+  @Override
+  public void addItem(String message, long itemUID){
+    model.addItem(new QuadrantItem(message, itemUID));
+
+    // Update the fragment if data set has been changed
+    updateFragment();
+  }
+
   /**
    * Update the fragment on data set changes
    */

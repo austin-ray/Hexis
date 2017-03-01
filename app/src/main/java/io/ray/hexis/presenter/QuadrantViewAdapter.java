@@ -1,6 +1,7 @@
 package io.ray.hexis.presenter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,11 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     @Override
     public void onBindViewHolder(QuadrantItemViewHolder holder, int position) {
         holder.setTextView(data.get(position).getMessage());
+
+        // Handle longclick of item
+        holder.itemView.setOnLongClickListener((View v) -> {
+                return true;
+        });
     }
 
     @Override

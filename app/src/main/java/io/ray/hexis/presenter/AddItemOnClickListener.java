@@ -68,11 +68,15 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     public void addItem(String message, int quadrantId){
         IQuadrantFragment specificFragment = getFragment(quadrantId);
 
-        // The item through the presenter.
-        specificFragment.getPresenter().addItem(message);
-
+        // Initialize QuadrantItemWriter to access database
         QuadrantItemWriter writeQuadrantItems = new QuadrantItemWriter(sqLiteHelper);
-        writeQuadrantItems.insertNewItem(0, quadrantId, message);
+
+        // Insert new item into QuadrantItems table
+        long itemUID = writeQuadrantItems.insertNewItem(0, quadrantId, message);
+
+        // The item through the presenter.
+        specificFragment.getPresenter().addItem(message, itemUID);
+
     }
 
     /**
