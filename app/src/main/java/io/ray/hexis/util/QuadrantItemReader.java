@@ -14,6 +14,10 @@ public class QuadrantItemReader {
     private SQLiteDatabase db;
     private SQLiteHelper sqLiteHelper;
 
+    // A query to retrieve all gaols with a specific id
+    private String queryGoalID =
+        "SELECT * FROM " + QuadrantItemsContract.QuadrantItemsEntry.TABLE_NAME + " WHERE " + QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID + " = ";
+
     /**
      * QuadrantItemReader constructor
      * @param sqLiteHelper needed to read database
@@ -84,5 +88,54 @@ public class QuadrantItemReader {
 
         // Return list of QuadrantItems
         return items;
+    }
+
+    /**
+     * Used to check if an item with a defined ID exists in QuadrantItem table
+     *
+     * @param itemUID
+     * @return true if item with defined ID exists
+     */
+    public boolean doesItemExist(long itemUID){
+        // Query database for existence of a matching goal ID
+        Cursor cursor = db.rawQuery(queryGoalID + itemUID, null);
+        // Return true if at least one instance of the goal id exists
+        if (cursor.getCount() > 0) {
+
+            // Close cursor
+            cursor.close();
+
+            // Return true because goal id exists
+            return true;
+        }
+
+        // Close the cursor
+        cursor.close();
+
+        // Return false because goal id does not exist
+        return false;
+    }
+
+    public String getItemByUID(long itemUID){
+        // Query database for existence of a matching goal ID
+        Cursor cursor = db.rawQuery(queryGoalID + itemUID, null);
+        // Return true if at least one instance of the goal id exists
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext();
+
+            String itemText = cursor.getString(
+                cursor.getColumnIndexOrThrow(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT));
+            // Close cursor
+            cursor.close();
+
+            // Return true because goal id exists
+            return itemText;
+        }
+
+        // Close the cursor
+        cursor.close();
+
+        // Return null because goal id does not exist
+        return null;
     }
 }

@@ -24,7 +24,7 @@ import io.ray.hexis.view.abs.IMatrixFragment;
 public class MainActivity extends AppCompatActivity{
 
     private FragmentManager fm;
-    SQLiteHelper sqlHelper;
+    private SQLiteHelper sqlHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
