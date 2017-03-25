@@ -1,4 +1,6 @@
 language: android
+jdk: oraclejdk8
+sudo: true 
 cache:
   directories:
     - ${TRAVIS_BUILD_DIR}/gradle/caches/
@@ -23,7 +25,6 @@ android:
 script:
   - ./gradlew clean build jacocoTestReport
 
-jdk: oraclejdk8
 
 # Send code report to codecov.io
 after_success:
