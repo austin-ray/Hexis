@@ -25,6 +25,8 @@ public class GoalReader {
         "SELECT * FROM " + GoalsEntry.TABLE_NAME + " WHERE " + GoalsEntry.COLUMN_NAME_ID + " = ";
 
     /**
+     * GoalReader constructor
+     * GoalRead needs SQLiteHelper to access database
      * @param sqLiteHelper
      */
     public GoalReader(SQLiteHelper sqLiteHelper) {
@@ -33,53 +35,88 @@ public class GoalReader {
     }
 
     /**
+     * Used to check if a goal with matching title exists
+     *
+     * @param goalTitle the desired title to search for
      * @return true if a goal with matching title is found in table
      */
     public boolean doesGoalExist(String goalTitle) {
+
         // Sanitize goalTitle string before sql query
         goalTitle = DatabaseUtils.sqlEscapeString(goalTitle);
+
         // Query database for existence of a matching goal title
         Cursor cursor = db.rawQuery(queryGoalTitle + goalTitle + "\"", null);
+
         // return true if at least one instance of the goal title exists
         if (cursor.getCount() > 0) {
+            // Close cursor
             cursor.close();
+
+            // Return true because goal title exists
             return true;
         }
+
+        // Close the cursor
         cursor.close();
+
+        // Return false because goal does not exist
         return false;
     }
 
     /**
-     * Query database looking for goal with matching ID
+     * Used to check if a goal with corresponding id exists in database
+     *
+     * @param goalID the desired id to search for
      * @return true if goal with matching ID is found in table
      */
     public boolean doesGoalExist(int goalID) {
+
         // Query database for existence of a matching goal ID
         Cursor cursor = db.rawQuery(queryGoalID + goalID, null);
-        // return true if at least one instance of the goal title exists
+
+        // Return true if at least one instance of the goal id exists
         if (cursor.getCount() > 0) {
+
+            // Close cursor
             cursor.close();
+
+            // Return true because goal id exists
             return true;
         }
+
+        // Close the cursor
         cursor.close();
+
+        // Return false because goal id does not exist
         return false;
     }
 
     /**
      * Query database looking for goal with matching ID
      * Returns the title of the goal with the matching ID
-     * @return title of Goal with matching ID
+     *
+     * @param goalID the requested goal id
+     * @return title of Goal with matching ID, if goal does not exist return null
      */
     public String getGoalTitle(int goalID) {
+
         // Query database for existence of a matching goal ID
         Cursor cursor = db.rawQuery(queryGoalID + goalID, null);
+
         // goalID is unique so only one goal should be returned
         if (cursor.getCount() > 0) {
             cursor.moveToNext();
+
+            // Return the title that corresponds with goal id
             return cursor.getString(
                 cursor.getColumnIndexOrThrow(GoalsEntry.COLUMN_NAME_GOAL_TITLE));
         }
+
+        // Close the cursor
         cursor.close();
-        return "null";
+
+        // Return null because goal id does not exist in database
+        return null;
     }
 }

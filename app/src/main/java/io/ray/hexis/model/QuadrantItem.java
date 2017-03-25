@@ -7,7 +7,7 @@ import android.os.Parcelable;
  *  QuadrantItem object. Represents an entry on a Quadrant.
  */
 public class QuadrantItem implements Parcelable {
-    private final String msg;
+    private String msg;
 
     private long UID = -1;
     private int completion;
@@ -45,6 +45,23 @@ public class QuadrantItem implements Parcelable {
         this.completion = 0;
     }
 
+    /**
+     * Parameterized constructor that takes a message and UID
+     * @param msg
+     * @param UID
+     */
+    public QuadrantItem(String msg, long UID){
+        this.msg = msg;
+        this.UID = UID;
+        this.completion = 0;
+    }
+
+    /**
+     * Parameterized constructor that takes a message, UID, and completion status
+     * @param msg
+     * @param UID
+     * @param completion
+     */
     public QuadrantItem(String msg, long UID, int completion) {
         this.msg = msg;
         this.UID = UID;
@@ -81,6 +98,8 @@ public class QuadrantItem implements Parcelable {
     public void setUID(long UID) {
         this.UID = UID;
     }
+
+    public void setMessage(String msg) { this.msg = msg; }
 
     public long getUID() {
         return UID;

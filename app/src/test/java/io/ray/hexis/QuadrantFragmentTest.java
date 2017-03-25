@@ -66,6 +66,9 @@ public class QuadrantFragmentTest {
         QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
         fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
 
+        // Assert that the presenter has been set correctly
+        assertNotNull(fragment.getPresenter());
+
         // Start the fragment
         startFragment(fragment);
 
@@ -92,6 +95,9 @@ public class QuadrantFragmentTest {
         // Add an item to the list
         fragment.addItem("TEST");
 
+        // Add an item and itemUID to the list
+        fragment.addItem("TEST", 1);
+
         // Create a bundle and get its saved state
         Bundle out = new Bundle();
         fragment.onSaveInstanceState(out);
@@ -101,7 +107,7 @@ public class QuadrantFragmentTest {
 
         // Check that there is in fact, an item.
         assert list != null;
-        assertEquals(1, list.size());
+        assertEquals(2, list.size());
     }
 
 }
