@@ -1,13 +1,11 @@
 package io.ray.hexis;
 
 
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.test.AndroidTestCase;
 import io.ray.hexis.util.GoalReader;
 import io.ray.hexis.util.GoalWriter;
 import io.ray.hexis.util.QuadrantItemReader;
-import io.ray.hexis.util.SQLiteHelper;
+import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.util.sql.GoalsContract;
 import io.ray.hexis.util.sql.QuadrantItemsContract;
 import org.junit.Before;
@@ -22,8 +20,8 @@ import static junit.framework.Assert.assertNotNull;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 
-public class SQLiteHelperTest extends AndroidTestCase {
-    private SQLiteHelper sqlHelper;
+public class SqlLiteHelperTest extends AndroidTestCase {
+    private SqlLiteHelper sqlHelper;
 
     @Before
     public void setup() {
@@ -31,7 +29,7 @@ public class SQLiteHelperTest extends AndroidTestCase {
         MainActivity activity = Robolectric.setupActivity(MainActivity.class);
 
         // Initialize the SQL Lite Helper
-        sqlHelper = new SQLiteHelper(activity);
+        sqlHelper = new SqlLiteHelper(activity);
     }
 
     @Test

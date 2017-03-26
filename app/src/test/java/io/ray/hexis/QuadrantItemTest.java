@@ -73,14 +73,14 @@ public class QuadrantItemTest {
     @Test
     public void getUID() throws Exception{
         QuadrantItem test = new QuadrantItem("TEST",-1L,0);
-        assertEquals(-1L, test.getUID());
+        assertEquals(-1L, test.getUid());
     }
 
     @Test
     public void setUID() throws Exception{
         QuadrantItem test = new QuadrantItem("TEST", -1L, 0);
-        test.setUID(2L);
-        assertEquals(2L, test.getUID());
+        test.setUid(2L);
+        assertEquals(2L, test.getUid());
     }
 
     @Test

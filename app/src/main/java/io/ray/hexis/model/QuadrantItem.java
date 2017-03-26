@@ -7,105 +7,106 @@ import android.os.Parcelable;
  *  QuadrantItem object. Represents an entry on a Quadrant.
  */
 public class QuadrantItem implements Parcelable {
-    private String msg;
+  private String msg;
 
-    private long UID = -1;
-    private int completion;
+  private long uid = -1;
+  private int completion;
 
-    /**
-     * Parcelable Creator for a QuadrantItem
-     * Allows a QuadrantItem to be created from a Parcelable
-     */
-    public static final Parcelable.Creator<QuadrantItem> CREATOR
-            = new Parcelable.Creator<QuadrantItem>() {
-        public QuadrantItem createFromParcel(Parcel in) {
-            return new QuadrantItem(in);
-        }
-
-        public QuadrantItem[] newArray(int size) {
-            return new QuadrantItem[size];
-        }
-    };
-
-    /**
-     * Required constructor to load a Parcelable item
-     * @param in    Parcel to unpack and create QuadrantItem from
-     */
-    private QuadrantItem(Parcel in) {
-        msg = in.readString();
+  /**
+   * Parcelable Creator for a QuadrantItem.
+   * Allows a QuadrantItem to be created from a Parcelable
+   */
+  public static final Parcelable.Creator<QuadrantItem> CREATOR =
+      new Parcelable.Creator<QuadrantItem>() {
+    public QuadrantItem createFromParcel(Parcel in) {
+      return new QuadrantItem(in);
     }
 
-    /**
-     * Parameterized constructor that takes a message
-     * @param msg   Message to be displayed
-     */
-    public QuadrantItem(String msg) {
-        this.msg = msg;
-        this.UID = -1;
-        this.completion = 0;
+    public QuadrantItem[] newArray(int size) {
+      return new QuadrantItem[size];
     }
+  };
 
-    /**
-     * Parameterized constructor that takes a message and UID
-     * @param msg
-     * @param UID
-     */
-    public QuadrantItem(String msg, long UID){
-        this.msg = msg;
-        this.UID = UID;
-        this.completion = 0;
-    }
+  /**
+   * Required constructor to load a Parcelable item.
+   * @param in    Parcel to unpack and create QuadrantItem from
+   */
+  private QuadrantItem(Parcel in) {
+    msg = in.readString();
+  }
 
-    /**
-     * Parameterized constructor that takes a message, UID, and completion status
-     * @param msg
-     * @param UID
-     * @param completion
-     */
-    public QuadrantItem(String msg, long UID, int completion) {
-        this.msg = msg;
-        this.UID = UID;
-        this.completion = completion;
-    }
+  /**
+   * Parameterized constructor that takes a message.
+   * @param msg   Message to be displayed
+   */
+  public QuadrantItem(String msg) {
+    // Pass the message parameter, but set uid to -1 (i.e. not assigned yet)
+    // and completion to 0 (i.e. not complete).
+    this(msg, -1, 0);
+  }
 
-    /**
-     * Get and return QuadrantItem's message
-     * @return Message
-     */
-    public String getMessage() {
-        return msg;
-    }
+  /**
+   * Parameterized constructor that takes a message and uid.
+   * @param msg     Message to be display
+   * @param uid     Uid from the database
+   */
+  public QuadrantItem(String msg, long uid) {
+    // Pass message and uid, but set completion to 0 (i.e. not complete)
+    this(msg, uid, 0);
+  }
 
-    /**
-     * Describe the contents of the Parcel
-     * @return  Integer representing a Parcel's status
-     */
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+  /**
+   * Parameterized constructor that takes a message, uid, and completion status.
+   * @param msg           Message to be displayed
+   * @param uid           Uid from the database
+   * @param completion    Completion status of the item, 0 for not complete, 1 for complete
+   */
+  public QuadrantItem(String msg, long uid, int completion) {
+    this.msg = msg;
+    this.uid = uid;
+    this.completion = completion;
+  }
 
-    /**
-     * Write a QuadrantItem object to a Parcel
-     * @param dest      Parcel being written to
-     * @param flags     Flags to determine how to write it
-     */
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(msg);
-    }
+  /**
+   * Get and return QuadrantItem's message.
+   * @return Message
+   */
+  public String getMessage() {
+    return msg;
+  }
 
-    public void setUID(long UID) {
-        this.UID = UID;
-    }
+  /**
+   * Describe the contents of the Parcel.
+   * @return  Integer representing a Parcel's status
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-    public void setMessage(String msg) { this.msg = msg; }
+  /**
+   * Write a QuadrantItem object to a Parcel.
+   * @param dest      Parcel being written to
+   * @param flags     Flags to determine how to write it
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(msg);
+  }
 
-    public long getUID() {
-        return UID;
-    }
+  public void setUid(long uid) {
+    this.uid = uid;
+  }
 
-    public int getCompletion() {
-        return completion;
-    }
+  public void setMessage(String msg) {
+    this.msg = msg;
+  }
+
+  public long getUid() {
+    return uid;
+  }
+
+  public int getCompletion() {
+    return completion;
+  }
 }
