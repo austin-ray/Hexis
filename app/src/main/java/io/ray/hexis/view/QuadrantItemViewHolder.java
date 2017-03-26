@@ -6,32 +6,35 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import io.ray.hexis.R;
 
 /**
- * Placeholder ViewHolder for Quadrant items
+ * Placeholder ViewHolder for Quadrant items.
  */
 public class QuadrantItemViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.quadrant_item_text)
-    TextView textView;
+  @BindView(R.id.quadrant_item_text)
+  TextView textView;
 
-    /**
-     * Default constructor
-     * @param itemView  View
-     */
-    public QuadrantItemViewHolder(View itemView) {
-        super(itemView);
+  /**
+   * Default constructor.
+   *
+   * @param itemView View
+   */
+  public QuadrantItemViewHolder(View itemView) {
+    super(itemView);
 
-        // Bind views
-        ButterKnife.bind(this, itemView);
-    }
+    // Bind views
+    ButterKnife.bind(this, itemView);
+  }
 
-    /**
-     * Set the text view message
-     * @param message   Message
-     */
-    public void setTextView(String message) {
-        textView.setText(message);
-    }
+  /**
+   * Set the text view message.
+   *
+   * @param message Message
+   */
+  public void setTextView(String message) {
+    textView.setText(message);
+  }
 }

@@ -6,7 +6,7 @@ import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 /**
- * Implementation of a IQuadrantPresenter
+ * Implementation of a IQuadrantPresenter.
  */
 public class QuadrantPresenter implements IQuadrantPresenter {
 
@@ -17,19 +17,21 @@ public class QuadrantPresenter implements IQuadrantPresenter {
   private IQuadrantModel model;
 
   /**
-   * Constructor
+   * Constructor.
+   *
    * @param fragment  Fragment managed by presenter
-   * @param model     Model manageed by presenter
-     */
+   * @param model     Model managed by presenter
+   */
   public QuadrantPresenter(IQuadrantFragment fragment, IQuadrantModel model) {
     this.fragment = fragment;
     this.model = model;
   }
 
   /**
-   * Add a QuadrantItem to the model
-   * @param message   Message to construct a QuadrantItem with
-     */
+   * Add a QuadrantItem to the model.
+   *
+   * @param message Message to construct a QuadrantItem with
+   */
   @Override
   public void addItem(String message) {
     model.addItem(new QuadrantItem(message));
@@ -38,21 +40,22 @@ public class QuadrantPresenter implements IQuadrantPresenter {
     updateFragment();
   }
 
-    /**
-     * Add a QuadrantItem with itemUID to the model
-     * @param message
-     * @param itemUID
-     */
+  /**
+   * Add a QuadrantItem with itemUID to the model.
+   *
+   * @param message     Message to be displayed.
+   * @param itemUid     UID from the database.
+   */
   @Override
-  public void addItem(String message, long itemUID){
-    model.addItem(new QuadrantItem(message, itemUID));
+  public void addItem(String message, long itemUid) {
+    model.addItem(new QuadrantItem(message, itemUid));
 
     // Update the fragment if data set has been changed
     updateFragment();
   }
 
   /**
-   * Update the fragment on data set changes
+   * Update the fragment on data set changes.
    */
   @Override
   public void updateFragment() {
