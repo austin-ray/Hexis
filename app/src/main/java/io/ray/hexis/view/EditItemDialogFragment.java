@@ -38,26 +38,33 @@ public class EditItemDialogFragment extends DialogFragment {
      * Update item message.
      *
      * @param message message that will be updated in QuadrantItem
-     * @param itemUid item UID that will be used to update item message in QuadrantItem
+     * @param itemUID item UID that will be used to update item message in QuadrantItem
      */
-    void updateItem(String message, long itemUid);
+    void updateItem(String message, long itemUID);
+
+    /**
+     * Delete item.
+     *
+     * @param itemUID id of item to be deleted
+     */
+    void deleteItem(long itemUID);
   }
 
   /**
    * Factory method for creating the DialogFragment with a listener.
    *
-   * @param itemUid  Item UID of item to be updated
+   * @param itemUID  Item UID of item to be updated
    * @param listener Listener for passing back the information to update item in QuadrantItem
    * @return New EditItemDialogFragment instance
    */
-  public static DialogFragment newInstance(long itemUid, Listener listener) {
+  public static DialogFragment newInstance(long itemUID, Listener listener) {
 
     // Initialize new EditItemDialogFragment fragment
     DialogFragment dialog = new EditItemDialogFragment();
 
     // Pass itemUid to onCreateDialog
     Bundle args = new Bundle();
-    args.putLong("itemUid", itemUid);
+    args.putLong("itemUID", itemUID);
     dialog.setArguments(args);
 
     // Set the listener
@@ -100,6 +107,8 @@ public class EditItemDialogFragment extends DialogFragment {
         // Add action buttons
         .setPositiveButton("Update Item", (dialog, id) ->
             listener.updateItem(addItemTextView.getText().toString(), itemUid))
+        .setNeutralButton("Delete Item", (dialog, id) ->
+            listener.deleteItem(itemUid))
         .setNegativeButton("Cancel",
             (dialog, id) -> EditItemDialogFragment.this.getDialog().cancel());
     return builder.create();

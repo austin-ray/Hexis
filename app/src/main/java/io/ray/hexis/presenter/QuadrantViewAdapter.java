@@ -23,7 +23,7 @@ import java.util.List;
  * RecyclerView.Adapter for a QuadrantFragment.
  */
 public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHolder>
-    implements EditItemDialogFragment.Listener {
+    implements EditItemDialogFragment.Listener{
 
   private List<QuadrantItem> data;
   private Context context;
@@ -129,10 +129,10 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
    * Update item message.
    *
    * @param message message that will be updated in QuadrantItem
-   * @param itemUid item UID that will be used to update item message in QuadrantItem
+   * @param itemUID item UID that will be used to update item message in QuadrantItem
    */
   @Override
-  public void updateItem(String message, long itemUid) {
+  public void updateItem(String message, long itemUID) {
     // Initialize sqlLiteHelper
     SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(context);
 
@@ -140,12 +140,39 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
 
     // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.updateItemText(itemUid, message);
+    quadrantItemWriter.updateItemText(itemUID, message);
 
     // Update QuadrantItem data array item with new message
     data.get(holder.getAdapterPosition()).setMessage(message);
 
     // Notify that change to an item has been made
     notifyItemChanged(holder.getAdapterPosition());
+  }
+
+  /**
+   * Delete item based on item id
+   *
+   * @param itemUID id of item to be deleted
+   */
+  @Override
+  public void deleteItem(long itemUID){
+    // Initialize sqlLiteHelper
+    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(context);
+
+    // Initialize quadrantItemWriter
+    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
+
+    // Update item message where item UID matches passed itemUid
+    quadrantItemWriter.removeItem(itemUID);
+
+    // Remove item from adapter
+    data.remove(holder.getAdapterPosition());
+
+    // Notify that item has been removed from list
+    notifyItemRemoved(holder.getAdapterPosition());
+
+    // Notify that change to an item has been made
+    notifyDataSetChanged();
+
   }
 }
