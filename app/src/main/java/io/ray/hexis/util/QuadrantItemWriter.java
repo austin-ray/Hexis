@@ -29,7 +29,7 @@ public class QuadrantItemWriter {
    * @param goalId   goalId to be set
    * @param quadrant quadrant where item belongs
    * @param itemText content of item
-   * @return unique id of newly inserted item
+   * @return         unique id of newly inserted item
    */
   public long insertNewItem(int goalId, int quadrant, String itemText) {
     // Shift to account for difference in counting by SQL Lite
@@ -54,7 +54,7 @@ public class QuadrantItemWriter {
    *
    * @param itemUid     id of item to be updated
    * @param newItemText new item text
-   * @return -1 if item does not exist, otherwise return item id
+   * @return            -1 if item does not exist, otherwise return item id
    */
   public long updateItemText(long itemUid, String newItemText) {
     QuadrantItemReader quadrantItemReader = new QuadrantItemReader(sqlLiteHelper);
@@ -79,7 +79,7 @@ public class QuadrantItemWriter {
    *
    * @param itemUid          id of item to be updated
    * @param completionStatus new completion status value of item
-   * @return return -1 if item does not exist, otherwise return item id
+   * @return                 -1 if item does not exist, otherwise return item id
    */
   public long updateItemCompletion(long itemUid, int completionStatus) {
     QuadrantItemReader quadrantItemReader = new QuadrantItemReader(sqlLiteHelper);
@@ -98,6 +98,26 @@ public class QuadrantItemWriter {
           QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID + "=\"" + itemUid + "\"",
           null);
     }
+    return -1L;
+  }
+
+  /**
+   * Delete item based on itemUid.
+   * @param itemUid id of item to be deleted
+   * @return        -1 if item does not exist, otherwise return item id
+   */
+  public long removeItem(long itemUid) {
+    QuadrantItemReader quadrantItemReader = new QuadrantItemReader(sqlLiteHelper);
+
+    // First check if an item with the passed itemUid exists
+    if (quadrantItemReader.doesItemExist(itemUid)) {
+
+      // Delete item and return the item id
+      return db.delete(QuadrantItemsContract.QuadrantItemsEntry.TABLE_NAME, "id=?",
+          new String[]{Long.toString(itemUid)});
+    }
+
+    // Return -1 if item does not exist
     return -1L;
   }
 }

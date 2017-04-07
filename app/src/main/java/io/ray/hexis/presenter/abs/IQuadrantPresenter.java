@@ -1,5 +1,9 @@
 package io.ray.hexis.presenter.abs;
 
+import io.ray.hexis.model.QuadrantItem;
+
+import java.util.List;
+
 /**
  * Interface for a QuadrantPresenter.
  */
@@ -16,6 +20,8 @@ public interface IQuadrantPresenter {
    * @param itemUid     UID from the database
    */
   void addItem(String message, long itemUid);
+
+  void updateModel(List<QuadrantItem> items);
 
   /**
    * Update the Fragment.

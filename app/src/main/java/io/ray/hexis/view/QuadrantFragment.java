@@ -3,7 +3,9 @@ package io.ray.hexis.view;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
+import io.ray.hexis.util.QuadrantItemWriter;
+import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import java.util.ArrayList;
@@ -26,7 +30,8 @@ import java.util.List;
 /**
  * Viewer class that displays one quadrant of a time matrix.
  */
-public class QuadrantFragment extends Fragment implements IQuadrantFragment {
+public class QuadrantFragment extends Fragment implements IQuadrantFragment,
+    EditItemDialogFragment.Listener, QuadrantViewAdapter.Listener {
 
   @BindView(R.id.quadrant_list)
   RecyclerView quadRecView;
@@ -65,10 +70,10 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment {
 
     // Initialize the ViewAdapter based on if there's a data set or not
     if (savedInstanceState == null) {
-      quadrantViewAdapter = QuadrantViewAdapter.newInstance();
+      quadrantViewAdapter = QuadrantViewAdapter.newInstance(this);
     } else {
       List<QuadrantItem> items = savedInstanceState.getParcelableArrayList("data");
-      quadrantViewAdapter = QuadrantViewAdapter.newInstance(items);
+      quadrantViewAdapter = QuadrantViewAdapter.newInstance(this, items);
     }
 
     quadRecView.setAdapter(quadrantViewAdapter);
@@ -137,5 +142,47 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment {
   @Override
   public IQuadrantPresenter getPresenter() {
     return presenter;
+  }
+
+  @Override
+  public void updateItem(String message, QuadrantItem item) {
+    // Initialize sqlLiteHelper
+    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
+
+    // Initialize quadrantItemWriter
+    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
+
+    // Update item message where item UID matches passed itemUid
+    quadrantItemWriter.updateItemText(item.getUid(), message);
+
+    quadrantViewAdapter.updateItem(message, item);
+    presenter.updateModel(quadrantViewAdapter.getData());
+  }
+
+  @Override
+  public void removeItem(QuadrantItem item) {
+    // Initialize sqlLiteHelper
+    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
+
+    // Initialize quadrantItemWriter
+    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
+
+    // Update item message where item UID matches passed itemUid
+    quadrantItemWriter.removeItem(item.getUid());
+
+    quadrantViewAdapter.removeItem(item);
+    presenter.updateModel(quadrantViewAdapter.getData());
+  }
+
+  @Override
+  public void onItemLongClick(QuadrantItem item) {
+    FragmentManager manager = getActivity().getSupportFragmentManager();
+
+    // Get a new instance of the AddItemDialogFragment
+    DialogFragment dialog =
+        EditItemDialogFragment.newInstance(item, this);
+
+    // Show the dialog and set its tag.
+    dialog.show(manager, "Edit Item");
   }
 }
