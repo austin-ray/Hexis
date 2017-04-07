@@ -15,7 +15,7 @@ import java.util.List;
 public class MatrixPresenter implements IMatrixPresenter {
 
   // Reference to the fragment
-  private IMatrixFragment fragment;
+  private final IMatrixFragment fragment;
 
   // Reference to the model
   private IMatrixModel model;

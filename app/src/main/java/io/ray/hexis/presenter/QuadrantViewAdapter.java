@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHolder> {
 
-  private Listener listener;
+  private final Listener listener;
   private List<QuadrantItem> data;
 
   public interface Listener {
@@ -61,8 +61,8 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
   @Override
   public QuadrantItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     // Inflate the layout
-    View view =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.view_quadrant_item, null);
+    View view = LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.view_quadrant_item, parent, false);
 
     // Return a view holder
     return new QuadrantItemViewHolder(view);

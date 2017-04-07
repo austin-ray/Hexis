@@ -13,11 +13,11 @@ import java.util.List;
  * A class to read data from QuadrantItems table from Hexis Database.
  */
 public class QuadrantItemReader {
-  private SQLiteDatabase db;
-  private SqlLiteHelper sqlLiteHelper;
+  private final SQLiteDatabase db;
+  private final SqlLiteHelper sqlLiteHelper;
 
   // A query to retrieve all gaols with a specific id
-  private String queryGoalId = "SELECT * FROM "
+  private final String queryGoalId = "SELECT * FROM "
       + QuadrantItemsContract.QuadrantItemsEntry.TABLE_NAME
       + " WHERE " + QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID + " = ";
 
@@ -89,6 +89,8 @@ public class QuadrantItemReader {
 
       items.add(new QuadrantItem(msg, id, completion));
     }
+
+    cursor.close();
 
     // Return list of QuadrantItems
     return items;

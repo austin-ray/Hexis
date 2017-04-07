@@ -2,12 +2,12 @@ package io.ray.hexis.view;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -15,7 +15,6 @@ import android.widget.ToggleButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
-import io.ray.hexis.presenter.AddItemOnClickListener;
 
 /**
  * DialogFragment that appears when a user adds an item to a QuadrantFragment.
@@ -77,10 +76,9 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
   @NonNull
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     // Get the layout inflater
     LayoutInflater inflater = getActivity().getLayoutInflater();
-    View v = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    View v = inflater.inflate(R.layout.fragment_add_item_dialog, (ViewGroup) getView(), false);
 
     ButterKnife.bind(this, v);
 
@@ -95,6 +93,8 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
     quadTwo.setOnClickListener(e -> selectQuadrant(1));
     quadThree.setOnClickListener(e -> selectQuadrant(2));
     quadFour.setOnClickListener(e -> selectQuadrant(3));
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
     // Inflate and set the layout for the dialog
     // Pass null as the parent view because its going in the dialog layout

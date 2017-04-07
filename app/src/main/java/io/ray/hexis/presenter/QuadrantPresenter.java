@@ -13,10 +13,10 @@ import java.util.List;
 public class QuadrantPresenter implements IQuadrantPresenter {
 
   // Fragment reference
-  private IQuadrantFragment fragment;
+  private final IQuadrantFragment fragment;
 
   // Model reference
-  private IQuadrantModel model;
+  private final IQuadrantModel model;
 
   /**
    * Constructor.

@@ -13,8 +13,8 @@ import io.ray.hexis.view.abs.IQuadrantFragment;
  * time management matrix.
  */
 public class QuadrantFragmentPagerAdapter extends FragmentStatePagerAdapter {
-  private IQuadrantFragment[] fragments = new QuadrantFragment[4];
-  private String[] titles = new String[4];
+  private final IQuadrantFragment[] fragments = new QuadrantFragment[4];
+  private final String[] titles = new String[4];
 
   /**
    * Default constructor that initializes four blank matrix quadrants and

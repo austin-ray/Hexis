@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -80,7 +81,7 @@ public class EditItemDialogFragment extends DialogFragment {
 
     // Inflate and set the layout for the dialog
     // Pass null as the parent view because its going in the dialog layout
-    View v = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    View v = inflater.inflate(R.layout.fragment_add_item_dialog, (ViewGroup) getView(), false);
 
     // Implement ButterKnife
     ButterKnife.bind(this, v);
@@ -92,7 +93,7 @@ public class EditItemDialogFragment extends DialogFragment {
     toggleGroup.setVisibility(View.INVISIBLE);
 
     // Set addItemText view to item message
-    addItemTextView.setText(item.getMessage());
+    addItemTextView.setText(item != null ? item.getMessage() : null);
 
     // Build view
     builder.setView(v)
@@ -108,7 +109,6 @@ public class EditItemDialogFragment extends DialogFragment {
 
   /**
    * Set the listener for the Dialog.
-   *
    * @param listener Listener reference for the DialogFragment
    */
   public void setListener(Listener listener) {

@@ -9,8 +9,8 @@ import io.ray.hexis.util.sql.QuadrantItemsContract;
  * QuadrantItemWriter class to insert data into QuadrantItems table.
  */
 public class QuadrantItemWriter {
-  private SQLiteDatabase db;
-  private SqlLiteHelper sqlLiteHelper;
+  private final SQLiteDatabase db;
+  private final SqlLiteHelper sqlLiteHelper;
   private ContentValues values;
 
   /**
