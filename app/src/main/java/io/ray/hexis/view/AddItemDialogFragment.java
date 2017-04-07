@@ -39,7 +39,6 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
 
     /**
      * Add a QuadrantItem to the current fragment.
-     *
      * @param message Message that will be used to construct a QuadrantItem
      */
     void addItem(String message);
@@ -109,7 +108,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
 
     dialog.setOnShowListener(dialog1 -> {
       Button button = ((AlertDialog) dialog1).getButton(AlertDialog.BUTTON_POSITIVE);
-      button.setOnClickListener(AddItemDialogFragment.this);
+      button.setOnClickListener(this);
     });
 
     return dialog;
@@ -158,7 +157,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
   @Override
   public void onClick(View v) {
     if (!newItem.getText().toString().isEmpty()) {
-      listener.addItem(newItem.getText().toString());
+      listener.addItem(newItem.getText().toString(), selectedQuadrant);
       dismiss();
     }
   }

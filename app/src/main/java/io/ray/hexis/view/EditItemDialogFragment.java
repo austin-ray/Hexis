@@ -14,8 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.util.QuadrantItemReader;
-import io.ray.hexis.util.SqlLiteHelper;
 
 /**
  * DialogFragment that appears when a user edits an item in a QuadrantFragment.
@@ -90,15 +88,11 @@ public class EditItemDialogFragment extends DialogFragment {
     // Retrieve itemUID from arguments passed from newInstance
     QuadrantItem item = getArguments().getParcelable("quadrantItem");
 
-    // Initialize sql database helper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(this.getContext());
-    QuadrantItemReader quadrantItemReader = new QuadrantItemReader(sqlLiteHelper);
-
     // Hide quadrant buttons
     toggleGroup.setVisibility(View.INVISIBLE);
 
     // Set addItemText view to item message
-    addItemTextView.setText(quadrantItemReader.getItemByUid(item != null ? item.getUid() : 0));
+    addItemTextView.setText(item.getMessage());
 
     // Build view
     builder.setView(v)
