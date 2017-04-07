@@ -5,6 +5,8 @@ import io.ray.hexis.model.abs.IQuadrantModel;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
+import java.util.List;
+
 /**
  * Implementation of a IQuadrantPresenter.
  */
@@ -52,6 +54,10 @@ public class QuadrantPresenter implements IQuadrantPresenter {
 
     // Update the fragment if data set has been changed
     updateFragment();
+  }
+
+  @Override public void updateModel(List<QuadrantItem> items) {
+    model.setData(items);
   }
 
   /**

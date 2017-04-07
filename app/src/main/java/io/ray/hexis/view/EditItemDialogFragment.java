@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
+import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.util.QuadrantItemReader;
 import io.ray.hexis.util.SqlLiteHelper;
 
@@ -36,35 +37,32 @@ public class EditItemDialogFragment extends DialogFragment {
 
     /**
      * Update item message.
-     *
-     * @param message message that will be updated in QuadrantItem
-     * @param itemUID item UID that will be used to update item message in QuadrantItem
+     * @param message   message that will be updated in QuadrantItem
+     * @param item      Item that will be updated
      */
-    void updateItem(String message, long itemUID);
+    void updateItem(String message, QuadrantItem item);
 
     /**
-     * Delete item.
-     *
-     * @param itemUID id of item to be deleted
+     * Remove item from the model.
+     * @param item    Object of the item being removed
      */
-    void deleteItem(long itemUID);
+    void removeItem(QuadrantItem item);
   }
 
   /**
    * Factory method for creating the DialogFragment with a listener.
-   *
-   * @param itemUID  Item UID of item to be updated
-   * @param listener Listener for passing back the information to update item in QuadrantItem
-   * @return New EditItemDialogFragment instance
+   * @param item        QuadrantItem being manipulated
+   * @param listener    Listener for passing back the information to update item in QuadrantItem
+   * @return            New EditItemDialogFragment instance
    */
-  public static DialogFragment newInstance(long itemUID, Listener listener) {
+  public static DialogFragment newInstance(QuadrantItem item, Listener listener) {
 
     // Initialize new EditItemDialogFragment fragment
     DialogFragment dialog = new EditItemDialogFragment();
 
     // Pass itemUid to onCreateDialog
     Bundle args = new Bundle();
-    args.putLong("itemUID", itemUID);
+    args.putParcelable("quadrantItem", item);
     dialog.setArguments(args);
 
     // Set the listener
@@ -90,7 +88,7 @@ public class EditItemDialogFragment extends DialogFragment {
     ButterKnife.bind(this, v);
 
     // Retrieve itemUID from arguments passed from newInstance
-    long itemUid = getArguments().getLong("itemUID");
+    QuadrantItem item = getArguments().getParcelable("quadrantItem");
 
     // Initialize sql database helper
     SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(this.getContext());
@@ -100,15 +98,15 @@ public class EditItemDialogFragment extends DialogFragment {
     toggleGroup.setVisibility(View.INVISIBLE);
 
     // Set addItemText view to item message
-    addItemTextView.setText(quadrantItemReader.getItemByUid(itemUid));
+    addItemTextView.setText(quadrantItemReader.getItemByUid(item != null ? item.getUid() : 0));
 
     // Build view
     builder.setView(v)
         // Add action buttons
         .setPositiveButton("Update Item", (dialog, id) ->
-            listener.updateItem(addItemTextView.getText().toString(), itemUid))
+            listener.updateItem(addItemTextView.getText().toString(), item))
         .setNeutralButton("Delete Item", (dialog, id) ->
-            listener.deleteItem(itemUid))
+            listener.removeItem(item))
         .setNegativeButton("Cancel",
             (dialog, id) -> EditItemDialogFragment.this.getDialog().cancel());
     return builder.create();

@@ -1,9 +1,5 @@
 package io.ray.hexis.presenter;
 
-import android.content.Context;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +7,6 @@ import android.view.ViewGroup;
 
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.util.QuadrantItemWriter;
-import io.ray.hexis.util.SqlLiteHelper;
-import io.ray.hexis.view.EditItemDialogFragment;
 import io.ray.hexis.view.QuadrantItemViewHolder;
 
 import java.util.ArrayList;
@@ -22,20 +15,22 @@ import java.util.List;
 /**
  * RecyclerView.Adapter for a QuadrantFragment.
  */
-public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHolder>
-    implements EditItemDialogFragment.Listener{
+public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHolder> {
 
+  private Listener listener;
   private List<QuadrantItem> data;
-  private Context context;
-  private QuadrantItemViewHolder holder;
+
+  public interface Listener {
+    void onItemLongClick(QuadrantItem item);
+  }
 
   /**
    * Factory method for constructing a QuadrantViewAdapter without a data set.
    *
    * @return QuadrantViewAdapter without a data set
    */
-  public static QuadrantViewAdapter newInstance() {
-    return new QuadrantViewAdapter();
+  public static QuadrantViewAdapter newInstance(Listener listener) {
+    return new QuadrantViewAdapter(listener);
   }
 
   /**
@@ -44,12 +39,13 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
    * @param data Data set for the QuadrantViewAdapter
    * @return QuadrantViewAdapter set up with a data set
    */
-  public static QuadrantViewAdapter newInstance(List<QuadrantItem> data) {
-    return new QuadrantViewAdapter(data);
+  public static QuadrantViewAdapter newInstance(Listener listener, List<QuadrantItem> data) {
+    return new QuadrantViewAdapter(listener, data);
   }
 
-  private QuadrantViewAdapter() {
-    data = new ArrayList<>();
+  private QuadrantViewAdapter(Listener listener) {
+    this.listener = listener;
+    this.data = new ArrayList<>();
   }
 
   /**
@@ -57,7 +53,8 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
    *
    * @param data Data set
    */
-  private QuadrantViewAdapter(List<QuadrantItem> data) {
+  private QuadrantViewAdapter(Listener listener, List<QuadrantItem> data) {
+    this.listener = listener;
     this.data = new ArrayList<>(data);
   }
 
@@ -78,21 +75,8 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     holder.setTextView(data.get(position).getMessage());
 
     // Handle longclick of item
-    holder.itemView.setOnLongClickListener((View v) -> {
-
-      // Set holder to current holder to be used by listener
-      this.holder = holder;
-
-      // Set context to holder itemView context
-      this.context = holder.itemView.getContext();
-
-      // Set FragmentManager to current fragment
-      FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
-
-      // Get a new instance of the AddItemDialogFragment
-      DialogFragment dialog =
-          EditItemDialogFragment.newInstance(data.get(position).getUid(), this);
-      dialog.show(manager, "Edit Item");
+    holder.itemView.setOnLongClickListener(v -> {
+      listener.onItemLongClick(data.get(position));
       return true;
     });
   }
@@ -127,52 +111,26 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
   /**
    * Update item message.
-   *
    * @param message message that will be updated in QuadrantItem
-   * @param itemUID item UID that will be used to update item message in QuadrantItem
+   * @param item    Object being manipulated
    */
-  @Override
-  public void updateItem(String message, long itemUID) {
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(context);
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.updateItemText(itemUID, message);
-
+  public void updateItem(String message, QuadrantItem item) {
     // Update QuadrantItem data array item with new message
-    data.get(holder.getAdapterPosition()).setMessage(message);
-
-    // Notify that change to an item has been made
-    notifyItemChanged(holder.getAdapterPosition());
-  }
-
-  /**
-   * Delete item based on item id
-   *
-   * @param itemUID id of item to be deleted
-   */
-  @Override
-  public void deleteItem(long itemUID){
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(context);
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.removeItem(itemUID);
-
-    // Remove item from adapter
-    data.remove(holder.getAdapterPosition());
-
-    // Notify that item has been removed from list
-    notifyItemRemoved(holder.getAdapterPosition());
+    data.get(data.indexOf(item)).setMessage(message);
 
     // Notify that change to an item has been made
     notifyDataSetChanged();
+  }
 
+  /**
+   * Delete item based on item id.
+   */
+  public void removeItem(QuadrantItem item) {
+    // Remove item from adapter
+    //data.remove(holder.getAdapterPosition());
+    data.remove(item);
+
+    // Notify that change to an item has been made
+    notifyDataSetChanged();
   }
 }

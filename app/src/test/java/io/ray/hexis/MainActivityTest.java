@@ -12,19 +12,18 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 public class MainActivityTest {
-    @Test
-    public void onBackPressed() throws Exception {
-        // Setup the activity via Robolectric
-        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
+  @Test
+  public void onBackPressed() throws Exception {
+    // Setup the activity via Robolectric
+    MainActivity activity = Robolectric.setupActivity(MainActivity.class);
 
-        // Find the drawer layout
-        DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
+    // Find the drawer layout
+    DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
 
-        // Open the drawer
-        drawer.openDrawer(GravityCompat.START);
+    // Open the drawer
+    drawer.openDrawer(GravityCompat.START);
 
-        // Click the button
-        activity.onBackPressed();
-    }
-
+    // Click the button
+    activity.onBackPressed();
+  }
 }

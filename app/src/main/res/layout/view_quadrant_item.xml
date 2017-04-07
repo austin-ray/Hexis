@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/quadrant_item_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/quadrant_item_text" />
+        android:layout_height="50dp"
+        android:text="TextView"/>
 </LinearLayout>
