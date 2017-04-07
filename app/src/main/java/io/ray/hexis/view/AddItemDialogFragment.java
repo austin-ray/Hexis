@@ -2,22 +2,25 @@ package io.ray.hexis.view;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
+import io.ray.hexis.presenter.AddItemOnClickListener;
 
 /**
  * DialogFragment that appears when a user adds an item to a QuadrantFragment.
  */
-public class AddItemDialogFragment extends DialogFragment {
+public class AddItemDialogFragment extends DialogFragment implements View.OnClickListener {
 
   @BindView(R.id.add_item) EditText newItem;
 
@@ -98,13 +101,18 @@ public class AddItemDialogFragment extends DialogFragment {
     // Pass null as the parent view because its going in the dialog layout
     builder.setView(v)
         // Add action buttons
-        .setPositiveButton("Add Item", (dialog, id) -> {
-          newItem = (EditText) getDialog().findViewById(R.id.add_item);
-          listener.addItem(newItem.getText().toString(), selectedQuadrant);
-        })
+        .setPositiveButton("Add Item", null)
         .setNegativeButton("Cancel", (dialog, id) -> AddItemDialogFragment.this.getDialog()
             .cancel());
-    return builder.create();
+
+    Dialog dialog = builder.create();
+
+    dialog.setOnShowListener(dialog1 -> {
+      Button button = ((AlertDialog) dialog1).getButton(AlertDialog.BUTTON_POSITIVE);
+      button.setOnClickListener(AddItemDialogFragment.this);
+    });
+
+    return dialog;
   }
 
   /**
@@ -145,5 +153,13 @@ public class AddItemDialogFragment extends DialogFragment {
    */
   public Listener getListener() {
     return listener;
+  }
+
+  @Override
+  public void onClick(View v) {
+    if (!newItem.getText().toString().isEmpty()) {
+      listener.addItem(newItem.getText().toString());
+      dismiss();
+    }
   }
 }
