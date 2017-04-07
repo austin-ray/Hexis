@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -14,8 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.util.QuadrantItemReader;
-import io.ray.hexis.util.SqlLiteHelper;
 
 /**
  * DialogFragment that appears when a user edits an item in a QuadrantFragment.
@@ -82,7 +81,7 @@ public class EditItemDialogFragment extends DialogFragment {
 
     // Inflate and set the layout for the dialog
     // Pass null as the parent view because its going in the dialog layout
-    View v = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    View v = inflater.inflate(R.layout.fragment_add_item_dialog, (ViewGroup) getView(), false);
 
     // Implement ButterKnife
     ButterKnife.bind(this, v);
@@ -90,15 +89,11 @@ public class EditItemDialogFragment extends DialogFragment {
     // Retrieve itemUID from arguments passed from newInstance
     QuadrantItem item = getArguments().getParcelable("quadrantItem");
 
-    // Initialize sql database helper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(this.getContext());
-    QuadrantItemReader quadrantItemReader = new QuadrantItemReader(sqlLiteHelper);
-
     // Hide quadrant buttons
     toggleGroup.setVisibility(View.INVISIBLE);
 
     // Set addItemText view to item message
-    addItemTextView.setText(quadrantItemReader.getItemByUid(item != null ? item.getUid() : 0));
+    addItemTextView.setText(item != null ? item.getMessage() : null);
 
     // Build view
     builder.setView(v)
@@ -114,7 +109,6 @@ public class EditItemDialogFragment extends DialogFragment {
 
   /**
    * Set the listener for the Dialog.
-   *
    * @param listener Listener reference for the DialogFragment
    */
   public void setListener(Listener listener) {

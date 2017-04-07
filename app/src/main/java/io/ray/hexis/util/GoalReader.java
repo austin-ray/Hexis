@@ -10,18 +10,18 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
  * Class to read data from Goal table in Hexis database.
  */
 public class GoalReader {
-  private SQLiteDatabase db;
-  private SqlLiteHelper sqlLiteHelper;
+  private final SQLiteDatabase db;
+  private final SqlLiteHelper sqlLiteHelper;
 
   // A query to retrieve all goals with a specific title
-  private String queryGoalTitle = "SELECT * FROM "
+  private final String queryGoalTitle = "SELECT * FROM "
       + GoalsEntry.TABLE_NAME
       + " WHERE "
       + GoalsEntry.COLUMN_NAME_GOAL_TITLE
       + " = \"";
 
   // A query to retrieve all gaols with a specific id
-  private String queryGoalId =
+  private final String queryGoalId =
       "SELECT * FROM " + GoalsEntry.TABLE_NAME + " WHERE " + GoalsEntry.COLUMN_NAME_ID + " = ";
 
   /**

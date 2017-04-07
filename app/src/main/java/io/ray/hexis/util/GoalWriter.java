@@ -10,8 +10,8 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
  * GoalWriter class used to write to Goal table in Hexis database.
  */
 public class GoalWriter {
-  private SQLiteDatabase db;
-  private SqlLiteHelper sqlLiteHelper;
+  private final SQLiteDatabase db;
+  private final SqlLiteHelper sqlLiteHelper;
   private ContentValues values;
 
   /**

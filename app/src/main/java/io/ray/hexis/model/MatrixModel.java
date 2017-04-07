@@ -11,7 +11,7 @@ import java.util.List;
 public class MatrixModel implements IMatrixModel {
 
   // Data for all the Quadrants
-  private IQuadrantModel[] quadrantModels;
+  private final IQuadrantModel[] quadrantModels;
 
   /**
    * Constructor which sets up four empty IQuadrantModel objects in an array.

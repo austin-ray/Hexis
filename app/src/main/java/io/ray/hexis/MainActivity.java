@@ -5,13 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.presenter.NavigationAdapter;
 import io.ray.hexis.util.QuadrantItemReader;
 import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.MatrixFragment;
@@ -31,21 +28,21 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     // Get current view to pass to navigation adapter object
-    View v = findViewById(android.R.id.content);
+    //View v = findViewById(android.R.id.content);
 
     // Initialize toolbar object
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     //Initialize navigation Adapter to handle item selection
-    NavigationAdapter navAdapter = new NavigationAdapter(v);
+    //NavigationAdapter navAdapter = new NavigationAdapter(v);
 
     // Initialize drawer layout object
     // This adds the three horizontal navigation drawer bars in the toolbar
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle =
-        new ActionBarDrawerToggle(this, drawer, toolbar, 0, 0);
-    toggle.syncState();
+    //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    //ActionBarDrawerToggle toggle =
+    //    new ActionBarDrawerToggle(this, drawer, toolbar, 0, 0);
+    //toggle.syncState();
 
     // Initialize the SQL Lite Helper
     sqlHelper = new SqlLiteHelper(this);

@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
@@ -17,7 +19,7 @@ import io.ray.hexis.R;
 /**
  * DialogFragment that appears when a user adds an item to a QuadrantFragment.
  */
-public class AddItemDialogFragment extends DialogFragment {
+public class AddItemDialogFragment extends DialogFragment implements View.OnClickListener {
 
   @BindView(R.id.add_item) EditText newItem;
 
@@ -36,7 +38,6 @@ public class AddItemDialogFragment extends DialogFragment {
 
     /**
      * Add a QuadrantItem to the current fragment.
-     *
      * @param message Message that will be used to construct a QuadrantItem
      */
     void addItem(String message);
@@ -75,10 +76,9 @@ public class AddItemDialogFragment extends DialogFragment {
   @NonNull
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     // Get the layout inflater
     LayoutInflater inflater = getActivity().getLayoutInflater();
-    View v = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    View v = inflater.inflate(R.layout.fragment_add_item_dialog, (ViewGroup) getView(), false);
 
     ButterKnife.bind(this, v);
 
@@ -94,17 +94,24 @@ public class AddItemDialogFragment extends DialogFragment {
     quadThree.setOnClickListener(e -> selectQuadrant(2));
     quadFour.setOnClickListener(e -> selectQuadrant(3));
 
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
     // Inflate and set the layout for the dialog
     // Pass null as the parent view because its going in the dialog layout
     builder.setView(v)
         // Add action buttons
-        .setPositiveButton("Add Item", (dialog, id) -> {
-          newItem = (EditText) getDialog().findViewById(R.id.add_item);
-          listener.addItem(newItem.getText().toString(), selectedQuadrant);
-        })
+        .setPositiveButton("Add Item", null)
         .setNegativeButton("Cancel", (dialog, id) -> AddItemDialogFragment.this.getDialog()
             .cancel());
-    return builder.create();
+
+    Dialog dialog = builder.create();
+
+    dialog.setOnShowListener(dialog1 -> {
+      Button button = ((AlertDialog) dialog1).getButton(AlertDialog.BUTTON_POSITIVE);
+      button.setOnClickListener(this);
+    });
+
+    return dialog;
   }
 
   /**
@@ -145,5 +152,13 @@ public class AddItemDialogFragment extends DialogFragment {
    */
   public Listener getListener() {
     return listener;
+  }
+
+  @Override
+  public void onClick(View v) {
+    if (!newItem.getText().toString().isEmpty()) {
+      listener.addItem(newItem.getText().toString(), selectedQuadrant);
+      dismiss();
+    }
   }
 }
