@@ -16,6 +16,7 @@ import io.ray.hexis.view.abs.IQuadrantFragment;
  */
 public class AddItemOnClickListener implements FloatingActionButton.OnClickListener,
         AddItemDialogFragment.Listener {
+
   private final ViewPager pager;
   private final SqlLiteHelper sqlLiteHelper;
 
@@ -26,7 +27,7 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
   public AddItemOnClickListener(ViewPager pager) {
     this.pager = pager;
     this.sqlLiteHelper = new SqlLiteHelper(pager.getContext());
-    pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
+    //pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
   }
 
   /**
