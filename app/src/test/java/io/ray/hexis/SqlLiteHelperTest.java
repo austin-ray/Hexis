@@ -1,7 +1,5 @@
 package io.ray.hexis;
 
-import android.test.AndroidTestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +14,12 @@ import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.util.sql.GoalsContract;
 import io.ray.hexis.util.sql.QuadrantItemsContract;
 
+import static junit.framework.Assert.assertNotNull;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 
-public class SqlLiteHelperTest extends AndroidTestCase {
+public class SqlLiteHelperTest {
   private SqlLiteHelper sqlHelper;
 
   @Before
