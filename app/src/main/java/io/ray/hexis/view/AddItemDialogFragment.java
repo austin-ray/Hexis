@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import butterknife.BindView;
@@ -21,12 +22,19 @@ import io.ray.hexis.R;
  */
 public class AddItemDialogFragment extends DialogFragment implements View.OnClickListener {
 
-  @BindView(R.id.add_item) EditText newItem;
+  @BindView(R.id.add_item)
+  EditText newItem;
 
-  @BindView(R.id.btn_QI) ToggleButton quadOne;
-  @BindView(R.id.btn_QII) ToggleButton quadTwo;
-  @BindView(R.id.btn_QIII) ToggleButton quadThree;
-  @BindView(R.id.btn_QIV) ToggleButton quadFour;
+  @BindView(R.id.btn_QI)
+  ToggleButton quadOne;
+  @BindView(R.id.btn_QII)
+  ToggleButton quadTwo;
+  @BindView(R.id.btn_QIII)
+  ToggleButton quadThree;
+  @BindView(R.id.btn_QIV)
+  ToggleButton quadFour;
+  @BindView(R.id.txtDialogTitle)
+  TextView dialogTitle;
 
   private int selectedQuadrant = 0;
   private Listener listener;
@@ -38,6 +46,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
 
     /**
      * Add a QuadrantItem to the current fragment.
+     *
      * @param message Message that will be used to construct a QuadrantItem
      */
     void addItem(String message);
@@ -45,13 +54,14 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
     /**
      * Add a QuadrantItem to the current fragment.
      *
-     * @param message    Message that will be used to construct a QuadrantItem
+     * @param message Message that will be used to construct a QuadrantItem
      * @param quadrantId the quadrant id
      */
     void addItem(String message, int quadrantId);
 
     /**
      * Return id of current quadrant.
+     *
      * @return id of current quadrant
      */
     int getQuadrant();
@@ -81,6 +91,9 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
     View v = inflater.inflate(R.layout.fragment_add_item_dialog, (ViewGroup) getView(), false);
 
     ButterKnife.bind(this, v);
+
+    // Set title to Add Item
+    dialogTitle.setText("Add Item");
 
     // Get the current quadrant
     selectedQuadrant = listener.getQuadrant();
