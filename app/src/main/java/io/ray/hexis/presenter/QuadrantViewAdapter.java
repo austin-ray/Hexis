@@ -63,7 +63,7 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     final ViewGroup nullParent = null;
     // Inflate the layout
     View view = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.view_quadrant_item, nullParent);
+        .inflate(R.layout.view_quadrant_item, parent, false);
 
     // Return a view holder
     return new QuadrantItemViewHolder(view);
