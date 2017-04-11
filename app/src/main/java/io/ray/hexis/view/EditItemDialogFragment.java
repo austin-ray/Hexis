@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
@@ -26,6 +27,9 @@ public class EditItemDialogFragment extends DialogFragment {
 
   @BindView(R.id.add_item)
   EditText addItemTextView;
+
+  @BindView(R.id.txtDialogTitle)
+  TextView dialogTitle;
 
   private Listener listener;
 
@@ -85,6 +89,9 @@ public class EditItemDialogFragment extends DialogFragment {
 
     // Implement ButterKnife
     ButterKnife.bind(this, v);
+
+    // Set title to Edit Item
+    dialogTitle.setText("Edit Item");
 
     // Retrieve itemUID from arguments passed from newInstance
     QuadrantItem item = getArguments().getParcelable("quadrantItem");
