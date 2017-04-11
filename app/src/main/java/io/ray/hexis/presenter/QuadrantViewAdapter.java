@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.CheckedTextView;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.view.QuadrantItemViewHolder;
@@ -22,6 +23,7 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
   public interface Listener {
     void onItemLongClick(QuadrantItem item);
+    void onItemClick(QuadrantItem item, CheckedTextView textView);
   }
 
   /**
@@ -73,6 +75,11 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
     // Set the holder text to item message
     holder.setTextView(data.get(position).getMessage());
+
+    // Handle click of item
+    holder.itemView.setOnClickListener((View v) -> {
+      listener.onItemClick(data.get(position), (CheckedTextView) holder.itemView.findViewById(R.id.quadrant_item_text));
+    });
 
     // Handle longclick of item
     holder.itemView.setOnLongClickListener(v -> {

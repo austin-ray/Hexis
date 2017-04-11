@@ -2,6 +2,7 @@ package io.ray.hexis.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -15,7 +16,7 @@ import io.ray.hexis.R;
 public class QuadrantItemViewHolder extends RecyclerView.ViewHolder {
 
   @BindView(R.id.quadrant_item_text)
-  TextView textView;
+  CheckedTextView textView;
 
   /**
    * Default constructor.

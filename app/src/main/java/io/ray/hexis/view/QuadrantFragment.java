@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.CheckedTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -184,5 +185,17 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
 
     // Show the dialog and set its tag.
     dialog.show(manager, "Edit Item");
+  }
+
+  @Override
+  public void onItemClick(QuadrantItem item, CheckedTextView textView){
+    FragmentManager manager = getActivity().getSupportFragmentManager();
+
+    if (textView.isChecked())
+      textView.setChecked(false);
+      // Logic to set completion status
+    else
+      textView.setChecked(true);
+    // Logic to set completion status
   }
 }
