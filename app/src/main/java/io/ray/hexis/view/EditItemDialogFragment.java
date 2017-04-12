@@ -36,14 +36,13 @@ public class EditItemDialogFragment extends DialogFragment {
   /**
    * Listener for the EditItemDialogFragment.
    */
-  public interface Listener {
+  interface Listener {
 
     /**
-     * Update item message.
-     * @param message   message that will be updated in QuadrantItem
+     * Update an item.
      * @param item      Item that will be updated
      */
-    void updateItem(String message, QuadrantItem item);
+    void updateItem(QuadrantItem item);
 
     /**
      * Remove item from the model.
@@ -91,13 +90,13 @@ public class EditItemDialogFragment extends DialogFragment {
     ButterKnife.bind(this, v);
 
     // Set title to Edit Item
-    dialogTitle.setText("Edit Item");
+    dialogTitle.setText(R.string.edit_item);
 
     // Retrieve itemUID from arguments passed from newInstance
     QuadrantItem item = getArguments().getParcelable("quadrantItem");
 
     // Hide quadrant buttons
-    toggleGroup.setVisibility(View.INVISIBLE);
+    //toggleGroup.setVisibility(View.INVISIBLE);
 
     // Set addItemText view to item message
     addItemTextView.setText(item != null ? item.getMessage() : null);
@@ -105,8 +104,12 @@ public class EditItemDialogFragment extends DialogFragment {
     // Build view
     builder.setView(v)
         // Add action buttons
-        .setPositiveButton("Update Item", (dialog, id) ->
-            listener.updateItem(addItemTextView.getText().toString(), item))
+        .setPositiveButton("Update Item", (dialog, id) -> {
+          if (item != null) {
+            item.setMessage(addItemTextView.getText().toString());
+            listener.updateItem(item);
+          }
+        })
         .setNeutralButton("Delete Item", (dialog, id) ->
             listener.removeItem(item))
         .setNegativeButton("Cancel",

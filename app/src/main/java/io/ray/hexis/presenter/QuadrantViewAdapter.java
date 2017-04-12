@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.CheckedTextView;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.view.QuadrantItemViewHolder;
@@ -23,7 +22,8 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
   public interface Listener {
     void onItemLongClick(QuadrantItem item);
-    void onItemClick(QuadrantItem item, CheckedTextView textView);
+
+    void onItemClick(QuadrantItem item, QuadrantItemViewHolder vh);
   }
 
   /**
@@ -77,15 +77,14 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     holder.setTextView(data.get(position).getMessage());
 
     // Set the holder text check to item check status
-    holder.setCheck(data.get(position).getCompletion());
+    holder.setCheck(data.get(position).isComplete());
 
     // Handle click of item
-    holder.itemView.setOnClickListener((View v) -> {
-      listener.onItemClick(data.get(position), (CheckedTextView) holder.itemView.findViewById(R.id.quadrant_item_text));
-    });
+    holder.getTextView().setOnClickListener((View v) ->
+        listener.onItemClick(data.get(position), holder));
 
     // Handle longclick of item
-    holder.itemView.setOnLongClickListener(v -> {
+    holder.getTextView().setOnLongClickListener(v -> {
       listener.onItemLongClick(data.get(position));
       return true;
     });
@@ -121,12 +120,13 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
   /**
    * Update item message.
-   * @param message message that will be updated in QuadrantItem
    * @param item    Object being manipulated
    */
-  public void updateItem(String message, QuadrantItem item) {
+  public void updateItem(QuadrantItem item) {
     // Update QuadrantItem data array item with new message
-    data.get(data.indexOf(item)).setMessage(message);
+    int index = data.indexOf(item);
+    data.remove(index);
+    data.add(index, item);
 
     // Notify that change to an item has been made
     notifyDataSetChanged();

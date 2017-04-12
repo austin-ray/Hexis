@@ -40,15 +40,30 @@ public class QuadrantItemViewHolder extends RecyclerView.ViewHolder {
   }
 
   /**
-   * Set the check value of the item
-   *
-   * @param checked 0 if not completed 1 if completed
+   * Set the value of the checkbox.
+   * @param isChecked   Is the box checked?
    */
-  public void setCheck(int checked) {
+  public void setCheck(boolean isChecked) {
+    textView.setChecked(isChecked);
+  }
 
-    if(checked == 0)
-      textView.setChecked(false);
-    else
-      textView.setChecked(true);
+  /**
+   * Click the check box.
+   */
+  public void clickCheck() {
+    // Negate the current the value of the check box
+    textView.setChecked(!textView.isChecked());
+  }
+
+  /**
+   * Return if the TextView is checked.
+   * @return    Is the text view checked?
+   */
+  public boolean isChecked() {
+    return textView.isChecked();
+  }
+
+  public TextView getTextView() {
+    return textView;
   }
 }

@@ -93,7 +93,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
     ButterKnife.bind(this, v);
 
     // Set title to Add Item
-    dialogTitle.setText("Add Item");
+    dialogTitle.setText(R.string.add_item);
 
     // Get the current quadrant
     selectedQuadrant = listener.getQuadrant();
@@ -114,8 +114,8 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
     builder.setView(v)
         // Add action buttons
         .setPositiveButton("Add Item", null)
-        .setNegativeButton("Cancel", (dialog, id) -> AddItemDialogFragment.this.getDialog()
-            .cancel());
+        .setNegativeButton("Cancel", (dialog, id) ->
+            AddItemDialogFragment.this.getDialog().cancel());
 
     Dialog dialog = builder.create();
 

@@ -79,7 +79,7 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
       int completion = cursor.getInt(cursor.getColumnIndexOrThrow(
           QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS));
 
-      items.add(new QuadrantItem(msg, id, completion));
+      items.add(new QuadrantItem(msg, id, completion == 1));
     }
 
     cursor.close();
