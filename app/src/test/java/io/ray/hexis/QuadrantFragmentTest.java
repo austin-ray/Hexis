@@ -42,7 +42,7 @@ public class QuadrantFragmentTest {
   public void onCreateView() throws Exception {
     // Get an instance of the fragment
     QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
+    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
 
     // Start its lifecycle
     startFragment(fragment);
@@ -54,7 +54,7 @@ public class QuadrantFragmentTest {
   public void onSaveInstanceState() throws Exception {
     // Get a new instance of the fragment
     QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
+    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
 
     // Assert that the presenter has been set correctly
     assertNotNull(fragment.getPresenter());
@@ -77,7 +77,7 @@ public class QuadrantFragmentTest {
   public void addItem() throws Exception {
     // Get an instance of the fragment.
     QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel()));
+    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
 
     // Start its lifecycle
     startFragment(fragment);

@@ -1,8 +1,11 @@
 package io.ray.hexis.presenter.abs;
 
+import android.support.v4.view.ViewPager;
+
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.abs.IMatrixModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
+import io.ray.hexis.presenter.QuadrantFragmentPagerAdapter;
 import io.ray.hexis.view.abs.IMatrixFragment;
 
 import java.util.List;
@@ -29,5 +32,7 @@ public interface IMatrixPresenter extends IPresenter<IMatrixFragment, IMatrixMod
   IQuadrantModel getQuadrantData(int quadrant);
 
   void setQuadrantData(int quadrant, List<QuadrantItem> data);
+
+  ViewPager getPager();
 }
 

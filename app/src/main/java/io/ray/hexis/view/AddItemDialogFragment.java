@@ -16,6 +16,7 @@ import android.widget.ToggleButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
+import io.ray.hexis.presenter.abs.ModifyItemListener;
 
 /**
  * DialogFragment that appears when a user adds an item to a QuadrantFragment.
@@ -37,35 +38,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
   TextView dialogTitle;
 
   private int selectedQuadrant = 0;
-  private Listener listener;
-
-  /**
-   * Listener for the AddItemDialogFragment.
-   */
-  public interface Listener {
-
-    /**
-     * Add a QuadrantItem to the current fragment.
-     *
-     * @param message Message that will be used to construct a QuadrantItem
-     */
-    void addItem(String message);
-
-    /**
-     * Add a QuadrantItem to the current fragment.
-     *
-     * @param message Message that will be used to construct a QuadrantItem
-     * @param quadrantId the quadrant id
-     */
-    void addItem(String message, int quadrantId);
-
-    /**
-     * Return id of current quadrant.
-     *
-     * @return id of current quadrant
-     */
-    int getQuadrant();
-  }
+  private ModifyItemListener listener;
 
   /**
    * Factory method for creating the DialogFragment with a listener.
@@ -73,7 +46,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
    * @param listener Listener for passing back the information to create a QuadrantItem
    * @return New AddItemDialogFragment instance
    */
-  public static DialogFragment newInstance(Listener listener) {
+  public static DialogFragment newInstance(ModifyItemListener listener) {
     DialogFragment dialog = new AddItemDialogFragment();
 
     // Set the listener
@@ -154,7 +127,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
    *
    * @param listener Listener reference for the DialogFragment
    */
-  public void setListener(Listener listener) {
+  public void setListener(ModifyItemListener listener) {
     this.listener = listener;
   }
 
@@ -163,7 +136,7 @@ public class AddItemDialogFragment extends DialogFragment implements View.OnClic
    *
    * @return Listener
    */
-  public Listener getListener() {
+  public ModifyItemListener getListener() {
     return listener;
   }
 

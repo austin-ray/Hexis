@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.util.QuadrantItemWriter;
@@ -31,7 +32,7 @@ import java.util.List;
  * Viewer class that displays one quadrant of a time matrix.
  */
 public class QuadrantFragment extends Fragment implements IQuadrantFragment,
-    EditItemDialogFragment.Listener, QuadrantViewAdapter.Listener {
+    QuadrantViewAdapter.Listener {
 
   @BindView(R.id.quadrant_list)
   RecyclerView quadRecView;
@@ -145,42 +146,13 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   }
 
   @Override
-  public void updateItem(QuadrantItem item) {
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.updateItem(item);
-
-    quadrantViewAdapter.updateItem(item);
-    presenter.updateModel(quadrantViewAdapter.getData());
-  }
-
-  @Override
-  public void removeItem(QuadrantItem item) {
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.removeItem(item);
-
-    quadrantViewAdapter.removeItem(item);
-    presenter.updateModel(quadrantViewAdapter.getData());
-  }
-
-  @Override
   public void onItemLongClick(QuadrantItem item) {
     FragmentManager manager = getActivity().getSupportFragmentManager();
 
     // Get a new instance of the AddItemDialogFragment
     DialogFragment dialog =
-        EditItemDialogFragment.newInstance(item, this);
+        EditItemDialogFragment.newInstance(item,
+            new AddItemOnClickListener(presenter.getMatrixPresenter().getPager()));
 
     // Show the dialog and set its tag.
     dialog.show(manager, "Edit Item");

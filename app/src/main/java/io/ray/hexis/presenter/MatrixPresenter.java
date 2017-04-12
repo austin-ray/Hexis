@@ -1,5 +1,7 @@
 package io.ray.hexis.presenter;
 
+import android.support.v4.view.ViewPager;
+
 import io.ray.hexis.model.MatrixModel;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.abs.IMatrixModel;
@@ -75,5 +77,10 @@ public class MatrixPresenter implements IMatrixPresenter {
       model = new MatrixModel();
       model.setQuadrantModel(quadrant, data);
     }
+  }
+
+  @Override
+  public ViewPager getPager() {
+    return fragment.getPager();
   }
 }

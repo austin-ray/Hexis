@@ -33,7 +33,6 @@ public class EditItemDialogFragmentTest {
   private DialogFragment dialog;
   private QuadrantViewAdapter adapter;
 
-
   /**
    * Pre-test setup.
    */
@@ -63,7 +62,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
   }
@@ -81,7 +80,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 
@@ -106,7 +105,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 
@@ -128,7 +127,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 

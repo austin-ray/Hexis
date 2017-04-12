@@ -23,8 +23,17 @@ public interface IQuadrantPresenter {
 
   void updateModel(List<QuadrantItem> items);
 
+  void modifyItemInModel(QuadrantItem item);
+
+  void removeItemFromModel(QuadrantItem item);
+
   /**
    * Update the Fragment.
    */
   void updateFragment();
+
+  /**
+   * Get the presenter for one level up in the program heirarchy.
+   */
+  IMatrixPresenter getMatrixPresenter();
 }

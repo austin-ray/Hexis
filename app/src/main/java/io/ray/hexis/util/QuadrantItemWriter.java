@@ -60,6 +60,7 @@ public class QuadrantItemWriter extends QuadrantItemSqlInterator {
    * @return            UID of the item
    */
   public long updateItem(QuadrantItem item, int quadrant, int goal) {
+
     if (doesItemExist(item)) {
       values = new ContentValues();
 
@@ -72,6 +73,7 @@ public class QuadrantItemWriter extends QuadrantItemSqlInterator {
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_QUADRANT,
             getQuadrantByUid(item.getUid()));
       } else {
+        quadrant++;
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_QUADRANT, quadrant);
       }
 
@@ -79,6 +81,7 @@ public class QuadrantItemWriter extends QuadrantItemSqlInterator {
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_GOAL_ID,
             getGoalByUid(item.getUid()));
       } else {
+        goal++;
         values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_GOAL_ID, goal);
       }
 
