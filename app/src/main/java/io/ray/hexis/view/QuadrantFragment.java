@@ -161,6 +161,20 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
     presenter.updateModel(quadrantViewAdapter.getData());
   }
 
+
+  public void updateItem(int completionStatus, QuadrantItem item){
+    // Initialize sqlLiteHelper
+    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
+
+    // Initialize quadrantItemWriter
+    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
+
+    item.setCompletion(completionStatus);
+    quadrantItemWriter.updateItem(item);
+
+    presenter.updateModel(quadrantViewAdapter.getData());
+  }
+
   @Override
   public void removeItem(QuadrantItem item) {
     // Initialize sqlLiteHelper
@@ -192,11 +206,16 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   public void onItemClick(QuadrantItem item, CheckedTextView textView){
     FragmentManager manager = getActivity().getSupportFragmentManager();
 
-    if (textView.isChecked())
+    // Completion status set to 0 for incomplete and 1 for completed
+    if (textView.isChecked()) {
       textView.setChecked(false);
       // Logic to set completion status
-    else
+      updateItem(0, item);
+    }
+    else {
       textView.setChecked(true);
-    // Logic to set completion status
+      // Logic to set completion status
+      updateItem(1, item);
+    }
   }
 }

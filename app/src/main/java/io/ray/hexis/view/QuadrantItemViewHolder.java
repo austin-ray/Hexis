@@ -38,4 +38,17 @@ public class QuadrantItemViewHolder extends RecyclerView.ViewHolder {
   public void setTextView(String message) {
     textView.setText(message);
   }
+
+  /**
+   * Set the check value of the item
+   *
+   * @param checked 0 if not completed 1 if completed
+   */
+  public void setCheck(int checked) {
+
+    if(checked == 0)
+      textView.setChecked(false);
+    else
+      textView.setChecked(true);
+  }
 }

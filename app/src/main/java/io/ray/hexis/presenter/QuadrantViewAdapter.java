@@ -76,6 +76,9 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     // Set the holder text to item message
     holder.setTextView(data.get(position).getMessage());
 
+    // Set the holder text check to item check status
+    holder.setCheck(data.get(position).getCompletion());
+
     // Handle click of item
     holder.itemView.setOnClickListener((View v) -> {
       listener.onItemClick(data.get(position), (CheckedTextView) holder.itemView.findViewById(R.id.quadrant_item_text));
