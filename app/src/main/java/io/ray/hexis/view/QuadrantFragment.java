@@ -153,7 +153,8 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
     QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
 
     // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.updateItemText(item.getUid(), message);
+    item.setMessage(message);
+    quadrantItemWriter.updateItem(item);
 
     quadrantViewAdapter.updateItem(message, item);
     presenter.updateModel(quadrantViewAdapter.getData());
@@ -168,7 +169,7 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
     QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
 
     // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.removeItem(item.getUid());
+    quadrantItemWriter.removeItem(item);
 
     quadrantViewAdapter.removeItem(item);
     presenter.updateModel(quadrantViewAdapter.getData());

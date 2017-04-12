@@ -10,7 +10,7 @@
     android:scaleType="center"
     android:textAlignment="center"
     android:textColor="#ffffff"
-    android:textSize="40dp"
+    android:textSize="40sp"
     android:textStyle="bold"
     android:background="@color/colorPrimaryDark"
     android:text="Add Item" />
