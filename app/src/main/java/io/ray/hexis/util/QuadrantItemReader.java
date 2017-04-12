@@ -1,7 +1,6 @@
 package io.ray.hexis.util;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.util.sql.QuadrantItemsContract;
@@ -12,14 +11,7 @@ import java.util.List;
 /**
  * A class to read data from QuadrantItems table from Hexis Database.
  */
-public class QuadrantItemReader {
-  private final SQLiteDatabase db;
-  private final SqlLiteHelper sqlLiteHelper;
-
-  // A query to retrieve all gaols with a specific id
-  private final String queryGoalId = "SELECT * FROM "
-      + QuadrantItemsContract.QuadrantItemsEntry.TABLE_NAME
-      + " WHERE " + QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID + " = ";
+public class QuadrantItemReader extends QuadrantItemSqlInterator {
 
   /**
    * QuadrantItemReader constructor.
@@ -27,7 +19,7 @@ public class QuadrantItemReader {
    * @param sqlLiteHelper needed to read database
    */
   public QuadrantItemReader(SqlLiteHelper sqlLiteHelper) {
-    this.sqlLiteHelper = sqlLiteHelper;
+    super(sqlLiteHelper);
     this.db = sqlLiteHelper.getReadableDatabase();
   }
 
@@ -97,58 +89,13 @@ public class QuadrantItemReader {
   }
 
   /**
-   * Used to check if an item with a defined ID exists in QuadrantItem table.
-   *
-   * @param itemUid   ID of item in the database
-   * @return true if item with defined ID exists
-   */
-  public boolean doesItemExist(long itemUid) {
-    // Query database for existence of a matching goal ID
-    Cursor cursor = db.rawQuery(queryGoalId + itemUid, null);
-    // Return true if at least one instance of the goal id exists
-    if (cursor.getCount() > 0) {
-
-      // Close cursor
-      cursor.close();
-
-      // Return true because goal id exists
-      return true;
-    }
-
-    // Close the cursor
-    cursor.close();
-
-    // Return false because goal id does not exist
-    return false;
-  }
-
-  /**
    * Get an item from the database given its UID.
    *
-   * @param itemUid   UID of the item
-   * @return          Item with a given UID
+   * @param uid     UID of the item
+   * @return        Item with a given UID
    */
-  public String getItemByUid(long itemUid) {
-    // Query database for existence of a matching goal ID
-    Cursor cursor = db.rawQuery(queryGoalId + itemUid, null);
-    // Return true if at least one instance of the goal id exists
-    if (cursor.getCount() > 0) {
-      cursor.moveToNext();
-
-      String itemText = cursor.getString(cursor.getColumnIndexOrThrow(
-          QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT));
-
-      // Close cursor
-      cursor.close();
-
-      // Return true because goal id exists
-      return itemText;
-    }
-
-    // Close the cursor
-    cursor.close();
-
-    // Return null because goal id does not exist
-    return null;
+  public String getItemByUid(long uid) {
+    return (String) getValueOfColumnByUid(uid,
+        QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT, "");
   }
 }
