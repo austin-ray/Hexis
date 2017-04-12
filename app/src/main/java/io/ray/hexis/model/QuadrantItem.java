@@ -102,6 +102,8 @@ public class QuadrantItem implements Parcelable {
     this.msg = msg;
   }
 
+  public void setCompletion(int completion) { this.completion = completion; }
+
   public long getUid() {
     return uid;
   }

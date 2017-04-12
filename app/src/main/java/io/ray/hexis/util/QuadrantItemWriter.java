@@ -64,7 +64,7 @@ public class QuadrantItemWriter extends QuadrantItemSqlInterator {
       values = new ContentValues();
 
       values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID, item.getUid());
-      values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT, item.getUid());
+      values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT, item.getMessage());
       values.put(QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS,
           item.getCompletion());
 
