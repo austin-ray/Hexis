@@ -20,8 +20,6 @@ import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
-import io.ray.hexis.util.QuadrantItemWriter;
-import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import java.util.ArrayList;
@@ -152,7 +150,8 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
     // Get a new instance of the AddItemDialogFragment
     DialogFragment dialog =
         EditItemDialogFragment.newInstance(item,
-            new AddItemOnClickListener(presenter.getMatrixPresenter().getPager()));
+            new AddItemOnClickListener(presenter.getMatrixPresenter().getPager()),
+            getString(R.string.edit_item));
 
     // Show the dialog and set its tag.
     dialog.show(manager, "Edit Item");

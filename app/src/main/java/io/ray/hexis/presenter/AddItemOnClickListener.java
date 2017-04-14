@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.presenter.abs.ModifyItemListener;
@@ -43,7 +44,8 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     IQuadrantFragment currentFragment = getCurrentFragment();
 
     // Get a new instance of the AddItemDialogFragment
-    DialogFragment dialog = AddItemDialogFragment.newInstance(this);
+    DialogFragment dialog = AddItemDialogFragment.newInstance(this,
+        ((Fragment) currentFragment).getString(R.string.add_item));
 
     // Show the dialog fragment
     dialog.show(((Fragment)currentFragment).getFragmentManager(), "Add Item");

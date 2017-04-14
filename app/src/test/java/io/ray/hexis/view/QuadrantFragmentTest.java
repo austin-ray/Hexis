@@ -1,4 +1,4 @@
-package io.ray.hexis;
+package io.ray.hexis.view;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
+import io.ray.hexis.BuildConfig;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.QuadrantModel;
 import io.ray.hexis.presenter.QuadrantPresenter;
