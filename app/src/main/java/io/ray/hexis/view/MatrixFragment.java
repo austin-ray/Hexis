@@ -117,4 +117,9 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
   public void setPresenter(IMatrixPresenter presenter) {
     this.presenter = presenter;
   }
+
+  @Override
+  public ViewPager getPager() {
+    return pager;
+  }
 }

@@ -1,18 +1,23 @@
-package io.ray.hexis;
+package io.ray.hexis.view;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import android.animation.FloatArrayEvaluator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
+import io.ray.hexis.BuildConfig;
+import io.ray.hexis.MainActivity;
+import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
-import io.ray.hexis.view.EditItemDialogFragment;
-import io.ray.hexis.view.QuadrantItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,6 @@ public class EditItemDialogFragmentTest {
   private DialogFragment dialog;
   private QuadrantViewAdapter adapter;
 
-
   /**
    * Pre-test setup.
    */
@@ -46,7 +50,7 @@ public class EditItemDialogFragmentTest {
 
   @Test
   public void newInstance() throws Exception {
-    DialogFragment dialog = EditItemDialogFragment.newInstance(null, null);
+    DialogFragment dialog = EditItemDialogFragment.newInstance(null, null, null);
     assertNotNull(dialog);
   }
 
@@ -63,7 +67,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
   }
@@ -81,7 +85,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 
@@ -106,7 +110,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 
@@ -128,7 +132,7 @@ public class EditItemDialogFragmentTest {
     QuadrantItemViewHolder vh =
         (QuadrantItemViewHolder) recyclerView.findViewHolderForAdapterPosition(0);
 
-    vh.itemView.performLongClick();
+    vh.getTextView().performLongClick();
 
     assertNotNull(getDialog());
 
@@ -174,5 +178,20 @@ public class EditItemDialogFragmentTest {
    */
   private DialogFragment getDialog() {
     return (DialogFragment) activity.getSupportFragmentManager().findFragmentByTag("Edit Item");
+  }
+
+  @Test
+  public void validateInput() throws Exception {
+    onLongClick();
+
+    dialog = getDialog();
+    assertNotNull(dialog);
+
+    LayoutInflater inflater = activity.getLayoutInflater();
+    View root = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    TextView tv = (TextView) root.findViewById(R.id.add_item);
+    tv.setText("");
+
+    clickButton(AlertDialog.BUTTON_POSITIVE);
   }
 }

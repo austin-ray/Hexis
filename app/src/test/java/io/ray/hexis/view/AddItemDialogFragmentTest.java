@@ -1,27 +1,38 @@
-package io.ray.hexis;
+package io.ray.hexis.view;
 
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import io.ray.hexis.BuildConfig;
+import io.ray.hexis.MainActivity;
+import io.ray.hexis.R;
 import io.ray.hexis.presenter.AddItemOnClickListener;
-import io.ray.hexis.view.AddItemDialogFragment;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 public class AddItemDialogFragmentTest {
+
   private MainActivity activity;
   private ViewPager pager;
   private FloatingActionButton fab;
@@ -80,7 +91,7 @@ public class AddItemDialogFragmentTest {
 
   @Test
   public void newInstance() throws Exception {
-    dialog = AddItemDialogFragment.newInstance(null);
+    dialog = AddItemDialogFragment.newInstance(null, null);
     assertNotNull(dialog);
   }
 
@@ -112,12 +123,32 @@ public class AddItemDialogFragmentTest {
     dialog.getDialog().findViewById(R.id.btn_QIV).performClick();
   }
 
+  @Test
+  public void validateInput() throws Exception {
+    fab.performClick();
+    dialog = getDialog();
+    assertNotNull(dialog);
+
+    clickButton(AlertDialog.BUTTON_POSITIVE);
+
+    ((TextView) dialog.getDialog().findViewById(R.id.add_item)).setText("TEST");
+    LayoutInflater inflater = activity.getLayoutInflater();
+    View root = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    TextView tv = (TextView) root.findViewById(R.id.add_item);
+    tv.setText("TEST");
+    dialog.getDialog().setContentView(root);
+    ((AlertDialog) dialog.getDialog())
+        .getButton(AlertDialog.BUTTON_POSITIVE)
+        .performClick();
+  }
+
   /**
-   * Helper class to return the abstract of AddItemDialogFragment
+   * Helper class to return the abstract of AddItemDialogFragment.
    *
    * @return Abstract of AddItemDialogFragment
    */
   private DialogFragment getDialog() {
     return (DialogFragment) activity.getSupportFragmentManager().findFragmentByTag("Add Item");
   }
+
 }

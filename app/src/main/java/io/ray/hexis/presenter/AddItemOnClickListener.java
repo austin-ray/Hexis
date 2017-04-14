@@ -6,6 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import io.ray.hexis.R;
+import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.presenter.abs.IQuadrantPresenter;
+import io.ray.hexis.presenter.abs.ModifyItemListener;
 import io.ray.hexis.util.QuadrantItemWriter;
 import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.AddItemDialogFragment;
@@ -15,7 +19,7 @@ import io.ray.hexis.view.abs.IQuadrantFragment;
  * Listener for the FloatingActionButton, and the DialogFragment is spawns.
  */
 public class AddItemOnClickListener implements FloatingActionButton.OnClickListener,
-        AddItemDialogFragment.Listener {
+    ModifyItemListener {
 
   private final ViewPager pager;
   private final SqlLiteHelper sqlLiteHelper;
@@ -40,7 +44,8 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     IQuadrantFragment currentFragment = getCurrentFragment();
 
     // Get a new instance of the AddItemDialogFragment
-    DialogFragment dialog = AddItemDialogFragment.newInstance(this);
+    DialogFragment dialog = AddItemDialogFragment.newInstance(this,
+        ((Fragment) currentFragment).getString(R.string.add_item));
 
     // Show the dialog fragment
     dialog.show(((Fragment)currentFragment).getFragmentManager(), "Add Item");
@@ -106,5 +111,39 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
 
     // Return the item.
     return (IQuadrantFragment)adapter.getItem(quadrantId);
+  }
+
+  public void updateItem(QuadrantItem item, int quadrant) {
+    QuadrantItemWriter writer = new QuadrantItemWriter(sqlLiteHelper);
+    writer.updateItem(item, quadrant, -1);
+
+    if (quadrant != -1) {
+      IQuadrantFragment currentFragment = getCurrentFragment();
+      currentFragment.getPresenter().removeItemFromModel(item);
+      currentFragment.getPresenter().updateFragment();
+    }
+
+    IQuadrantFragment specificFragment = quadrant == -1 ? getCurrentFragment() :
+        getFragment(quadrant);
+    specificFragment.getPresenter().updateFragment();
+
+    IQuadrantPresenter presenter = specificFragment.getPresenter();
+    presenter.modifyItemInModel(item);
+    presenter.updateFragment();
+  }
+
+  @Override
+  public void updateItem(QuadrantItem item) {
+    updateItem(item, -1);
+  }
+
+  @Override
+  public void removeItem(QuadrantItem item) {
+    QuadrantItemWriter writer = new QuadrantItemWriter(sqlLiteHelper);
+    writer.removeItem(item);
+
+    IQuadrantPresenter presenter = getCurrentFragment().getPresenter();
+    presenter.removeItemFromModel(item);
+    presenter.updateFragment();
   }
 }

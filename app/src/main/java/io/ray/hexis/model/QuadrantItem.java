@@ -10,7 +10,7 @@ public class QuadrantItem implements Parcelable {
   private String msg;
 
   private long uid = -1;
-  private int completion;
+  private boolean completion;
 
   /**
    * Parcelable Creator for a QuadrantItem.
@@ -41,8 +41,8 @@ public class QuadrantItem implements Parcelable {
    */
   public QuadrantItem(String msg) {
     // Pass the message parameter, but set uid to -1 (i.e. not assigned yet)
-    // and completion to 0 (i.e. not complete).
-    this(msg, -1, 0);
+    // and completion to false (i.e. not complete).
+    this(msg, -1, false);
   }
 
   /**
@@ -52,7 +52,7 @@ public class QuadrantItem implements Parcelable {
    */
   public QuadrantItem(String msg, long uid) {
     // Pass message and uid, but set completion to 0 (i.e. not complete)
-    this(msg, uid, 0);
+    this(msg, uid, false);
   }
 
   /**
@@ -61,7 +61,7 @@ public class QuadrantItem implements Parcelable {
    * @param uid           Uid from the database
    * @param completion    Completion status of the item, 0 for not complete, 1 for complete
    */
-  public QuadrantItem(String msg, long uid, int completion) {
+  public QuadrantItem(String msg, long uid, boolean completion) {
     this.msg = msg;
     this.uid = uid;
     this.completion = completion;
@@ -102,13 +102,20 @@ public class QuadrantItem implements Parcelable {
     this.msg = msg;
   }
 
-  public void setCompletion(int completion) { this.completion = completion; }
+  public void setCompletion(boolean isComplete) {
+    // If it's complete then set the value to one.
+    this.completion = isComplete;
+  }
 
   public long getUid() {
     return uid;
   }
 
-  public int getCompletion() {
+  /**
+   * Return if the QuadrantItem has been completed.
+   * @return    If QuadrantItem has been completed.
+   */
+  public boolean isComplete() {
     return completion;
   }
 }

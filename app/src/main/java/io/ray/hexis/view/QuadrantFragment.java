@@ -12,16 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.CheckedTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
-import io.ray.hexis.util.QuadrantItemWriter;
-import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ import java.util.List;
  * Viewer class that displays one quadrant of a time matrix.
  */
 public class QuadrantFragment extends Fragment implements IQuadrantFragment,
-    EditItemDialogFragment.Listener, QuadrantViewAdapter.Listener {
+    QuadrantViewAdapter.Listener {
 
   @BindView(R.id.quadrant_list)
   RecyclerView quadRecView;
@@ -103,8 +101,8 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   /**
    * Add an item with itemUid to the Quadrant.
    *
-   * @param message     Message for the item
-   * @param itemUid     UID of the item
+   * @param message Message for the item
+   * @param itemUid UID of the item
    */
   public void addItem(String message, long itemUid) {
     presenter.addItem(message, itemUid);
@@ -118,16 +116,6 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   @Override
   public void setData(List<QuadrantItem> data) {
     quadrantViewAdapter.setData(data);
-  }
-
-  /**
-   * Set the Presenter object for this class.
-   *
-   * @param presenter Presenter reference
-   */
-  @Override
-  public void setPresenter(IQuadrantPresenter presenter) {
-    this.presenter = presenter;
   }
 
   /**
@@ -145,49 +133,14 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
     return presenter;
   }
 
+  /**
+   * Set the Presenter object for this class.
+   *
+   * @param presenter Presenter reference
+   */
   @Override
-  public void updateItem(String message, QuadrantItem item) {
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    item.setMessage(message);
-    quadrantItemWriter.updateItem(item);
-
-    quadrantViewAdapter.updateItem(message, item);
-    presenter.updateModel(quadrantViewAdapter.getData());
-  }
-
-
-  public void updateItem(int completionStatus, QuadrantItem item){
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    item.setCompletion(completionStatus);
-    quadrantItemWriter.updateItem(item);
-
-    presenter.updateModel(quadrantViewAdapter.getData());
-  }
-
-  @Override
-  public void removeItem(QuadrantItem item) {
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Update item message where item UID matches passed itemUid
-    quadrantItemWriter.removeItem(item);
-
-    quadrantViewAdapter.removeItem(item);
-    presenter.updateModel(quadrantViewAdapter.getData());
+  public void setPresenter(IQuadrantPresenter presenter) {
+    this.presenter = presenter;
   }
 
   @Override
@@ -196,26 +149,18 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
 
     // Get a new instance of the AddItemDialogFragment
     DialogFragment dialog =
-        EditItemDialogFragment.newInstance(item, this);
+        EditItemDialogFragment.newInstance(item,
+            new AddItemOnClickListener(presenter.getMatrixPresenter().getPager()),
+            getString(R.string.edit_item));
 
     // Show the dialog and set its tag.
     dialog.show(manager, "Edit Item");
   }
 
   @Override
-  public void onItemClick(QuadrantItem item, CheckedTextView textView){
-    FragmentManager manager = getActivity().getSupportFragmentManager();
-
+  public void onItemClick(QuadrantItem item, QuadrantItemViewHolder vh) {
     // Completion status set to 0 for incomplete and 1 for completed
-    if (textView.isChecked()) {
-      textView.setChecked(false);
-      // Logic to set completion status
-      updateItem(0, item);
-    }
-    else {
-      textView.setChecked(true);
-      // Logic to set completion status
-      updateItem(1, item);
-    }
+    item.setCompletion(vh.isChecked());
+    vh.clickCheck();
   }
 }
