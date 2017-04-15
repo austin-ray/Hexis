@@ -1,6 +1,7 @@
 package io.ray.hexis.presenter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,7 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
     // Set the holder text check to item check status
     holder.setCheck(data.get(position).isComplete());
+    Log.d("item completion", ""+data.get(position).isComplete());
 
     // Handle click of item
     holder.getTextView().setOnClickListener((View v) ->

@@ -20,6 +20,8 @@ import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
+import io.ray.hexis.util.QuadrantItemWriter;
+import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import java.util.ArrayList;
@@ -160,7 +162,18 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   @Override
   public void onItemClick(QuadrantItem item, QuadrantItemViewHolder vh) {
     // Completion status set to 0 for incomplete and 1 for completed
-    item.setCompletion(vh.isChecked());
+    item.setCompletion(!vh.isChecked());
+
+    // Initialize sqlLiteHelper
+    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
+
+    // Initialize quadrantItemWriter
+    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
+    
+    quadrantItemWriter.updateItem(item);
+
+    quadrantViewAdapter.updateItem(item);
+    presenter.updateModel(quadrantViewAdapter.getData());
     vh.clickCheck();
   }
 }
