@@ -1,19 +1,28 @@
 package io.ray.hexis.view;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 import io.ray.hexis.BuildConfig;
+import io.ray.hexis.model.MatrixModel;
 import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.QuadrantModel;
+import io.ray.hexis.presenter.MatrixPresenter;
 import io.ray.hexis.presenter.QuadrantPresenter;
+import io.ray.hexis.presenter.abs.IMatrixPresenter;
+import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.QuadrantFragment;
+import io.ray.hexis.view.abs.IMatrixFragment;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import static org.junit.Assert.assertEquals;
@@ -43,7 +52,7 @@ public class QuadrantFragmentTest {
   public void onCreateView() throws Exception {
     // Get an instance of the fragment
     QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
+    fragment.setPresenter(new QuadrantPresenter(0, fragment, new QuadrantModel(), null));
 
     // Start its lifecycle
     startFragment(fragment);
@@ -55,7 +64,10 @@ public class QuadrantFragmentTest {
   public void onSaveInstanceState() throws Exception {
     // Get a new instance of the fragment
     QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
+
+    IMatrixPresenter presenter = Mockito.mock(IMatrixPresenter.class);
+
+    fragment.setPresenter(new QuadrantPresenter(0, fragment, new QuadrantModel(), presenter));
 
     // Assert that the presenter has been set correctly
     assertNotNull(fragment.getPresenter());
@@ -64,7 +76,7 @@ public class QuadrantFragmentTest {
     startFragment(fragment);
 
     // Add an item
-    fragment.addItem("TEST");
+    fragment.getPresenter().addItem("TEST");
 
     // Create a bundle and get a saved instance of the fragment
     Bundle out = new Bundle();
@@ -73,32 +85,4 @@ public class QuadrantFragmentTest {
     // Assert that the instance isn't null i.e. data has been saved.
     assertNotNull(out.getParcelableArrayList("data"));
   }
-
-  @Test
-  public void addItem() throws Exception {
-    // Get an instance of the fragment.
-    QuadrantFragment fragment = (QuadrantFragment) QuadrantFragment.newInstance();
-    fragment.setPresenter(new QuadrantPresenter(fragment, new QuadrantModel(), null));
-
-    // Start its lifecycle
-    startFragment(fragment);
-
-    // Add an item to the list
-    fragment.addItem("TEST");
-
-    // Add an item and itemUID to the list
-    fragment.addItem("TEST", 1);
-
-    // Create a bundle and get its saved state
-    Bundle out = new Bundle();
-    fragment.onSaveInstanceState(out);
-
-    // Get the ArrayList from the bundle
-    ArrayList<QuadrantItem> list = out.getParcelableArrayList("data");
-
-    // Check that there is in fact, an item.
-    assert list != null;
-    assertEquals(2, list.size());
-  }
-
 }

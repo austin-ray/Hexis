@@ -20,7 +20,7 @@ public class AddItemOnClickListenerTest {
         ViewPager pager = (ViewPager) activity.findViewById(R.id.quadrant_view_pager);
 
         AddItemOnClickListener listener = new AddItemOnClickListener(pager);
-        listener.addItem("Test add");
+        listener.addItem("Test add", 0);
     }
 
     @Test

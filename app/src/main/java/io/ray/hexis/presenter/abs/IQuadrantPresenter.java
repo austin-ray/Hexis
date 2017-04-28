@@ -8,6 +8,7 @@ import java.util.List;
  * Interface for a QuadrantPresenter.
  */
 public interface IQuadrantPresenter {
+
   /**
    * Construct a QuadrantItem from a given message and add it to the IQuadrantModel.
    * @param message   Message to construct a QuadrantItem with
@@ -27,6 +28,8 @@ public interface IQuadrantPresenter {
 
   void removeItemFromModel(QuadrantItem item);
 
+  void removeItemLocally(QuadrantItem item);
+
   /**
    * Update the Fragment.
    */
@@ -36,4 +39,6 @@ public interface IQuadrantPresenter {
    * Get the presenter for one level up in the program heirarchy.
    */
   IMatrixPresenter getMatrixPresenter();
+
+  int getQuadrant();
 }

@@ -15,10 +15,8 @@ import io.ray.hexis.presenter.abs.ModifyItemListener;
 public class AddItemDialogFragment extends ModifyItemDialogFragment
     implements View.OnClickListener {
 
-
   /**
    * Factory method for creating the DialogFragment with a listener.
-   *
    * @param listener Listener for passing back the information to create a QuadrantItem
    * @return New AddItemDialogFragment instance
    */

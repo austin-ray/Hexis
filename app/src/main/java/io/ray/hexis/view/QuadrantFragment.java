@@ -20,8 +20,6 @@ import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.QuadrantViewAdapter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
-import io.ray.hexis.util.QuadrantItemWriter;
-import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import java.util.ArrayList;
@@ -92,25 +90,6 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   }
 
   /**
-   * Add an item to the Quadrant.
-   *
-   * @param message Message for the new QuadrantItem
-   */
-  public void addItem(String message) {
-    presenter.addItem(message);
-  }
-
-  /**
-   * Add an item with itemUid to the Quadrant.
-   *
-   * @param message Message for the item
-   * @param itemUid UID of the item
-   */
-  public void addItem(String message, long itemUid) {
-    presenter.addItem(message, itemUid);
-  }
-
-  /**
    * Set the data for the ViewAdapter.
    *
    * @param data Data
@@ -162,18 +141,8 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   @Override
   public void onItemClick(QuadrantItem item, QuadrantItemViewHolder vh) {
     // Completion status set to 0 for incomplete and 1 for completed
-    item.setCompletion(!vh.isChecked());
-
-    // Initialize sqlLiteHelper
-    SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-
-    // Initialize quadrantItemWriter
-    QuadrantItemWriter quadrantItemWriter = new QuadrantItemWriter(sqlLiteHelper);
-    
-    quadrantItemWriter.updateItem(item);
-
-    quadrantViewAdapter.updateItem(item);
-    presenter.updateModel(quadrantViewAdapter.getData());
     vh.clickCheck();
+    item.setCompletion(vh.isChecked());
+    presenter.modifyItemInModel(item);
   }
 }

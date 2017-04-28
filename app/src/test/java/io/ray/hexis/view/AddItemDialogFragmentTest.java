@@ -59,7 +59,7 @@ public class AddItemDialogFragmentTest {
     assertNotNull(addItemDialogFragment);
 
     // Test add item
-    listener.addItem("Test item");
+    listener.addItem("Test item", 0);
 
     // Test dialog cancel
     dialog.getDialog().cancel();
