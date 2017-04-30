@@ -51,19 +51,6 @@ public class QuadrantPresenter implements IQuadrantPresenter {
     updateFragment();
   }
 
-  /**
-   * Add a QuadrantItem with itemUID to the model.
-   *
-   * @param message     Message to be displayed.
-   * @param itemUid     UID from the database.
-   */
-  @Override
-  public void addItem(String message, long itemUid) {
-    matrixPresenter.addItem(quadrant, new QuadrantItem(message, itemUid));
-    // Update the fragment if data set has been changed
-    updateFragment();
-  }
-
   @Override public void updateModel(List<QuadrantItem> items) {
     model.setData(items);
   }

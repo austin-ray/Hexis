@@ -2,23 +2,20 @@
 
 buildscript {
     ext.kotlin_version = '1.1.2'
+    ext.dokka_version = '0.9.13'
+
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
         classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        mavenCentral()
     }
 }
 

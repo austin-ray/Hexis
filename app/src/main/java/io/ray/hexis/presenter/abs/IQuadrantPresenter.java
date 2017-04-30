@@ -15,13 +15,6 @@ public interface IQuadrantPresenter {
    */
   void addItem(String message);
 
-  /**
-   * Construct a QuadrantItem from a given message and itemUid and it to the IQuadrantModel.
-   * @param message     Message to be displayed
-   * @param itemUid     UID from the database
-   */
-  void addItem(String message, long itemUid);
-
   void updateModel(List<QuadrantItem> items);
 
   void modifyItemInModel(QuadrantItem item);
