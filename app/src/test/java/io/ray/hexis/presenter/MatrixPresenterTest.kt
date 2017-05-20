@@ -1,6 +1,7 @@
 package io.ray.hexis.presenter
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.support.v4.view.ViewPager
 import io.ray.hexis.model.MatrixModel
@@ -10,16 +11,17 @@ import io.ray.hexis.presenter.abs.IMatrixPresenter
 import io.ray.hexis.util.SqlLiteHelper
 import io.ray.hexis.view.MatrixFragment
 import io.ray.hexis.view.abs.IMatrixFragment
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mockito
 
 class MatrixPresenterTest {
   var mockFragment : IMatrixFragment? = null
   var mockModel : IMatrixModel? = null
   var mockHelper : SqlLiteHelper? = null
+  var mockCursor: Cursor? = null
 
   @Before
   fun init() {
@@ -32,15 +34,17 @@ class MatrixPresenterTest {
     // Mock the necessary Fragment function calls
     Mockito.`when`(mockFragment?.pager).thenReturn(Mockito.mock(ViewPager::class.java))
 
-
     // Mock the necessary DB calls
     Mockito.`when`(mockDb.insert(Mockito.any(), Mockito.any(),
         Mockito.any(ContentValues::class.java))).thenReturn(1L)
 
+    mockCursor = Mockito.mock(Cursor::class.java)
+    Mockito.`when`(mockCursor?.count).thenReturn(1)
+    Mockito.`when`(mockDb.rawQuery(Mockito.any(), Mockito.any())).thenReturn(mockCursor)
+
     // Mock the necessary SqlLiteHelper function calls
     Mockito.`when`(mockHelper?.readableDatabase).thenReturn(mockDb)
   }
-
   @Test
   fun getPager() {
     val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, mockModel, mockHelper!!)
@@ -82,5 +86,25 @@ class MatrixPresenterTest {
 
     presenter = MatrixPresenter(mockFragment!!, null, mockHelper!!)
     presenter.setQuadrantData(0, list)
+  }
+
+  @Test
+  fun notifyItemRemoved() {
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!);
+    presenter.addItem(0, QuadrantItem("TEST"))
+    presenter.notifyItemRemoved(QuadrantItem("TEST"))
+  }
+
+  @Test
+  fun notifyItemModified() {
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
+    presenter.notifyItemModified(QuadrantItem("TEST"), 0)
+  }
+
+  @Test
+  fun getQuadrantData() {
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
+    presenter.addItem(0, QuadrantItem("TEST"))
+    assertEquals(1, presenter.getQuadrantData(0).data.size)
   }
 }
