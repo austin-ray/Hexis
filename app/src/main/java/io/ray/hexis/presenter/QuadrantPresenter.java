@@ -19,7 +19,11 @@ public class QuadrantPresenter implements IQuadrantPresenter {
   // Model reference
   private final IQuadrantModel model;
 
+  // Reference to the Matrix presenter so it can do SQL interactions
   private final IMatrixPresenter matrixPresenter;
+
+  // Number reference to the quadrant
+  private final int quadrant;
 
   /**
    * Constructor.
@@ -27,8 +31,9 @@ public class QuadrantPresenter implements IQuadrantPresenter {
    * @param fragment  Fragment managed by presenter
    * @param model     Model managed by presenter
    */
-  public QuadrantPresenter(IQuadrantFragment fragment, IQuadrantModel model,
+  public QuadrantPresenter(int quadrant, IQuadrantFragment fragment, IQuadrantModel model,
                            IMatrixPresenter matrixPresenter) {
+    this.quadrant = quadrant;
     this.fragment = fragment;
     this.model = model;
     this.matrixPresenter = matrixPresenter;
@@ -41,22 +46,7 @@ public class QuadrantPresenter implements IQuadrantPresenter {
    */
   @Override
   public void addItem(String message) {
-    model.addItem(new QuadrantItem(message));
-
-    // Update the fragment if data set has been changed
-    updateFragment();
-  }
-
-  /**
-   * Add a QuadrantItem with itemUID to the model.
-   *
-   * @param message     Message to be displayed.
-   * @param itemUid     UID from the database.
-   */
-  @Override
-  public void addItem(String message, long itemUid) {
-    model.addItem(new QuadrantItem(message, itemUid));
-
+    matrixPresenter.addItem(quadrant, new QuadrantItem(message));
     // Update the fragment if data set has been changed
     updateFragment();
   }
@@ -82,6 +72,7 @@ public class QuadrantPresenter implements IQuadrantPresenter {
   public void modifyItemInModel(QuadrantItem item) {
     List<QuadrantItem> data = model.getData();
 
+    // TODO: Clean this code up so it's not O(n)
     for (QuadrantItem quadrantItem : data) {
       if (quadrantItem.getUid() == item.getUid()) {
         data.remove(quadrantItem);
@@ -91,10 +82,28 @@ public class QuadrantPresenter implements IQuadrantPresenter {
 
     data.add(item);
     model.setData(data);
+    matrixPresenter.notifyItemModified(item, quadrant);
+    updateFragment();
   }
 
   @Override
   public void removeItemFromModel(QuadrantItem item) {
     model.getData().remove(item);
+    matrixPresenter.notifyItemRemoved(item);
+    updateFragment();
+  }
+
+  /**
+   * Remove an item from a Fragment without touching the database
+   * @param item    Item to be removed
+   */
+  public void removeItemLocally(QuadrantItem item) {
+    model.getData().remove(item);
+    updateFragment();
+  }
+
+  @Override
+  public int getQuadrant() {
+    return quadrant;
   }
 }

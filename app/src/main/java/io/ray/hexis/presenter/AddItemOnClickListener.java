@@ -8,10 +8,7 @@ import android.view.View;
 
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.presenter.abs.ModifyItemListener;
-import io.ray.hexis.util.QuadrantItemWriter;
-import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.AddItemDialogFragment;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
@@ -22,7 +19,6 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
     ModifyItemListener {
 
   private final ViewPager pager;
-  private final SqlLiteHelper sqlLiteHelper;
 
   /**
    * Parameterized constructor that passed a ViewPager object in order to operate.
@@ -30,8 +26,6 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
    */
   public AddItemOnClickListener(ViewPager pager) {
     this.pager = pager;
-    this.sqlLiteHelper = new SqlLiteHelper(pager.getContext());
-    //pager.setOffscreenPageLimit(this.pager.getAdapter().getCount());
   }
 
   /**
@@ -52,35 +46,13 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
   }
 
   /**
-   * Adds a new QuadrantItem to the current QuadrantFragment.
-   * @param message   Message that will be used to construct a QuadrantItem
-   */
-  @Override
-  public void addItem(String message) {
-    // Get the current fragment
-    IQuadrantFragment currentFragment = getCurrentFragment();
-
-    // Add a new QuadrantItem to the fragment
-    currentFragment.getPresenter().addItem(message);
-  }
-
-  /**
    * Add an item to a quadrant with specified message.
    * @param message   Message that will be used to construct a QuadrantItem
    * @param quadrantId the quadrant id
    */
   @Override
   public void addItem(String message, int quadrantId) {
-    IQuadrantFragment specificFragment = getFragment(quadrantId);
-
-    // Initialize QuadrantItemWriter to access database
-    QuadrantItemWriter writeQuadrantItems = new QuadrantItemWriter(sqlLiteHelper);
-
-    // Insert new item into QuadrantItems table
-    long itemUid = writeQuadrantItems.insertNewItem(0, quadrantId, message);
-
-    // The item through the presenter.
-    specificFragment.getPresenter().addItem(message, itemUid);
+    getFragment(quadrantId).getPresenter().addItem(message);
   }
 
   /**
@@ -114,22 +86,16 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
   }
 
   public void updateItem(QuadrantItem item, int quadrant) {
-    QuadrantItemWriter writer = new QuadrantItemWriter(sqlLiteHelper);
-    writer.updateItem(item, quadrant, -1);
+    // Find the corresponding fragment
+    IQuadrantFragment fragment = quadrant == -1 ? getCurrentFragment() : getFragment(quadrant);
 
-    if (quadrant != -1) {
-      IQuadrantFragment currentFragment = getCurrentFragment();
-      currentFragment.getPresenter().removeItemFromModel(item);
-      currentFragment.getPresenter().updateFragment();
+    // Tell the presenter to update it
+    fragment.getPresenter().modifyItemInModel(item);
+
+    // If the quadrant number is not -1 i.e. current fragment. Remove it from current fragment.
+    if (getCurrentFragment().getPresenter().getQuadrant() != quadrant) {
+      getCurrentFragment().getPresenter().removeItemLocally(item);
     }
-
-    IQuadrantFragment specificFragment = quadrant == -1 ? getCurrentFragment() :
-        getFragment(quadrant);
-    specificFragment.getPresenter().updateFragment();
-
-    IQuadrantPresenter presenter = specificFragment.getPresenter();
-    presenter.modifyItemInModel(item);
-    presenter.updateFragment();
   }
 
   @Override
@@ -139,11 +105,6 @@ public class AddItemOnClickListener implements FloatingActionButton.OnClickListe
 
   @Override
   public void removeItem(QuadrantItem item) {
-    QuadrantItemWriter writer = new QuadrantItemWriter(sqlLiteHelper);
-    writer.removeItem(item);
-
-    IQuadrantPresenter presenter = getCurrentFragment().getPresenter();
-    presenter.removeItemFromModel(item);
-    presenter.updateFragment();
+    getCurrentFragment().getPresenter().removeItemFromModel(item);
   }
 }

@@ -11,7 +11,6 @@ import io.ray.hexis.util.sql.GoalsContract.GoalsEntry;
  */
 public class GoalReader {
   private final SQLiteDatabase db;
-  private final SqlLiteHelper sqlLiteHelper;
 
   // A query to retrieve all goals with a specific title
   private final String queryGoalTitle = "SELECT * FROM "
@@ -31,7 +30,6 @@ public class GoalReader {
    * @param sqlLiteHelper    Helper to get a DB
    */
   public GoalReader(SqlLiteHelper sqlLiteHelper) {
-    this.sqlLiteHelper = sqlLiteHelper;
     this.db = sqlLiteHelper.getReadableDatabase();
   }
 

@@ -21,6 +21,7 @@ import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.MatrixPresenter;
 import io.ray.hexis.presenter.QuadrantFragmentPagerAdapter;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
+import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.abs.IMatrixFragment;
 
 import java.util.ArrayList;
@@ -73,9 +74,9 @@ public class MatrixFragment extends Fragment implements IMatrixFragment {
         model.setQuadrantModel(i, args.getParcelableArrayList(String.valueOf(i)));
       }
 
-      presenter = new MatrixPresenter(this, model);
+      presenter = new MatrixPresenter(this, model, new SqlLiteHelper(getContext()));
     } else {
-      presenter = new MatrixPresenter(this, new MatrixModel());
+      presenter = new MatrixPresenter(this, new MatrixModel(), new SqlLiteHelper(getContext()));
     }
   }
 

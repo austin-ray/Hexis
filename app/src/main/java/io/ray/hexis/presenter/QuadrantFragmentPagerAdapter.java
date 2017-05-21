@@ -28,7 +28,7 @@ public class QuadrantFragmentPagerAdapter extends FragmentStatePagerAdapter {
     // Create the four QuadrantFragments
     for (int i = 0; i < fragments.length; i++) {
       fragments[i] = QuadrantFragment.newInstance();
-      fragments[i].setPresenter(new QuadrantPresenter(fragments[i], presenter.getQuadrantData(i),
+      fragments[i].setPresenter(new QuadrantPresenter(i, fragments[i], presenter.getQuadrantData(i),
           presenter));
     }
 

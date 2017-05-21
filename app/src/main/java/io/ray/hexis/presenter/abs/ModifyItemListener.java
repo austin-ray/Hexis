@@ -8,13 +8,6 @@ public interface ModifyItemListener {
    * Add a QuadrantItem to the current fragment.
    *
    * @param message Message that will be used to construct a QuadrantItem
-   */
-  void addItem(String message);
-
-  /**
-   * Add a QuadrantItem to the current fragment.
-   *
-   * @param message Message that will be used to construct a QuadrantItem
    * @param quadrantId the quadrant id
    */
   void addItem(String message, int quadrantId);
