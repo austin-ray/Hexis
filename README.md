@@ -9,5 +9,7 @@
 <br />
 
 ### Description
-Hexis is a simple time management tool based on the principles found in the Eisenhower Matrix for time management. Hexis allows the user to organize their daily tasks into four separate categories based the tasks' importance and priority. Important tasks are placed in the first two "quadrants" while unimportant tasks are placed in last two quadrants. Any urgent tasks should be placed in odd numbered quadrants and non-urgent in even numbered quadrants.
+Hexis is a simple time management tool based on the principles found in the Eisenhower Matrix for time management. Designed to be easy to use and lightweight, Hexis doesn't overload its users with fancy one off features. This lightweight approach gives the user only what they need, allowing them to focus on what's important.
+
+Hexis allows the user to organize their daily tasks into four separate categories based the tasks' importance and priority. Important tasks are placed in the first two "quadrants" while unimportant tasks are placed in last two quadrants. Any urgent tasks should be placed in odd numbered quadrants and non-urgent in even numbered quadrants.
 <br />
