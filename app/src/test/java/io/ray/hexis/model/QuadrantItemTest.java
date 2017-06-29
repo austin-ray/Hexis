@@ -1,10 +1,12 @@
-package io.ray.hexis;
+package io.ray.hexis.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import android.os.Parcel;
 
+import io.ray.hexis.BuildConfig;
 import io.ray.hexis.model.QuadrantItem;
 
 import org.junit.Test;
@@ -18,6 +20,15 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
 public class QuadrantItemTest {
+  @Test
+  public void setCompletion() throws Exception {
+    QuadrantItem item = new QuadrantItem("TEST");
+
+    assertFalse(item.isComplete());
+    item.setCompletion(true);
+    assertTrue(item.isComplete());
+  }
+
   @Test
   public void quadrantCreatorArray() throws Exception {
     int size = 10;

@@ -1,4 +1,4 @@
-package io.ray.hexis;
+package io.ray.hexis.util;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import io.ray.hexis.BuildConfig;
+import io.ray.hexis.MainActivity;
 import io.ray.hexis.util.GoalReader;
 import io.ray.hexis.util.GoalWriter;
 import io.ray.hexis.util.QuadrantItemReader;
