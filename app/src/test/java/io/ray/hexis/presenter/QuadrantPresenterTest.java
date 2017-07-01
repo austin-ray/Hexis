@@ -34,7 +34,9 @@ public class QuadrantPresenterTest {
     QuadrantItem item = Mockito.mock(QuadrantItem.class);
     Mockito.when(item.getUid()).thenReturn(1L);
     List<QuadrantItem> items = new ArrayList<>();
+    items.add(new QuadrantItem("TEST", 30L));
     items.add(item);
+    items.add(new QuadrantItem("TEST", 50L));
     Mockito.when(mockModel.getData()).thenReturn(items);
 
     IMatrixPresenter mockPres = Mockito.mock(IMatrixPresenter.class);

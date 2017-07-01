@@ -193,5 +193,16 @@ public class EditItemDialogFragmentTest {
     tv.setText("");
 
     clickButton(AlertDialog.BUTTON_POSITIVE);
+
+    onLongClick();
+
+    dialog = getDialog();
+    assertNotNull(dialog);
+
+    root = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    tv = (TextView) root.findViewById(R.id.add_item);
+    tv.setText("TEST");
+
+    clickButton(AlertDialog.BUTTON_POSITIVE);
   }
 }

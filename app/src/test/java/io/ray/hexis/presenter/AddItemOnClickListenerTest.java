@@ -1,24 +1,20 @@
 package io.ray.hexis.presenter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import io.ray.hexis.BuildConfig;
 import io.ray.hexis.MainActivity;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.presenter.AddItemOnClickListener;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.view.QuadrantFragment;
-import io.ray.hexis.view.abs.IQuadrantFragment;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 22)
