@@ -64,15 +64,4 @@ public class MainActivity extends AppCompatActivity {
     ft.replace(R.id.container_fragment, matrix.toFragment(), "0");
     ft.commit();
   }
-
-  // Close navigation drawer when back button is pressed
-  @Override
-  public void onBackPressed() {
-    /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-      drawer.closeDrawer(GravityCompat.START);
-    } else {
-      super.onBackPressed();
-    }*/
-  }
 }
