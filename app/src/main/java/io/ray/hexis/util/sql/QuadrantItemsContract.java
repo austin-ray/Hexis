@@ -5,8 +5,7 @@ import android.provider.BaseColumns;
 public final class QuadrantItemsContract {
 
   // Prevent instantiation
-  private QuadrantItemsContract() {
-  }
+  private QuadrantItemsContract() { }
 
   public static class QuadrantItemsEntry implements BaseColumns {
     public static final String TABLE_NAME = "QuadrantItems";

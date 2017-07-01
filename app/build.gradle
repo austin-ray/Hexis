@@ -62,3 +62,22 @@ repositories {
     mavenCentral()
 }
 
+android.applicationVariants.all { variant ->
+    def variantName = variant.name.capitalize()
+
+    task("jacoco${variantName}Report", type: JacocoReport, dependsOn: "test${variantName}UnitTest") {
+        group "Reporting"
+        description "Generate ${variantName} Jacoco coverage reports."
+
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+
+        // variant.javaCompile.source does not work
+        // traverses from starting point
+        sourceDirectories = files(android.sourceSets.main.java.srcDirs)
+        executionData = files("${buildDir}/jacoco/test${variantName}UnitTest.exec")
+    }
+}
+
