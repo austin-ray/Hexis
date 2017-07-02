@@ -69,7 +69,6 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
     List<QuadrantItem> items = new ArrayList<>();
 
     // Traverse the cursor and place all items into item lists
-    if(cursor!=null) {
       while (cursor.moveToNext()) {
         long id = cursor.getLong(cursor.getColumnIndexOrThrow(
             QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID));
@@ -84,7 +83,6 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
       }
 
       cursor.close();
-    }
 
     // Return list of QuadrantItems
     return items;

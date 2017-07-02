@@ -1,4 +1,5 @@
-package io.ray.hexis.util;
+package io.ray.hexis.util
+
 
 import android.content.ContentValues
 import android.database.Cursor
@@ -18,7 +19,7 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = intArrayOf(22))
 
-public class SqlLiteHelperTest {
+public class GoalReadWriteTest {
 
     var mockHelper: SqlLiteHelper? = null
     var mockCursor: Cursor? = null
@@ -30,6 +31,7 @@ public class SqlLiteHelperTest {
         // Create the Mock elements to managed
         mockHelper = Mockito.mock(SqlLiteHelper::class.java)
         val mockDb = Mockito.mock(SQLiteDatabase::class.java)
+
 
         // Mock the necessary DB calls
         Mockito.`when`(mockDb.insert(Mockito.any(), Mockito.any(),
@@ -60,18 +62,26 @@ public class SqlLiteHelperTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun quadrantItemReaderTest() {
-        val quadrantItemReader = QuadrantItemReader(sqlHelper)
-        quadrantItemReader.getItemsTextByQuadrant(1, 1)
+    fun readWriteTest() {
+        val goalReader: GoalReader = GoalReader(mockHelper);
+        val goalWriter: GoalWriter = GoalWriter(mockHelper);
+        assertNotNull(goalReader);
+        assertNotNull(goalWriter);
+
+        goalWriter.insertNewGoal("test");
+        assert(goalReader.doesGoalExist("test"));
+        goalWriter.updateGoal("test", "updated");
+        assert(!goalReader.doesGoalExist("test"));
+        assert(goalReader.doesGoalExist("updated"));
+        goalWriter.updateGoal(0, "updated update");
+        assert(goalReader.doesGoalExist("updated update"));
+
+        goalReader.getGoalTitle(0);
+        goalReader.doesGoalExist(0);
+        goalReader.getGoalTitle(1);
+        goalReader.doesGoalExist(1);
+        goalReader.doesGoalExist("");
+        goalReader.doesGoalExist(-1);
+        goalReader.doesGoalExist("none");
     }
-
-
-    @Test
-    @Throws(Exception::class)
-    fun onUpgradeTest() {
-        val mockDb: SQLiteDatabase = Mockito.mock(SQLiteDatabase::class.java)
-        sqlHelper?.onUpgrade(mockDb, 1, 2)
-    }
-
 }

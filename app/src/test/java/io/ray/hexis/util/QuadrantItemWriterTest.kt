@@ -1,4 +1,5 @@
-package io.ray.hexis.util;
+package io.ray.hexis.util
+
 
 import android.content.ContentValues
 import android.database.Cursor
@@ -18,7 +19,7 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = intArrayOf(22))
 
-public class SqlLiteHelperTest {
+public class QuadrantItemWriterTest {
 
     var mockHelper: SqlLiteHelper? = null
     var mockCursor: Cursor? = null
@@ -30,6 +31,7 @@ public class SqlLiteHelperTest {
         // Create the Mock elements to managed
         mockHelper = Mockito.mock(SqlLiteHelper::class.java)
         val mockDb = Mockito.mock(SQLiteDatabase::class.java)
+
 
         // Mock the necessary DB calls
         Mockito.`when`(mockDb.insert(Mockito.any(), Mockito.any(),
@@ -60,18 +62,15 @@ public class SqlLiteHelperTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun quadrantItemReaderTest() {
-        val quadrantItemReader = QuadrantItemReader(sqlHelper)
-        quadrantItemReader.getItemsTextByQuadrant(1, 1)
+    fun quadrantItemWriterTest() {
+        val goalWriter: GoalWriter = GoalWriter(mockHelper);
+        goalWriter.insertNewGoal("test");
+        val quadrantItemWriter: QuadrantItemWriter = QuadrantItemWriter(mockHelper)
+        quadrantItemWriter.insertNewItem(1, 1, "Temp")
+        quadrantItemWriter.updateItemCompletion(QuadrantItem("Temp"), 1);
+        quadrantItemWriter.updateItem(QuadrantItem("Temp"));
+        quadrantItemWriter.updateItem(QuadrantItem("Temp"), 1, -1);
+        quadrantItemWriter.updateItem(QuadrantItem("Temp"), 1, 1);
+        quadrantItemWriter.updateItemCompletion(QuadrantItem(null), 1);
     }
-
-
-    @Test
-    @Throws(Exception::class)
-    fun onUpgradeTest() {
-        val mockDb: SQLiteDatabase = Mockito.mock(SQLiteDatabase::class.java)
-        sqlHelper?.onUpgrade(mockDb, 1, 2)
-    }
-
 }
