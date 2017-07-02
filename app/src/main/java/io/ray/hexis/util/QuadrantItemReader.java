@@ -69,23 +69,26 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
     List<QuadrantItem> items = new ArrayList<>();
 
     // Traverse the cursor and place all items into item lists
-    while (cursor.moveToNext()) {
-      long id = cursor.getLong(cursor.getColumnIndexOrThrow(
-          QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID));
+    if(cursor!=null) {
+      while (cursor.moveToNext()) {
+        long id = cursor.getLong(cursor.getColumnIndexOrThrow(
+            QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID));
 
-      String msg = cursor.getString(cursor.getColumnIndexOrThrow(
-          QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT));
+        String msg = cursor.getString(cursor.getColumnIndexOrThrow(
+            QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ITEM_TEXT));
 
-      int completion = cursor.getInt(cursor.getColumnIndexOrThrow(
-          QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS));
+        int completion = cursor.getInt(cursor.getColumnIndexOrThrow(
+            QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_COMPLETION_STATUS));
 
-      items.add(new QuadrantItem(msg, id, completion == 1));
+        items.add(new QuadrantItem(msg, id, completion == 1));
+      }
+
+      cursor.close();
     }
-
-    cursor.close();
 
     // Return list of QuadrantItems
     return items;
+
   }
 
   /**
