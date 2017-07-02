@@ -14,6 +14,7 @@ class GoalWriterTest {
     val mockHelper: SqlLiteHelper = Mockito.mock(SqlLiteHelper::class.java)
     val mockDb: SQLiteDatabase = Mockito.mock(SQLiteDatabase::class.java)
 
+    Mockito.`when`(mockHelper.readableDatabase).thenReturn(mockDb)
     Mockito.`when`(mockDb.insert(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(1L)
 
     writer = GoalWriter(mockHelper)
