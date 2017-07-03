@@ -53,15 +53,15 @@ public class GoalWriter {
   public long updateGoal(String goalTitle, String newGoalTitle) {
     GoalReader goalReader = new GoalReader(sqlLiteHelper);
 
+    // Use ContentValues to sanitize user defined goalTitle string
+    values = new ContentValues();
+
+    // Add new goal title to goal_title field in goal table
+    values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
+
     // Check if goal with original title exists in goal table
+    // Update goal title in goal table where goal title matches requested title
     if (goalReader.doesGoalExist(goalTitle)) {
-      // Use ContentValues to sanitize user defined goalTitle string
-      values = new ContentValues();
-
-      // Add new goal title to goal_title field in goal table
-      values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
-
-      // Update goal title in goal table where goal title matches requested title
       return db.update(GoalsEntry.TABLE_NAME, values, GoalsEntry.COLUMN_NAME_GOAL_TITLE
           + "=\""
           + DatabaseUtils.sqlEscapeString(goalTitle)
@@ -82,20 +82,18 @@ public class GoalWriter {
   public long updateGoal(int goalId, String newGoalTitle) {
     GoalReader goalReader = new GoalReader(sqlLiteHelper);
 
+    // Use ContentValues to sanitize user defined goalTitle string
+    values = new ContentValues();
+
+    // Add new goal title to goal_title field in goal table
+    values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
+
     // Check if goal exists
+    // Update goal title in goal table where goal id matches requested id
     if (goalReader.doesGoalExist(goalId)) {
-
-      // Use ContentValues to sanitize user defined goalTitle string
-      values = new ContentValues();
-
-      // Add new goal title to goal_title field in goal table
-      values.put(GoalsEntry.COLUMN_NAME_GOAL_TITLE, newGoalTitle);
-
-      // Update goal title in goal table where goal id matches requested id
       return db.update(GoalsEntry.TABLE_NAME, values,
           GoalsEntry.COLUMN_NAME_ID + "=" + goalId, null);
     }
-
     // Return -1 if no goal exists in goal table matching goal id
     return -1;
   }
