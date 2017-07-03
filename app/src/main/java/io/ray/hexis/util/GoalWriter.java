@@ -90,10 +90,10 @@ public class GoalWriter {
 
     // Check if goal exists
     // Update goal title in goal table where goal id matches requested id
-    if (goalReader.doesGoalExist(goalId))
+    if (goalReader.doesGoalExist(goalId)) {
       return db.update(GoalsEntry.TABLE_NAME, values,
           GoalsEntry.COLUMN_NAME_ID + "=" + goalId, null);
-
+    }
     // Return -1 if no goal exists in goal table matching goal id
     return -1;
   }

@@ -11,6 +11,7 @@ import io.ray.hexis.model.QuadrantItem;
 import static org.junit.Assert.*;
 
 public class QuadrantViewAdapterTest {
+
   @Test
   public void newInstance() throws Exception {
     QuadrantViewAdapter.Listener mockListener = Mockito.mock(QuadrantViewAdapter.Listener.class);
