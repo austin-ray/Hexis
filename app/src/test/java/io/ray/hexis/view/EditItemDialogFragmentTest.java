@@ -3,10 +3,8 @@ package io.ray.hexis.view;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import android.animation.FloatArrayEvaluator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -191,6 +189,17 @@ public class EditItemDialogFragmentTest {
     View root = inflater.inflate(R.layout.fragment_add_item_dialog, null);
     TextView tv = (TextView) root.findViewById(R.id.add_item);
     tv.setText("");
+
+    clickButton(AlertDialog.BUTTON_POSITIVE);
+
+    onLongClick();
+
+    dialog = getDialog();
+    assertNotNull(dialog);
+
+    root = inflater.inflate(R.layout.fragment_add_item_dialog, null);
+    tv = (TextView) root.findViewById(R.id.add_item);
+    tv.setText("TEST");
 
     clickButton(AlertDialog.BUTTON_POSITIVE);
   }

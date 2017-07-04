@@ -94,7 +94,7 @@ public class QuadrantPresenter implements IQuadrantPresenter {
   }
 
   /**
-   * Remove an item from a Fragment without touching the database
+   * Remove an item from a Fragment without touching the database.
    * @param item    Item to be removed
    */
   public void removeItemLocally(QuadrantItem item) {

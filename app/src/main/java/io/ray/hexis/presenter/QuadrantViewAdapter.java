@@ -79,11 +79,11 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
 
     // Set the holder text check to item check status
     holder.setCheck(data.get(position).isComplete());
-    Log.d("item completion", ""+data.get(position).isComplete());
+    Log.d("item completion", "" + data.get(position).isComplete());
 
     // Handle click of item
-    holder.getTextView().setOnClickListener((View v) ->
-        listener.onItemClick(data.get(position), holder));
+    holder.getTextView().setOnClickListener((View v) -> listener.onItemClick(data.get(position),
+        holder));
 
     // Handle longclick of item
     holder.getTextView().setOnLongClickListener(v -> {
@@ -120,29 +120,4 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
     return data;
   }
 
-  /**
-   * Update item message.
-   * @param item    Object being manipulated
-   */
-  public void updateItem(QuadrantItem item) {
-    // Update QuadrantItem data array item with new message
-    int index = data.indexOf(item);
-    data.remove(index);
-    data.add(index, item);
-
-    // Notify that change to an item has been made
-    notifyDataSetChanged();
-  }
-
-  /**
-   * Delete item based on item id.
-   */
-  public void removeItem(QuadrantItem item) {
-    // Remove item from adapter
-    //data.remove(holder.getAdapterPosition());
-    data.remove(item);
-
-    // Notify that change to an item has been made
-    notifyDataSetChanged();
-  }
 }

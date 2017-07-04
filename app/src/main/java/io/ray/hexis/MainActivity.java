@@ -17,9 +17,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-  private FragmentManager fm;
-  private SqlLiteHelper sqlHelper;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //toggle.syncState();
 
     // Initialize the SQL Lite Helper
-    sqlHelper = new SqlLiteHelper(this);
+    SqlLiteHelper sqlHelper = new SqlLiteHelper(this);
 
     // Get an instance of a QuadrantReader
     QuadrantItemReader quadReader = new QuadrantItemReader(sqlHelper);
@@ -59,20 +56,9 @@ public class MainActivity extends AppCompatActivity {
     // Initiate the default matrix
     IMatrixFragment matrix = MatrixFragment.newInstance(metaList);
 
-    fm = getSupportFragmentManager();
+    FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
     ft.replace(R.id.container_fragment, matrix.toFragment(), "0");
     ft.commit();
-  }
-
-  // Close navigation drawer when back button is pressed
-  @Override
-  public void onBackPressed() {
-    /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-      drawer.closeDrawer(GravityCompat.START);
-    } else {
-      super.onBackPressed();
-    }*/
   }
 }

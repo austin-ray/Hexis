@@ -47,7 +47,7 @@ class MatrixPresenterTest {
   }
   @Test
   fun getPager() {
-    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, mockModel, mockHelper!!)
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, mockModel!!, mockHelper!!)
     assertNotNull(presenter.pager)
   }
 
@@ -61,7 +61,7 @@ class MatrixPresenterTest {
 
   @Test
   fun getFragment() {
-    val presenter: IMatrixPresenter = MatrixPresenter(MatrixFragment.newInstance(), mockModel,
+    val presenter: IMatrixPresenter = MatrixPresenter(MatrixFragment.newInstance(), mockModel!!,
         mockHelper!!)
 
     assertNotNull(presenter.fragment)
@@ -75,7 +75,7 @@ class MatrixPresenterTest {
 
   @Test
   fun setQuadrantData() {
-    var presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
     val list: MutableList<QuadrantItem> = ArrayList()
     list.add(QuadrantItem("TEST"))
 
@@ -83,14 +83,11 @@ class MatrixPresenterTest {
 
     presenter.setQuadrantData(0, list)
     assertEquals(1, presenter.getQuadrantData(0).data.size)
-
-    presenter = MatrixPresenter(mockFragment!!, null, mockHelper!!)
-    presenter.setQuadrantData(0, list)
   }
 
   @Test
   fun notifyItemRemoved() {
-    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!);
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
     presenter.addItem(0, QuadrantItem("TEST"))
     presenter.notifyItemRemoved(QuadrantItem("TEST"))
   }
@@ -104,7 +101,14 @@ class MatrixPresenterTest {
   @Test
   fun getQuadrantData() {
     val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
+
+    assertEquals(0, presenter.getQuadrantData(0).data.size)
+
     presenter.addItem(0, QuadrantItem("TEST"))
     assertEquals(1, presenter.getQuadrantData(0).data.size)
+
+    assertEquals(0, presenter.getQuadrantData(1).data.size)
+    assertEquals(0, presenter.getQuadrantData(2).data.size)
+    assertEquals(0, presenter.getQuadrantData(3).data.size)
   }
 }

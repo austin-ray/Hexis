@@ -19,7 +19,7 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
    * @param sqlLiteHelper needed to read database
    */
   public QuadrantItemReader(SqlLiteHelper sqlLiteHelper) {
-    super(sqlLiteHelper);
+    super();
     this.db = sqlLiteHelper.getReadableDatabase();
   }
 
@@ -28,8 +28,8 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
    * Offset in goalId and quadrantId of +1 is required due to
    * sql autoincrement starting at 1 rather than 0
    *
-   * @param goalId        id of goal
-   * @param quadrantId    quadrant id
+   * @param goalId id of goal
+   * @param quadrantId quadrant id
    * @return a list of every item matching the passed parameters
    */
   public List<QuadrantItem> getItemsTextByQuadrant(int goalId, int quadrantId) {
@@ -86,13 +86,14 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
 
     // Return list of QuadrantItems
     return items;
+
   }
 
   /**
    * Get an item from the database given its UID.
    *
-   * @param uid     UID of the item
-   * @return        Item with a given UID
+   * @param uid UID of the item
+   * @return Item with a given UID
    */
   public String getItemByUid(long uid) {
     return (String) getValueOfColumnByUid(uid,

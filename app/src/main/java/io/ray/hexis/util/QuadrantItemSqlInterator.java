@@ -8,7 +8,6 @@ import io.ray.hexis.util.sql.QuadrantItemsContract;
 
 public class QuadrantItemSqlInterator {
 
-  private final SqlLiteHelper helper;
   protected SQLiteDatabase db;
 
   // A query to retrieve all gaols with a specific id
@@ -16,9 +15,7 @@ public class QuadrantItemSqlInterator {
       + QuadrantItemsContract.QuadrantItemsEntry.TABLE_NAME
       + " WHERE " + QuadrantItemsContract.QuadrantItemsEntry.COLUMN_NAME_ID + " = ";
 
-  public QuadrantItemSqlInterator(SqlLiteHelper helper) {
-    this.helper = helper;
-  }
+  public QuadrantItemSqlInterator() { }
 
   /**
    * Checks if an item exists.

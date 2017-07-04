@@ -4,8 +4,7 @@ import android.provider.BaseColumns;
 
 public final class GoalsContract {
   // Prevent instantiation
-  private GoalsContract() {
-  }
+  private GoalsContract() { }
 
   public static class GoalsEntry implements BaseColumns {
     public static final String TABLE_NAME = "Goals";

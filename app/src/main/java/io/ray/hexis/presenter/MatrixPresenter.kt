@@ -1,8 +1,6 @@
 package io.ray.hexis.presenter
 
 import android.support.v4.view.ViewPager
-
-import io.ray.hexis.model.MatrixModel
 import io.ray.hexis.model.QuadrantItem
 import io.ray.hexis.model.abs.IMatrixModel
 import io.ray.hexis.model.abs.IQuadrantModel
@@ -17,7 +15,7 @@ import io.ray.hexis.view.abs.IMatrixFragment
  * @param model     Model handled by the presenter
  * @param helper    SqlLiteHelper reference used to interact with the DB
  */
-class MatrixPresenter(private val fragment: IMatrixFragment, private var model: IMatrixModel?,
+class MatrixPresenter(private val fragment: IMatrixFragment, private var model: IMatrixModel,
                       private val helper: SqlLiteHelper) : IMatrixPresenter {
 
   override val pager: ViewPager
@@ -64,7 +62,7 @@ class MatrixPresenter(private val fragment: IMatrixFragment, private var model: 
    * @param quadrant Quadrant that data is requested from
    * @return IQuadrantModel for a quadrant
    */
-  override fun getQuadrantData(quadrant: Int): IQuadrantModel = model!!.getQuadrant(quadrant)
+  override fun getQuadrantData(quadrant: Int): IQuadrantModel = model.getQuadrant(quadrant)
 
   /**
    * Return the managed IMatrixFragment.
@@ -74,19 +72,13 @@ class MatrixPresenter(private val fragment: IMatrixFragment, private var model: 
   /**
    * Return the managed IMatrixModel.
    */
-  override fun getModel(): IMatrixModel = model!!
+  override fun getModel(): IMatrixModel = model
 
   /**
    * Set the data set for a specific quadrant.
    * @param quadrant  Specific quadrant
    * @param data      Data set
    */
-  override fun setQuadrantData(quadrant: Int, data: List<QuadrantItem>) {
-    if (model != null) {
+  override fun setQuadrantData(quadrant: Int, data: List<QuadrantItem>) =
       getModel().setQuadrantModel(quadrant, data)
-    } else {
-      model = MatrixModel()
-      model!!.setQuadrantModel(quadrant, data)
-    }
-  }
 }
