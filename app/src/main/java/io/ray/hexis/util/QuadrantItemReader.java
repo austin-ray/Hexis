@@ -19,7 +19,7 @@ public class QuadrantItemReader extends QuadrantItemSqlInterator {
    * @param sqlLiteHelper needed to read database
    */
   public QuadrantItemReader(SqlLiteHelper sqlLiteHelper) {
-    super(sqlLiteHelper);
+    super();
     this.db = sqlLiteHelper.getReadableDatabase();
   }
 

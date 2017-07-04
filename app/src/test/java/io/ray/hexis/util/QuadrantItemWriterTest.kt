@@ -4,21 +4,19 @@ package io.ray.hexis.util
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.Before
+import org.junit.Test
 import org.junit.Assert.assertEquals
 import io.ray.hexis.model.QuadrantItem
 import org.junit.Assert.assertNotNull
 import io.ray.hexis.BuildConfig
 import org.junit.runner.RunWith
-import org.mockito.Mockito;
+import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(22))
-
-public class QuadrantItemWriterTest {
+@Config(constants = BuildConfig::class, sdk = intArrayOf(22)) class QuadrantItemWriterTest {
 
   var mockHelper: SqlLiteHelper? = null
   var mockCursor: Cursor? = null
@@ -44,13 +42,13 @@ public class QuadrantItemWriterTest {
 
   @Test
   fun sqlInitializationTest() {
-    assertNotNull(mockHelper);
+    assertNotNull(mockHelper)
   }
 
   @Test
   fun quadrantItemWriterInsertTest() {
-    val goalWriter: GoalWriter = GoalWriter(mockHelper);
-    goalWriter.insertNewGoal("test");
+    val goalWriter: GoalWriter = GoalWriter(mockHelper)
+    goalWriter.insertNewGoal("test")
     val quadrantItemWriter: QuadrantItemWriter = QuadrantItemWriter(mockHelper)
 
     // Add new item with title of Temp
@@ -60,8 +58,8 @@ public class QuadrantItemWriterTest {
 
   @Test
   fun quadrantItemWriterUpdateTest() {
-    val goalWriter: GoalWriter = GoalWriter(mockHelper);
-    goalWriter.insertNewGoal("test");
+    val goalWriter: GoalWriter = GoalWriter(mockHelper)
+    goalWriter.insertNewGoal("test")
     val quadrantItemWriter: QuadrantItemWriter = QuadrantItemWriter(mockHelper)
 
     // Insert items to be tested

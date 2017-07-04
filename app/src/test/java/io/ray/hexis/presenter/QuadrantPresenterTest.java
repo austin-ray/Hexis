@@ -10,10 +10,7 @@ import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.QuadrantModel;
 import io.ray.hexis.model.abs.IQuadrantModel;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
-import io.ray.hexis.presenter.abs.IQuadrantPresenter;
 import io.ray.hexis.view.abs.IQuadrantFragment;
-
-import static org.junit.Assert.*;
 
 public class QuadrantPresenterTest {
   @Test

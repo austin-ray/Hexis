@@ -13,9 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(22))
-
-public class GoalReadTest {
+@Config(constants = BuildConfig::class, sdk = intArrayOf(22)) class GoalReadTest {
 
   private var sqlHelper: SqlLiteHelper? = null
 
@@ -27,8 +25,8 @@ public class GoalReadTest {
     sqlHelper = SqlLiteHelper(activity)
 
     //Insert goals into database
-    val goalWriter: GoalWriter = GoalWriter(sqlHelper);
-    goalWriter.insertNewGoal("test");
+    val goalWriter: GoalWriter = GoalWriter(sqlHelper)
+    goalWriter.insertNewGoal("test")
   }
 
   @Test
@@ -40,8 +38,8 @@ public class GoalReadTest {
 
   @Test
   fun readGoalTitleTest() {
-    val goalReader: GoalReader = GoalReader(sqlHelper);
-    assertNotNull(goalReader);
+    val goalReader: GoalReader = GoalReader(sqlHelper)
+    assertNotNull(goalReader)
 
     // Get first goal title in database
     assertEquals("test", goalReader.getGoalTitle(1))
@@ -53,8 +51,8 @@ public class GoalReadTest {
 
   @Test
   fun doesGoalExistTest(){
-    val goalReader: GoalReader = GoalReader(sqlHelper);
-    assertNotNull(goalReader);
+    val goalReader: GoalReader = GoalReader(sqlHelper)
+    assertNotNull(goalReader)
 
     // One goal exists in database with id of 1
     assertTrue(goalReader.doesGoalExist(1))

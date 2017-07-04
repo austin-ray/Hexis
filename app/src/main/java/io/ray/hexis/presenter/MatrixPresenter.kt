@@ -1,8 +1,6 @@
 package io.ray.hexis.presenter
 
 import android.support.v4.view.ViewPager
-
-import io.ray.hexis.model.MatrixModel
 import io.ray.hexis.model.QuadrantItem
 import io.ray.hexis.model.abs.IMatrixModel
 import io.ray.hexis.model.abs.IQuadrantModel

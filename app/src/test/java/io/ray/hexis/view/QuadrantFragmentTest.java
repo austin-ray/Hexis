@@ -1,31 +1,20 @@
 package io.ray.hexis.view;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-
 import io.ray.hexis.BuildConfig;
-import io.ray.hexis.model.MatrixModel;
-import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.QuadrantModel;
-import io.ray.hexis.presenter.MatrixPresenter;
 import io.ray.hexis.presenter.QuadrantPresenter;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
-import io.ray.hexis.util.SqlLiteHelper;
 import io.ray.hexis.view.QuadrantFragment;
-import io.ray.hexis.view.abs.IMatrixFragment;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 

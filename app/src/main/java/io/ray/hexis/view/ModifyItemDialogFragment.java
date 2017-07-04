@@ -21,24 +21,17 @@ import io.ray.hexis.presenter.abs.ModifyItemListener;
 public class ModifyItemDialogFragment extends DialogFragment
     implements View.OnClickListener {
 
-  protected int selectedQuadrant;
-  protected String title;
+  int selectedQuadrant;
+  private String title;
 
-  protected ModifyItemListener listener;
+  ModifyItemListener listener;
 
-  @BindView(R.id.add_item)
-  EditText inputTextView;
-
-  @BindView(R.id.btn_QI)
-  ToggleButton quadOne;
-  @BindView(R.id.btn_QII)
-  ToggleButton quadTwo;
-  @BindView(R.id.btn_QIII)
-  ToggleButton quadThree;
-  @BindView(R.id.btn_QIV)
-  ToggleButton quadFour;
-  @BindView(R.id.txtDialogTitle)
-  TextView dialogTitle;
+  @BindView(R.id.add_item) EditText inputTextView;
+  @BindView(R.id.btn_QI) ToggleButton quadOne;
+  @BindView(R.id.btn_QII) ToggleButton quadTwo;
+  @BindView(R.id.btn_QIII) ToggleButton quadThree;
+  @BindView(R.id.btn_QIV) ToggleButton quadFour;
+  @BindView(R.id.txtDialogTitle) TextView dialogTitle;
 
   /**
    * Initialize the Dialog.

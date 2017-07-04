@@ -87,7 +87,7 @@ class MatrixPresenterTest {
 
   @Test
   fun notifyItemRemoved() {
-    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!);
+    val presenter: IMatrixPresenter = MatrixPresenter(mockFragment!!, MatrixModel(), mockHelper!!)
     presenter.addItem(0, QuadrantItem("TEST"))
     presenter.notifyItemRemoved(QuadrantItem("TEST"))
   }
