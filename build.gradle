@@ -1,22 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
+    ext.kotlin_version = '1.1.2-5'
+    ext.dokka_version = '0.9.13'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
     repositories {
         jcenter()
         mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
@@ -26,4 +25,8 @@ task clean(type: Delete) {
 
 ext {
     supportLibVersion = '25.1.1';
+    travisBuild = System.getenv("TRAVIS") == "true"
+
+    // allows for -Dpre-dex=false
+    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 }

@@ -1,25 +1,30 @@
 language: android
+jdk: oraclejdk8
+sudo: true 
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/gradle/caches/
+    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+    - ${TRAVIS_BUILD_DIR}/android-sdk/extras/
 env:
   global:
-    - ANDROID_TARGET=android-17
-    - ANDROID_ABI=armeabi-v7a
+    - ANDROID_API_LEVEL=25
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.2
 android:
   components:
     - tools
     - platform-tools
     
     # Build tool version for the project
-    - build-tools-25.0.2
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
 
     - extra-android-m2repository
 
     # SDK Version to compile project
-    - android-25
-    - android-17
+    - android-$ANDROID_API_LEVEL
 script:
-  - ./gradlew build jacocoTestReport
+  - ./gradlew clean build jacocoTestReport
 
-jdk: oraclejdk8
 
 # Send code report to codecov.io
 after_success:

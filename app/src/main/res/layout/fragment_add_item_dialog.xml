@@ -2,12 +2,19 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="@color/colorPrimaryDark"
-        android:contentDescription="@string/app_name" />
+
+  <TextView
+    android:id="@+id/txtDialogTitle"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:scaleType="center"
+    android:textAlignment="center"
+    android:textColor="#ffffff"
+    android:textSize="40sp"
+    android:textStyle="bold"
+    android:background="@color/colorPrimaryDark"
+    android:text="Add Item" />
+
     <EditText
         android:id="@+id/add_item"
         android:inputType="text"
@@ -18,6 +25,44 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:hint="Add Item" />
-
+    <RadioGroup android:id="@+id/toggleGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        >
+        <ToggleButton android:id="@+id/btn_QI"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QI"
+            android:textOff="QI"
+            />
+        <ToggleButton android:id="@+id/btn_QII"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QII"
+            android:textOff="QII"
+            />
+        <ToggleButton android:id="@+id/btn_QIII"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QIII"
+            android:textOff="QIII"
+            />
+        <ToggleButton android:id="@+id/btn_QIV"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textOn="QIV"
+            android:textOff="QIV"
+            />
+    </RadioGroup>
 </LinearLayout>
 
