@@ -51,7 +51,9 @@ public class QuadrantFragment extends Fragment implements IQuadrantFragment,
   public void onStart() {
     super.onStart();
 
-    presenter.updateFragment();
+    if (presenter != null) {
+      presenter.updateFragment();
+    }
   }
 
   @Nullable
