@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <android.support.design.widget.TabLayout
+        android:id="@+id/quadrant_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/quadrant_tab_layout"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentTop="false"
+        android:layout_below="@id/toolbar"
+        app:tabGravity="fill">
 
     </android.support.design.widget.TabLayout>
 
