@@ -16,6 +16,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center_horizontal"
         android:minHeight="?attr/actionBarSize"
+        app:title="@string/app_name"
         app:titleTextColor="@android:color/white">
 
     </android.support.v7.widget.Toolbar>
