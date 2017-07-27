@@ -4,8 +4,10 @@ import io.ray.hexis.model.QuadrantItem;
 import io.ray.hexis.model.abs.IQuadrantModel;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
 import io.ray.hexis.presenter.abs.IQuadrantPresenter;
+import io.ray.hexis.util.QuadrantItemComparator;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,7 +48,8 @@ public class QuadrantPresenter implements IQuadrantPresenter {
    */
   @Override
   public void addItem(String message) {
-    matrixPresenter.addItem(quadrant, new QuadrantItem(message));
+    QuadrantItem newItem = new QuadrantItem(message);
+    matrixPresenter.addItem(quadrant, newItem);
     // Update the fragment if data set has been changed
     updateFragment();
   }
@@ -60,6 +63,7 @@ public class QuadrantPresenter implements IQuadrantPresenter {
    */
   @Override
   public void updateFragment() {
+    Collections.sort(model.getData(), new QuadrantItemComparator());
     fragment.setData(model.getData());
   }
 
