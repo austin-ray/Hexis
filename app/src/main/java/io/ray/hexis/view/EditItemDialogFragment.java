@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.presenter.abs.ModifyItemListener;
+import io.ray.hexis.presenter.abs.IModifyItemListener;
 
 /**
  * DialogFragment that appears when a user edits an item in a QuadrantFragment.
@@ -20,7 +20,7 @@ public class EditItemDialogFragment extends ModifyItemDialogFragment {
    * @param listener    Listener for passing back the information to update item in QuadrantItem
    * @return            New EditItemDialogFragment instance
    */
-  public static DialogFragment newInstance(QuadrantItem item, ModifyItemListener listener,
+  public static DialogFragment newInstance(QuadrantItem item, IModifyItemListener listener,
                                            String title) {
 
     // Initialize new EditItemDialogFragment fragment
