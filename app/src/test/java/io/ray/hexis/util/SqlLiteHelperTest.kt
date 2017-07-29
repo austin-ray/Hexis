@@ -17,7 +17,8 @@ import org.junit.Assert.assertNotNull
 import org.mockito.Mockito
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(22))
+@Config(constants = BuildConfig::class, packageName = BuildConfig.BASE_APP_ID,
+    sdk = intArrayOf(25))
 class SqlLiteHelperTest {
   private var sqlHelper: SqlLiteHelper? = null
 

@@ -25,7 +25,7 @@ import io.ray.hexis.presenter.AddItemOnClickListener;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
+@Config(constants = BuildConfig.class, packageName = BuildConfig.BASE_APP_ID, sdk = 25)
 public class AddItemDialogFragmentTest {
 
   private MainActivity activity;
