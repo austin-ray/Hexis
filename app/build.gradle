@@ -26,6 +26,8 @@ android {
 
         resValue 'string', 'app_name', app_name
         resValue 'string', 'apk_name', apk_name
+
+        buildConfigField 'String', 'BASE_APP_ID', '\"io.ray.hexis\"'
     }
     buildTypes {
         debug {
@@ -49,6 +51,10 @@ android {
             }
         }
         unitTests.returnDefaultValues = true
+
+        unitTests {
+            includeAndroidResources = true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -72,11 +78,13 @@ dependencies {
     // Unit testing libraries
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.7.5'
-    testCompile 'org.robolectric:robolectric:3.2.2'
-    testCompile 'org.robolectric:shadows-support-v4:3.0'
+    testCompile 'org.robolectric:robolectric:3.4'
+    testCompile 'org.robolectric:shadows-support-v4:3.4-rc2'
+
     // View injection
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
     // Support for Kotlin code
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
