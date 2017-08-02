@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
@@ -29,6 +30,22 @@ public class AddItemDialogFragment extends ModifyItemDialogFragment
 
     // Return the dialog
     return dialog;
+  }
+
+  // Prevent null exception from occurring after device rotation
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setRetainInstance(true);
+  }
+
+  // Ensure that dialog remains open after device rotation
+  @Override
+  public void onDestroyView() {
+    if (getDialog() != null && getRetainInstance()) {
+      getDialog().setDismissMessage(null);
+    }
+    super.onDestroyView();
   }
 
   @NonNull
