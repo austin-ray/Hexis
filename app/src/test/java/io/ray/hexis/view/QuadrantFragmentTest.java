@@ -12,7 +12,6 @@ import io.ray.hexis.BuildConfig;
 import io.ray.hexis.model.QuadrantModel;
 import io.ray.hexis.presenter.QuadrantPresenter;
 import io.ray.hexis.presenter.abs.IMatrixPresenter;
-import io.ray.hexis.view.QuadrantFragment;
 import io.ray.hexis.view.abs.IQuadrantFragment;
 
 import static org.junit.Assert.assertNotNull;
@@ -20,7 +19,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
+@Config(constants = BuildConfig.class, packageName = BuildConfig.BASE_APP_ID, sdk = 25)
 public class QuadrantFragmentTest {
   @Test
   public void newInstance() throws Exception {

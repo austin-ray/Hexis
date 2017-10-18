@@ -5,8 +5,8 @@ import android.view.View
 import io.ray.hexis.BuildConfig
 import io.ray.hexis.MainActivity
 import io.ray.hexis.R
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +15,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(22))
+@Config(constants = BuildConfig::class, packageName = BuildConfig.BASE_APP_ID,
+    sdk = intArrayOf(25))
 class QuadrantItemViewHolderTest {
 
   var contextAct: MainActivity? = null

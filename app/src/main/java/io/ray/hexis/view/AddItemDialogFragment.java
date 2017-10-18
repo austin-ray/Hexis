@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
-import io.ray.hexis.presenter.abs.ModifyItemListener;
+import io.ray.hexis.presenter.abs.IModifyItemListener;
 
 /**
  * DialogFragment that appears when a user adds an item to a QuadrantFragment.
@@ -20,7 +20,7 @@ public class AddItemDialogFragment extends ModifyItemDialogFragment
    * @param listener Listener for passing back the information to create a QuadrantItem
    * @return New AddItemDialogFragment instance
    */
-  public static DialogFragment newInstance(ModifyItemListener listener, String title) {
+  public static DialogFragment newInstance(IModifyItemListener listener, String title) {
     DialogFragment dialog = new AddItemDialogFragment();
 
     // Set the listener

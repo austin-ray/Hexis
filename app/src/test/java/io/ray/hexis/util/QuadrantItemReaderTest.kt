@@ -12,7 +12,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(22)) class QuadrantItemReaderTest {
+@Config(constants = BuildConfig::class, packageName = BuildConfig.BASE_APP_ID, sdk = intArrayOf(25))
+class QuadrantItemReaderTest {
 
   private var sqlHelper: SqlLiteHelper? = null
 

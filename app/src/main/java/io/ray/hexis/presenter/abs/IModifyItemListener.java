@@ -2,7 +2,7 @@ package io.ray.hexis.presenter.abs;
 
 import io.ray.hexis.model.QuadrantItem;
 
-public interface ModifyItemListener {
+public interface IModifyItemListener {
 
   /**
    * Add a QuadrantItem to the current fragment.

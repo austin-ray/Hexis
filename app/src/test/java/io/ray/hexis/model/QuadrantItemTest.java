@@ -18,7 +18,7 @@ import org.robolectric.annotation.Config;
 
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
+@Config(constants = BuildConfig.class, packageName = BuildConfig.BASE_APP_ID, sdk = 25)
 public class QuadrantItemTest {
   @Test
   public void setCompletion() throws Exception {

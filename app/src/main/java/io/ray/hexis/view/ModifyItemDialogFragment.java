@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
-import io.ray.hexis.presenter.abs.ModifyItemListener;
+import io.ray.hexis.presenter.abs.IModifyItemListener;
 
 public class ModifyItemDialogFragment extends DialogFragment
     implements View.OnClickListener {
@@ -24,7 +24,7 @@ public class ModifyItemDialogFragment extends DialogFragment
   int selectedQuadrant;
   private String title;
 
-  ModifyItemListener listener;
+  IModifyItemListener listener;
 
   @BindView(R.id.add_item) EditText inputTextView;
   @BindView(R.id.btn_QI) ToggleButton quadOne;
@@ -103,7 +103,7 @@ public class ModifyItemDialogFragment extends DialogFragment
    *
    * @param listener Listener reference for the DialogFragment
    */
-  public void setListener(ModifyItemListener listener) {
+  public void setListener(IModifyItemListener listener) {
     this.listener = listener;
   }
 
@@ -112,7 +112,7 @@ public class ModifyItemDialogFragment extends DialogFragment
    *
    * @return Listener
    */
-  public ModifyItemListener getListener() {
+  public IModifyItemListener getListener() {
     return listener;
   }
 

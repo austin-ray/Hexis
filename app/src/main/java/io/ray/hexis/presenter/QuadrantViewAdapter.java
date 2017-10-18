@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import io.ray.hexis.R;
 import io.ray.hexis.model.QuadrantItem;
+import io.ray.hexis.util.QuadrantItemComparator;
 import io.ray.hexis.view.QuadrantItemViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -108,6 +110,7 @@ public class QuadrantViewAdapter extends RecyclerView.Adapter<QuadrantItemViewHo
    */
   public void setData(List<QuadrantItem> data) {
     this.data = new ArrayList<>(data);
+    Collections.sort(data, new QuadrantItemComparator());
     notifyDataSetChanged();
   }
 
